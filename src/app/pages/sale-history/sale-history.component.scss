@@ -1,0 +1,285 @@
+/* พื้นหลังหลัก */
+.sales-history-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #f9fafc;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+/* ปุ่ม back */
+.back-btn {
+  margin-top: 50px;
+  background: none;
+  border: none;
+  color: #4a90e2;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.page-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* กรอบข้อมูลผู้ขาย */
+.seller-info {
+  background: #fff;
+  padding: 16px 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  color: #333;
+}
+
+/* ตารางหลัก */
+.table-wrapper {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #e1e1e1;
+}
+
+.search-pagination {
+  display: flex;
+  // justify-content: flex-end;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-pagination input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 60%;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  justify-content: flex-end;
+}
+
+.pagination button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pagination span {
+  color: #444;
+}
+
+/* ตาราง */
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sales-table th {
+  background: #e9f2ff;
+  color: #333;
+  padding: 12px;
+  text-align: center;
+}
+
+.sales-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-btn {
+  background: #4a90e2;
+  border: none;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.detail-btn:hover {
+  background: #357abd;
+}
+
+/* 🔒 Overlay */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+  z-index: 1000;
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+/* 🪟 Drawer แบบเต็มจอ */
+.drawer-full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  animation: slideDown 0.3s ease;
+}
+
+.slide-out {
+  animation: slideUp 0.3s ease forwards;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  border-bottom: 1px solid #eee;
+  background: #f6f8fb;
+}
+
+.drawer-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+
+
+
+.print-btn {
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: green;
+  color: #f4f4f4;
+}
+
+
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 40px;
+  cursor: pointer;
+  color: #555;
+}
+
+.drawer-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.drawer-inner {
+  max-width: 900px;
+  width: 100%;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ตารางใน Drawer */
+.license-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.license-table th {
+  background: #eef3fb;
+  color: #333;
+  padding: 10px;
+  text-align: center;
+}
+
+.license-table td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.license-table td.active {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* 🔄 Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
+}
+
+/* ป้องกัน scroll ด้านหลัง */
+body.drawer-open {
+  overflow: hidden;
+}
+
+.save-btn {
+  background: #28a745;
+  border: none;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}

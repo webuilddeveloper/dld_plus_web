@@ -1,0 +1,365 @@
+<app-header></app-header>
+
+<div class="sales-history-container">
+  <button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
+
+  <h2 class="page-title">รายการผู้ขายที่ลงทะเบียนในระบบ</h2>
+
+  <!-- รายละเอียดผู้ขาย -->
+  <div class="seller-info search-pagination flex-wrap gap-3">
+    <div class="col">
+      ค้นหา
+      <input type="text" placeholder="ค้นหาชื่อผู้ติดต่อ เลขประจำตัวผู้เสียภาษี ..."
+        [(ngModel)]="criteriaModel.keySearch" (input)="readSale()" />
+    </div>
+    <div class="col">
+      สถานะ
+      <select name="" id="" [(ngModel)]="criteriaModel.status" (change)="readSale()">
+        <option value="" selected>ทุกสถานะ</option>
+        <option value="A" selected>อนุมัติแล้ว</option>
+        <option value="N" selected>รอตรวจสอบ</option>
+      </select>
+    </div>
+    <div class="col">
+      วันที่ลงทะเบียน
+      <input type="date" [(ngModel)]="criteriaModel.startDate" (input)="readSale()" />
+    </div>
+    <div class="col">
+      ถึงวันที่
+      <input type="date" [(ngModel)]="criteriaModel.endDate" (input)="readSale()" />
+    </div>
+  </div>
+
+
+  <!-- ตารางประวัติการขาย -->
+  <div class="table-wrapper">
+    <div class="head-table flex-wrap gap-3">
+      <div class="col"><span class="title">รายการ</span></div>
+      <div class="col d-flex justify-content-end w-fit gap-3">
+        @if (btnDelete) {
+        <button class="delete-btn" (click)="showDeletePopup()">
+          ลบรายการที่เลือก
+        </button>
+        }
+        <button class="save-btn" (click)="createDrawer()">
+          เพิ่มรายการ
+        </button>
+
+      </div>
+
+    </div>
+
+    <table class="sales-table">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleAll()" name="selectAll" />
+          </th>
+          <th>ลำดับ</th>
+          <th>สถานะ</th>
+          <th>ชื่อผู้ติดต่อ</th>
+          <th>เลขประจำตัวผู้เสียภาษี</th>
+          <th>ประเภทผู้ขาย</th>
+          <th>วันที่ลงทะเบียน</th>
+          <th>ดำเนินการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (sale of paginatedSales; track $index) {
+        <tr>
+          <td>
+            <input type="checkbox" [(ngModel)]="sale.selected" name="selected_{{ $index }}"
+              (change)="checkIfAllSelected()" />
+          </td>
+          <td>{{ (currentSalePage - 1) * totalSalePages + $index + 1 }}</td>
+          <td>
+            <div [ngClass]="sale.status == 'A' ? 'd-success' : 'd-warning'" class="d-status">{{ sale.status == 'A' ?
+              'อนุมัติแล้ว' : 'รอตรวจสอบ' }}</div>
+          </td>
+          <td>{{ sale.contactName }}</td>
+          <td>{{ sale.taxId }}</td>
+          <td>{{ sale.sellerType == 'person' ? 'บุคคลธรรมดา' : 'นิติบุคคล' }}</td>
+          <td>{{ sale.createDate | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <button class=" detail-btn" (click)="openDrawer(sale)">
+              ดูรายละเอียด
+            </button>
+          </td>
+        </tr>
+        }
+
+      </tbody>
+    </table>
+    <div class="pagination">
+      <button (click)="prevSalePage()" [disabled]="currentSalePage === 1">‹</button>
+      <span>หน้า {{ currentSalePage }} / {{ totalSalePages }}</span>
+      <button (click)="nextSalePage()" [disabled]="currentSalePage === totalSalePages">›</button>
+    </div>
+  </div>
+
+  <!-- Drawer Overlay -->
+  @if (isDrawer) {
+  <div class="drawer-overlay" (click)="closeDrawer()" [class.fade-out]="isClosing"></div>
+  }
+  <!-- Drawer Panel (Full Screen) -->
+
+  @if (isDrawer) {
+  <div class="drawer-full" [class.slide-out]="isClosing">
+    <div class="drawer-header">
+      <h3>รายละเอียด ผู้ลงทะเบียน</h3>
+      <button class="close-btn" (click)="closeDrawer()">×</button>
+    </div>
+
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <h4 class="org-name">
+          <!-- {{ selectedSale.organization }} ({{ selectedSale.province }}) -->
+        </h4>
+        <!-- <p>จำนวน License ทั้งหมด: {{ selectedSale.totalLicenses }}</p> -->
+        <form #userForm="ngForm" (ngSubmit)="submit(userForm)" class="drawer-table-wrapper">
+          <div class="box-input flex-wrap gap-3">
+            <div class="col">
+              <label class="switch">
+                <input type="checkbox" [checked]="selectedSale.status === 'A'"
+                  (change)="selectedSale.status = $event.target.checked ? 'A' : 'N'">
+                <span class="slider"></span>
+              </label>
+              <div class="d-flex align-items-center gap-2">สถานะการอนุมัติ: <div
+                  [ngClass]="selectedSale.status == 'A' ? 'd-success' : 'd-warning'" class="d-status">{{
+                  selectedSale.status == 'A' ? 'อนุมัติ' : 'รออนุมัติ' }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="box-input flex-wrap gap-3">
+            <div class="radio-group">
+              ประเภทผู้ขาย
+              <label class="d-flex gap-2">
+                <input type="radio" name="sellerType" [(ngModel)]="selectedSale.sellerType" value="company">
+                นิติบุคคล
+              </label>
+              <label class="d-flex gap-2">
+                <input type="radio" name="sellerType" [(ngModel)]="selectedSale.sellerType" value="person">
+                บุคคลธรรมดา
+              </label>
+            </div>
+          </div>
+          <div class="box-input flex-wrap gap-3">
+            <div class="col">
+              <label for="">ชื่อบริษัท/หน่วยงาน <span class="req">*</span></label>
+              <input type="text" name="companyName" placeholder="ชื่อบริษัท/หน่วยงาน"
+                [(ngModel)]="selectedSale.companyName" #companyName="ngModel" required />
+              @if (companyName.invalid && companyName.touched) {
+              @if (companyName.errors?.['required']) {
+              <div class="t-valid">กรุณากรอกชื่อบริษัท/หน่วยงาน</div>
+              }
+              }
+            </div>
+            <div class="col">
+              <label for="">เลขประจำตัวผู้เสียภาษี (13 หลัก) <span class="req">*</span></label>
+              <input type="text" name="taxId" minlength="13" maxlength="13" #taxId="ngModel" required
+                placeholder="เลขประจำตัวผู้เสียภาษี (13 หลัก)" [(ngModel)]="selectedSale.taxId" />
+              @if (taxId.errors?.['required'] && taxId.touched) {
+              <div class="t-valid">กรุณากรอกเลขบัตรประชาชน</div>
+              } @else if (taxId.errors?.['minlength'] && taxId.touched) {
+              <div class="t-valid">เลขบัตรต้องมี 13 หลัก</div>
+              } @else if (taxId.valid && thaiIdValidator(selectedSale.taxId)) {
+              <div class="t-valid">เลขบัตรไม่ถูกต้องตามหลัก</div>
+              }
+            </div>
+            <div class="col">
+              <label for="">ผู้ติดต่อ <span class="req">*</span></label>
+              <input type="text" name="contactName" #contactName="ngModel" required placeholder="ผู้ติดต่อ"
+                [(ngModel)]="selectedSale.contactName" />
+              @if (contactName.errors?.['required'] && contactName.touched) {
+              <div class="t-valid">กรุณากรอกผู้ติดต่อ</div>
+              }
+            </div>
+            <div class="col">
+              <label for="">อีเมล <span class="req">*</span></label>
+              <input type="email" name="email" #email="ngModel" required placeholder="อีเมล"
+                [(ngModel)]="selectedSale.email" />
+              @if (email.errors?.['required'] && email.touched) {
+              <div class="t-valid">กรุณากรอกอีเมล</div>
+              }
+            </div>
+            <div class="col">
+              <label for="">เบอร์โทรศัพท์ <span class="req">*</span></label>
+              <input type="text" name="phone" #phone="ngModel" required placeholder="เบอร์โทรศัพท์"
+                [(ngModel)]="selectedSale.phone" />
+              @if (phone.errors?.['required'] && phone.touched) {
+              <div class="t-valid">กรุณากรอกเบอร์โทรศัพท์</div>
+              }
+            </div>
+
+          </div>
+          <div class="box-input flex-wrap gap-3">
+            <div class="col">
+              <label for="">ที่อยู่ (สำหรับติดต่อ/ออกเอกสาร) <span class="req">*</span></label>
+              <input type="text" name="addressLine" #addressLine="ngModel" required
+                placeholder="ที่อยู่ (สำหรับติดต่อ/ออกเอกสาร)" [(ngModel)]="selectedSale.addressLine" />
+              @if (addressLine.errors?.['required'] && addressLine.touched) {
+              <div class="t-valid">กรุณากรอกที่อยู่</div>
+              }
+            </div>
+          </div>
+          <div class="box-input flex-wrap gap-3">
+            <div class="col">
+              จังหวัด
+              <select name="provinceCode" (change)="selectProvince($event)" [(ngModel)]="selectedSale.provinceCode">
+                <option value="" disabled>กรุณาเลือก</option>
+                @for (i of provinceList; track $index) {
+                <option value="{{i.code}}">{{i.title}}</option>
+                }
+              </select>
+            </div>
+            <div class="col">
+              อำเภอ/เขต
+              <select name="districtCode" (change)="selectDistrict($event)" [(ngModel)]="selectedSale.districtCode">
+                <option value="" disabled>กรุณาเลือก</option>
+                @for (i of districtList; track $index) {
+                <option value="{{i.code}}">{{i.title}}</option>
+                }
+              </select>
+            </div>
+            <div class="col">
+              ตำบล/แขวง
+              <select name="subdistrictCode" (change)="selectSubDistrict($event)"
+                [(ngModel)]="selectedSale.subdistrictCode">
+                <option value="" disabled>กรุณาเลือก</option>
+                @for (i of subDistrictList; track $index) {
+                <option value="{{i.code}}">{{i.title}}</option>
+                }
+
+              </select>
+            </div>
+            <div class="col">
+              รหัสไปรษณีย์
+              <input type="text" name="postalCode" placeholder="รหัสไปรษณีย์" [(ngModel)]="selectedSale.postalCode" />
+            </div>
+            <div class="col">
+              เว็บไซต์
+              <input type="text" name="website" placeholder="เว็บไซต์" [(ngModel)]="selectedSale.website" />
+            </div>
+            <div class="col">
+              บัญชีธนาคาร
+              <!-- <input type="text" name="bankName" placeholder="บัญชีธนาคาร" [(ngModel)]="selectedSale.bankName" /> -->
+              <select id="bankNameDrawer" name="bankName" [(ngModel)]="selectedSale.bankName">
+                <option value="" disabled>-- กรุณาเลือกธนาคาร --</option>
+                <option *ngFor="let bank of banks" [value]="bank.name">
+                  {{ bank.name }}
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              ชื่อบัญชี
+              <input type="text" name="bankAccountName" placeholder="ชื่อบัญชี"
+                [(ngModel)]="selectedSale.bankAccountName" />
+            </div>
+            <div class="col">
+              เลขที่บัญชี
+              <input type="text" name="bankAccountNumber" placeholder="เลขที่บัญชี"
+                [(ngModel)]="selectedSale.bankAccountNumber" />
+            </div>
+
+            <div class="col file-upload-col">
+              <label class="file-label">1. หนังสือรับรองบริษัท <span class="req">*</span></label>
+
+              @if (selectedSale.companyAffidavitFile && !uploadingState['companyAffidavitFile']) {
+              <div class="file-info">
+                <a [href]="selectedSale.companyAffidavitFile" target="_blank" class="file-name-link">
+                  <i class="fa fa-file-alt"></i> {{ getFileName(selectedSale.companyAffidavitFile) }}
+                </a>
+                <label for="companyAffidavitFile" class="choose-file-btn change-btn">
+                  <i class="fa fa-sync"></i> เปลี่ยน
+                </label>
+              </div>
+              }
+
+              @if (uploadingState['companyAffidavitFile']) {
+              <div class="upload-loading">
+                <i class="fa fa-spinner fa-spin"></i> กำลังอัปโหลด...
+              </div>
+              }
+
+              @if (!selectedSale.companyAffidavitFile && !uploadingState['companyAffidavitFile']) {
+              <label for="companyAffidavitFile" class="choose-file-btn">
+                <i class="fa fa-upload"></i> เลือกไฟล์
+              </label>
+              }
+
+              <input type="file" id="companyAffidavitFile" class="file-input-hidden" accept=".pdf,.jpg,.jpeg,.png"
+                (change)="onFileSelect($event, 'companyAffidavitFile')">
+
+              <input type="hidden" name="companyAffidavitFile" [(ngModel)]="selectedSale.companyAffidavitFile"
+                #companyAffidavitFile="ngModel" required>
+              @if (companyAffidavitFile.invalid && companyAffidavitFile.touched && !selectedSale.companyAffidavitFile) {
+              <div class="t-valid">กรุณาแนบหนังสือรับรองบริษัท</div>
+              }
+            </div>
+
+          </div>
+          <div class="col d-flex justify-content-center p-10">
+            <button class="save-btn" type="submit">
+              บันทึก
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+@if (showSuccessPopup) {
+<div class="popup-overlay">
+  <div class="popup-card">
+    <div class="popup-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+      </svg>
+    </div>
+    <h2>{{popupSuccessTitle}}</h2>
+    <div class="btn-c">
+      <button class="popup-btn" (click)="closePopup()">ตกลง</button>
+    </div>
+  </div>
+</div>
+}
+
+@if (showErrorPopup) {
+<div class="popup-overlay">
+  <div class="popup-card error-card">
+    <div class="popup-icon-error error-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </div>
+    <h2>เกิดข้อผิดพลาด</h2>
+    <p>{{ popupErrorMessage }}</p>
+    <div class="btn-c">
+      <button class="popup-btn error-btn" (click)="closeErrorPopup()">ปิด</button>
+    </div>
+  </div>
+</div>
+}
+
+@if (isShowDeletePopup) {
+<div class="popup-overlay">
+  <div class="popup-card error-card">
+    <div class="popup-icon-error error-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </div>
+    <h2>ยืนยันรายการ</h2>
+    <p>ต้องการลบรายการที่เลือกหรือไม่</p>
+    <div class="btn-c d-flex gap-3">
+      <button class="popup-btn secound" (click)="closeDeletePopup()">ยกเลิก</button>
+      <button class="popup-btn " (click)="deleteItem()">ตกลง</button>
+    </div>
+  </div>
+</div>
+}
+
+<app-footer></app-footer>

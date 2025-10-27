@@ -1,0 +1,74 @@
+<app-header></app-header>
+
+<div class="gen-license-container">
+  <h2 class="page-title">🧾 สร้าง License Key</h2>
+
+  <!-- กรอบบน: ข้อมูลผู้ขาย / องค์กร -->
+  <div class="summary-box">
+    <div class="summary-row">
+      <div><strong>รหัสผู้ขาย:</strong> {{ model.sellerCode }}</div>
+      <div><strong>ชื่อโปรแกรม:</strong> {{ model.program }}</div>
+    </div>
+    <div class="summary-row">
+      <div><strong>ชื่อองค์กร:</strong> {{ model.companyName }}</div>
+      <div><strong>ชื่อแพ๊คเกจ:</strong> {{model.package}}</div>
+
+    </div>
+    <div class="summary-row">
+      <div><strong>จำนวน License:</strong> {{ model.licenseCount }}</div>
+      <div><strong>ราคาขาย:</strong> {{ model.price | number }} บาท</div>
+    </div>
+
+    <div class="summary-row">
+      <div>
+        <strong>เอกสารแนบ:</strong>
+        <a [hidden]="!model.fileUrl" [href]="model.fileUrl" target="_blank" class="doc-link">ดูเอกสาร</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- กรอบล่าง: License List -->
+  <div class="license-card">
+    <div class="header">
+      <h3>🔑 รายการ License ที่จะสร้าง</h3>
+      <button class="btn-generate" (click)="generateLicenses()">สร้าง License</button>
+    </div>
+
+    <table class="license-table" *ngIf="listLicensKey.length > 0">
+      <thead>
+        <tr>
+          <th>ลำดับ</th>
+          <th>License Key</th>
+          <th>สถานะ</th>
+          <th>วันที่สร้าง</th>
+          <th>จัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lic of listLicensKey; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td class="license-key">{{ lic.licenseKey }}</td>
+          <td>
+            <span [class.active]="lic.status === 'A'" [class.pending]="lic.status === 'N'">
+              {{ lic.status === 'A' ? 'Active แล้ว' : 'รอ Activate' }}
+            </span>
+          </td>
+          <td>{{ lic.createDate | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <button class="btn-action" (click)="copyLicense(lic.key)">📋 คัดลอก</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="empty-state" *ngIf="listLicensKey.length === 0">
+      <p>ยังไม่มี License ที่สร้าง</p>
+    </div>
+  </div>
+
+</div>
+<div class="content-bottom">
+  <button class="btn-bot-back" (click)="goBack()">ย้อนกลับ</button>
+</div>
+<app-footer></app-footer>

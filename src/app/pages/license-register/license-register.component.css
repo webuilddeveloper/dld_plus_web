@@ -1,0 +1,111 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60px auto;
+  font-family: "Prompt", sans-serif;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+.form-card {
+  width: 420px;
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+.form-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-control {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.form-control:focus {
+  border-color: #2a7d2e;
+}
+
+.error {
+  font-size: 0.8rem;
+  color: #d93025;
+  margin-top: 3px;
+}
+
+.file-upload {
+  border: 1px dashed #aaa;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.file-preview {
+  margin-top: 5px;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.radio-group label {
+  margin-right: 15px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2a7d2e;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background: #226924;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #4a90e2;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15vh;
+  padding-left: 40px;
+}

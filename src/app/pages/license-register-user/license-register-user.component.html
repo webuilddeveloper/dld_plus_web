@@ -1,0 +1,106 @@
+<app-header></app-header>
+
+<button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
+
+<div class="register-container">
+  <h1 class="page-title">ลงทะเบียนการขาย</h1>
+
+  <div class="form-card">
+    <h2>แบบฟอร์มลงทะเบียนขาย</h2>
+    <div class="form-inner">
+      <form #licenseForm="ngForm" (ngSubmit)="onSubmit(licenseForm)">
+        <div class="form-group">
+          <label>รหัสผู้ขาย</label>
+          <input type="text" name="sellerCode" [(ngModel)]="model.sellerCode" required #sellerCode="ngModel"
+            class="form-control" placeholder="รหัสผู้ขาย" disabled />
+          <div class="error" *ngIf="sellerCode.invalid && licenseForm.submitted">
+            กรุณากรอกรหัสผู้ขาย
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label>ชื่อองค์กร</label>
+          <input type="text" name="companyName" [(ngModel)]="model.companyName" required #companyName="ngModel"
+            class="form-control" placeholder="ชื่อองค์กร" />
+          <div class="error" *ngIf="companyName.invalid && licenseForm.submitted">
+            กรุณากรอกชื่อองค์กร
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>ที่ตั้งองค์กร</label>
+          <input type="text" name="companyAddress" [(ngModel)]="model.companyAddress" required #companyAddress="ngModel"
+            class="form-control" placeholder="ที่ตั้งองค์กร" />
+          <div class="error" *ngIf="companyAddress.invalid && licenseForm.submitted">
+            กรุณากรอกที่ตั้งองค์กร
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>อ้างถึง (โครงการ)</label>
+          <input type="text" name="reference" [(ngModel)]="model.reference" required #reference="ngModel" class="form-control"
+            placeholder="ชื่อโครงการ" />
+          <div class="error" *ngIf="reference.invalid && licenseForm.submitted">
+            กรุณากรอกอ้างถึง (โครงการ)
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>เลือกโปรแกรม</label>
+          <select name="program" [(ngModel)]="model.program" class="form-control" disabled>
+            <option [value]="programs[0].name">{{ programs[0].name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>แพ็กเกจ</label>
+          <select name="package" [(ngModel)]="model.package" required #package="ngModel" class="form-control"
+            (change)="onSelectedLicense()">
+            <option value="">-- เลือกแพ็กเกจ --</option>
+            <option *ngFor="let pkg of packages" [value]="pkg.name">
+              {{ pkg.name }}
+            </option>
+          </select>
+          <div class="error" *ngIf="package.invalid && licenseForm.submitted">
+            กรุณาเลือกแพ็กเกจ
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>จำนวน License</label>
+          <input type="number" name="licenseCount" [(ngModel)]="model.licenseCount" required min="1"
+            #licenseCount="ngModel" class="form-control" disabled />
+        </div>
+
+        <div class="form-group">
+          <label>ราคาขาย</label>
+          <input type="number" name="price" [(ngModel)]="model.price" required min="0" #price="ngModel"
+            class="form-control" placeholder="เช่น 10000" />
+          <div class="error" *ngIf="price.invalid && licenseForm.submitted">
+            กรุณากรอกราคาขาย
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">ยืนยัน</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<div class="popup-overlay" *ngIf="showSuccessPopup">
+  <div class="popup-card">
+    <div class="popup-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+      </svg>
+    </div>
+    <h2>{{popupSuccessTitle}}</h2>
+    <!-- <p>โปรดรอเจ้าหน้าที่ติดต่อกลับทางอีเมลภายใน 3-7 วัน</p> -->
+    <div class="btn-c">
+      <button class="popup-btn" (click)="closePopup()">ตกลง</button>
+    </div>
+  </div>
+</div>

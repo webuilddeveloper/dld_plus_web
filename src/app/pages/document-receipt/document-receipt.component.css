@@ -1,0 +1,170 @@
+.main-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.ct-receipt {
+    width: 80%;
+    background-color: #fff;
+    border-radius: 12px;
+    /* box-shadow: 0px 3px 3px 0px var(--color-F5E); */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* padding: 5% 5% 5% 5%; */
+    margin: 50px 0 50px 0;
+}
+
+.btn-register {
+    width: 100%;
+    max-width: 236px;
+}
+
+.bgc-ee {
+    background-color: #000000;
+    opacity: 0.2;
+}
+
+.bgc-fbf {
+    background-color: #FBF9FF;
+}
+
+.h02 {
+    height: 2px !important;
+    width: 100%;
+}
+
+.ptheader {
+    padding-top: 118px;
+}
+
+.d-flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+.btn-pink {
+    height: 59px;
+    background-color: #ED038B;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+    max-width: 286px;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.content-header {
+    display: flex;
+    align-items: flex-end;
+    margin: 10px 0;
+    flex-direction: column;
+
+}
+
+.content-invoice {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 20px 0;
+}
+
+.invoice-h {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.invoice-sub {
+    font-size: 16px;
+}
+
+.content-company {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 40px 0 40px 0;
+}
+
+.company-h {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.company-sub {
+    font-size: 16px;
+}
+
+.content-h {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.content-sub {
+    font-size: 16px;
+}
+
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 16px;
+}
+
+.receipt-table th,
+.receipt-table td {
+    border: 2px solid #d3d3d3;
+    padding: 12px;
+    vertical-align: top;
+}
+
+.receipt-table th {
+    background-color: #f0f0f0;
+    text-align: left;
+    font-weight: bold;
+}
+
+.receipt-table .spacer td {
+    border: none;
+    padding: 8px 0;
+}
+
+.receipt-table td:first-child {
+    text-align: left;
+}
+
+.receipt-table td:last-child {
+    text-align: right;
+}
+
+.receipt-table .right-align td:first-child {
+    text-align: right;
+}
+
+.top-icon {
+
+    text-align: left;
+}
+
+.top-icon img {
+    width: 200px;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .content-header {
+        margin-top: 30px
+    }
+
+}

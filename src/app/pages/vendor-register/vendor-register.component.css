@@ -1,0 +1,358 @@
+/* พื้นหลังหลัก */
+.vendor-register {
+  min-height: 100vh;
+  padding: 120px 5% 120px;
+  background: linear-gradient(160deg, #00031d 0%, #101737 50%, #2d2a4a 100%);
+  color: #fff;
+  font-family: 'Inter', 'Prompt', sans-serif;
+}
+
+/* หัวเรื่อง */
+.title {
+  font-size: 2.2rem;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  text-align: center;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 40px;
+  font-size: 1rem;
+}
+
+/* กล่องฟอร์มหลัก */
+.form-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 40px 36px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+  backdrop-filter: blur(14px);
+}
+
+/* หัวข้อย่อย */
+h3 {
+  font-size: 1.3rem;
+  margin: 32px 0 14px;
+  font-weight: 600;
+  color: #ffdc86;
+  border-bottom: 1px solid rgba(255,220,134,0.3);
+  padding-bottom: 6px;
+}
+h4 {
+  font-size: 1.1rem;
+  margin: 22px 0 10px;
+  color: #ffd985;
+}
+
+/* layout grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* ฟิลด์แต่ละช่อง */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+label {
+  font-size: .95rem;
+  color: rgba(255,255,255,0.85);
+  margin-top: 5px;
+}
+
+.req {
+  color: #ffcd6b;
+}
+
+/* input / textarea */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: .95rem;
+  transition: all .25s ease;
+  backdrop-filter: blur(6px);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+
+input:focus,
+textarea:focus {
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 0 0 1px rgba(255,220,134,0.4), 0 0 8px rgba(255,220,134,0.3);
+}
+
+/* checkbox และ chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.chips label {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: .9rem;
+  color: rgba(255,255,255,0.9);
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.chips input {
+  margin-right: 6px;
+}
+
+.chips label:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+}
+
+/* consent checkbox */
+.consent {
+  margin: 30px 0;
+  line-height: 1.6;
+  font-size: .95rem;
+}
+.consent a {
+  color: #ffdc86;
+  text-decoration: none;
+}
+.consent a:hover {
+  text-decoration: underline;
+}
+
+/* ปุ่ม submit */
+.submit-btn {
+  width: 30%;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: none;
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.05rem;
+  background: linear-gradient(135deg, #ffe18a 0%, #ffffffb0 100%);
+  box-shadow: 0 10px 28px rgba(255,220,134,0.35);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.submit-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(255,220,134,0.45);
+}
+
+/* hr เส้นคั่น */
+hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin: 28px 0;
+}
+
+/* animation effect */
+.form-card {
+  animation: fadeInUp .7s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ปรับ textarea */
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.err{ color: red; font-size: .85rem; }
+
+.btn-c {
+  display: flex;
+  justify-content: center;
+}
+
+/* select dropdown ให้เหมือน input */
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: .95rem;
+  transition: all .25s ease;
+  backdrop-filter: blur(6px);
+  appearance: none; /* ซ่อนลูกศร default */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 14px;
+}
+
+select:focus {
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 0 0 1px rgba(255,220,134,0.4), 0 0 8px rgba(255,220,134,0.3);
+}
+
+/* ปรับสี option */
+select option {
+  background-color: #1b1f3a;
+  color: #fff;
+  padding: 8px 12px;
+}
+
+/* ป้องกัน icon ซ้อนบน Safari */
+select::-ms-expand {
+  display: none;
+}
+
+/*
+===========================
+    POPUP STYLES
+===========================
+*/
+
+/* พื้นหลัง затемняющий */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 3, 29, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn .3s ease forwards;
+}
+
+/* ตัวกล่อง Popup - ใช้สไตล์เดียวกับ .form-card */
+.popup-card {
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 30px 36px 36px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+  animation: scaleIn .4s ease-out forwards;
+}
+
+/* Icon ติ๊กถูก */
+.popup-icon {
+  margin: 0 auto 15px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #ffdc86;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-icon svg {
+  width: 38px;
+  height: 38px;
+  color: #ffdc86;
+}
+
+/* ข้อความใน Popup */
+.popup-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.popup-card p {
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+/* ปุ่มกด - ใช้สไตล์เดียวกับ .submit-btn */
+.popup-btn {
+  width: 50%;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: none;
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.0rem;
+  background: linear-gradient(135deg, #ffe18a 0%, #ffffffb0 100%);
+  box-shadow: 0 10px 28px rgba(255,220,134,0.35);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.popup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(255,220,134,0.45);
+}
+
+/* Animations สำหรับ Popup */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/*
+===========================
+    ERROR POPUP STYLES
+===========================
+*/
+
+.error-icon {
+  border-color: #ff8a8a;
+}
+.error-icon svg {
+  color: #ff8a8a;
+}
+.error-btn {
+  background: linear-gradient(135deg, #ff8a8a 0%, #ff5252 100%);
+  box-shadow: 0 10px 28px rgba(255, 100, 100, 0.35);
+}
+.error-btn:hover {
+  box-shadow: 0 16px 36px rgba(255, 100, 100, 0.45);
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>We LAP Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+
+<div id="bn-root"></div>
+
+<script>window.onload = function () { BN.init({ version: '1.0' }) }</script>
+<script>
+    (function (d, s, id) {
+      var js, bjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://console.botnoi.ai/customerchat/index.js';
+      bjs.parentNode.insertBefore(js, bjs);
+    }(document, 'script', 'bn-jssdk'));
+</script>
+
+<div class="bn-customerchat" bot_id="68401298443f6ce3f1392faf"
+  bot_logo="https://gateway.we-builds.com/wb-py-media/uploads/we-lap\\20250605-111642-ChatGPT Image 5 มิ.ย. 2568 11_16_18.png"
+  bot_name="OPTIONAL ATTRIBUTE, YOU CAN CHANGE YOUR CHATBOT DISPLAYNAME" theme_color="#ffffff"
+  locale="OPTIONAL ATTRIBUTE, YOU CAN CHANGE LANGUAGE TO THAI LANGUAGE [EX. th]"
+  logged_in_greeting="OPTIONAL ATTRIBUTE, YOU CAN CHANGE GREETING MESSAGE IN WELCOME" greeting_message="สวัสดี We-Lap"
+  default_open="OPTIONAL ATTRIBUTE, YOU CAN SET DEFULT TO SHOW OR HIDE CHATROOM [EX. true]">
+
+</html>

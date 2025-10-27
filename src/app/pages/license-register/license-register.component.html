@@ -1,0 +1,151 @@
+<app-header></app-header>
+
+    <button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
+
+<div class="register-container" >
+
+  <h1 class="page-title" >ลงทะเบียนสั่งซื้อ License</h1>
+
+  <div class="form-card" >
+    <h2>License</h2>
+    <p class="subtitle">กรอกข้อมูลเพื่อขอออก License สำหรับลูกค้าของคุณ</p>
+
+    <form #licenseForm="ngForm" (ngSubmit)="onSubmit(licenseForm)">
+
+      <!-- รหัสผู้ขาย -->
+      <div class="form-group">
+        <label>รหัสผู้ขาย</label>
+        <input
+          type="text"
+          name="sellerCode"
+          [(ngModel)]="model.sellerCode"
+          required
+          #sellerCode="ngModel"
+          class="form-control"
+          placeholder="รหัสผู้ขาย"
+        />
+        <div class="error" *ngIf="sellerCode.invalid && licenseForm.submitted">
+          กรุณากรอกรหัสผู้ขาย
+        </div>
+      </div>
+
+      <!-- ชื่อองค์กร -->
+      <div class="form-group">
+        <label>ชื่อองค์กร</label>
+        <input
+          type="text"
+          name="companyName"
+          [(ngModel)]="model.companyName"
+          required
+          #companyName="ngModel"
+          class="form-control"
+          placeholder="ชื่อองค์กร"
+        />
+        <div class="error" *ngIf="companyName.invalid && licenseForm.submitted">
+          กรุณากรอกชื่อองค์กร
+        </div>
+      </div>
+
+    
+
+      <!-- โปรแกรม -->
+      <div class="form-group">
+        <label>เลือกโปรแกรม</label>
+        <select
+          name="program"
+          [(ngModel)]="model.program"
+          required
+          #program="ngModel"
+          class="form-control"
+          (change)="onProgramChange()"
+        >
+          <option value="">-- เลือกโปรแกรม --</option>
+          <option *ngFor="let p of programs" [value]="p">{{ p }}</option>
+        </select>
+        <div class="error" *ngIf="program.invalid && licenseForm.submitted">
+          กรุณาเลือกโปรแกรม
+        </div>
+      </div>
+
+      <!-- แพ็กเกจ -->
+      <div class="form-group">
+        <label>แพ็กเกจ</label>
+        <select
+          name="package"
+          [(ngModel)]="model.package"
+          required
+          #package="ngModel"
+          class="form-control"
+                    (change)="onSelectedLicense()"
+        >
+          <option value="">-- เลือกแพ็กเกจ --</option>
+          <option *ngFor="let pkg of availablePackages" [value]="pkg.name">
+            {{ pkg.name }} - {{ pkg.keys }} key
+          </option>
+        </select>
+        <div class="error" *ngIf="package.invalid && licenseForm.submitted">
+          กรุณาเลือกแพ็กเกจ
+        </div>
+      </div>
+
+        <!-- จำนวน License -->
+      <div class="form-group">
+        <label>จำนวน License</label>
+        <input
+          type="number"
+          name="licenseCount"
+          [(ngModel)]="model.licenseCount"
+          required
+          min="1"
+          #licenseCount="ngModel"
+          class="form-control"
+        />
+       
+      </div>
+
+          <!-- ราคา -->
+      <div class="form-group">
+        <label>ราคาขาย</label>
+        <input
+          type="number"
+          name="price"
+          [(ngModel)]="model.price"
+          required
+          min="0"
+          #price="ngModel"
+          class="form-control"
+        />
+        <div class="error" *ngIf="price.invalid && licenseForm.submitted">
+          กรุณากรอกราคาขาย
+        </div>
+      </div>
+
+      <!-- Upload File -->
+      <div class="form-group">
+        <label>แนบเอกสาร (PDF หรือรูปภาพ)</label>
+        <input type="file" (change)="onFileSelected($event)" class="form-control file-upload" />
+        <div class="file-preview" *ngIf="selectedFile">
+          <span>📎 {{ selectedFile.name }}</span>
+        </div>
+      </div>
+
+      <!-- Duration -->
+      <div class="form-group">
+        <label>ระยะเวลาใช้งาน</label>
+        <div class="radio-group">
+          <label><input type="radio" name="duration" [(ngModel)]="model.duration" value="1" /> 1 ปี</label>
+        </div>
+        
+      </div>
+
+  
+
+      <!-- Submit -->
+      <button type="submit" class="submit-btn">ยืนยัน</button>
+
+    </form>
+  </div>
+</div>
+
+
+<app-footer></app-footer>

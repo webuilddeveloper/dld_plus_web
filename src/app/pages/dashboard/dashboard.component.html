@@ -1,0 +1,97 @@
+<app-header></app-header>
+
+<div class="dashboard-container">
+  <button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
+
+  <h2 class="page-title">📊 สรุปยอดขาย License Dashboard</h2>
+
+  <!-- 🔍 Filter -->
+  <div class="filter-bar">
+    <select [(ngModel)]="selectedYear" (change)="filterData()">
+      <option value="">ทุกปี</option>
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+
+    <select [(ngModel)]="selectedProgram" (change)="filterData()">
+      <option value="">ทุกโปรแกรม</option>
+      <option *ngFor="let p of programs" [value]="p">{{ p }}</option>
+    </select>
+  </div>
+
+  <!-- 🧾 สรุปยอดรวม -->
+  <div class="summary-cards">
+    <div class="card">
+      <h3>ยอดขายทั้งหมด</h3>
+      <p>{{ dashboardData.totalLicense | number }} Key</p>
+    </div>
+    <div class="card">
+      <h3>จำนวนองค์กรที่ซื้อ</h3>
+      <p>{{ dashboardData.totalCompany }}</p>
+    </div>
+    <!-- <div class="card">
+      <h3>จำนวนจังหวัดที่ขายได้</h3>
+      <p>{{ provinces.length }}</p>
+    </div> -->
+  </div>
+
+  <!-- 📈 กราฟ -->
+  <div class="chart-section">
+    <div class="chart-card">
+      <h3>ยอดขายแยกตามโปรแกรม (จำนวน Key)</h3>
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>สัดส่วนการขายแต่ละโปรแกรม</h3>
+      <canvas id="pieChart"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-card">
+      <h3>ยอดขายแยกตามโปรแกรม (มูลค่า)</h3>
+      <canvas id="barChartByValue"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>สัดส่วนยอดขายแต่ละโปรแกรม (มูลค่า)</h3>
+      <canvas id="pieChartByValue"></canvas>
+    </div>
+  </div>
+
+  <!-- 📋 ตารางข้อมูล -->
+  <div class="table-container">
+    <h3>รายละเอียดการขาย</h3>
+    <table class="sales-table">
+      <thead>
+        <tr>
+          <th>องค์กร</th>
+          <th>โปรแกรม</th>
+          <th>แพ็กเกจ</th>
+          <th>จำนวน License</th>
+          <th>ราคาต่อหน่วย</th>
+          <th>ราคารวม</th>
+          <th>ปี</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sale of paginatedSalesDetail">
+          <td>{{ sale.companyName }}</td>
+          <td>{{ sale.program }}</td>
+          <td>{{ sale.package }}</td>
+          <td>{{ sale.licenseCount }}</td>
+          <td>{{ sale.price | number }}</td>
+          <td>{{ sale.totalPrice | number }}</td>
+          <td>{{ sale.year }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <button (click)="prevDetailPage()" [disabled]="currentDetailPage === 1">‹</button>
+      <span>หน้า {{ currentDetailPage }} / {{ totalDetailPages }}</span>
+      <button (click)="nextDetailPage()" [disabled]="currentDetailPage >= totalDetailPages">›</button>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

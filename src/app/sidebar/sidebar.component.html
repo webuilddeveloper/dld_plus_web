@@ -1,0 +1,78 @@
+<div class="sidebar">
+    <!-- Top left icon (fix ซ้ายบน) -->
+    <div class="top-icon">
+        <a href="#">
+            <img src="assets/icon_header.png" alt="Logo" />
+
+        </a>
+    </div>
+    <div class="top-right-menu-web">
+
+        <a href="https://lap.spl-system.com">ระบบแผนงานอัตโนมัติ</a>
+
+        <!-- ✅ เพิ่ม -->
+        <a href="#" (click)="goPricing($event)">Pricing</a>
+        <a routerLink="/license-register">ลงทะเบียนการใช้งาน</a>
+        <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
+        <a routerLink="/about-us">เกี่ยวกับเรา</a>
+        <a href="https://www.modesolutions.co.th">ติดต่อเรา</a>
+                <a routerLink="/login-member">เข้าสู่ระบบ</a>
+
+    </div>
+
+    <button class="menu-btn" *ngIf="!menuOpen" (click)="toggleMenu()">
+        <img src="assets/menu.png" alt="Menu" />
+    </button>
+
+    <!-- Overlay เมนูเต็มจอ -->
+    <div class="menu-overlay" [class.active]="menuOpen" (click)="toggleMenu()">
+        <button class="close-btn" (click)="toggleMenu(); $event.stopPropagation()">
+            &#x2715;
+        </button>
+        <nav class="menu-content" (click)="$event.stopPropagation()">
+            <a href="https://lap.spl-system.com">ระบบแผนงานอัตโนมัติ</a>
+
+            <!-- ✅ เพิ่ม -->
+            <a href="#" (click)="goPricing($event)">Pricing</a>
+            <a routerLink="/license-register">ลงทะเบียนการใช้งาน</a>
+            <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
+            <a routerLink="/about-us">เกี่ยวกับเรา</a>
+            <a href="https://www.modesolutions.co.th">ติดต่อเรา</a>
+            <!-- เมนูอื่น ๆ -->
+            <div class="social-section">
+                <div class="social-title">Social</div>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" rel="noopener">
+                        <img src="assets/facebook-white.png" alt="Facebook" />
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener">
+                        <img src="assets/instagram-white.png" alt="Instagram" />
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+
+
+
+    <!-- Bottom Social Icons -->
+    <div class="bottom-icons" [class.hidden]="isBottom">
+        <a href="https://facebook.com" target="_blank">
+            <img src="assets/facebook.png" alt="Facebook" />
+        </a>
+        <a href="https://instagram.com" target="_blank">
+            <img src="assets/instagram.png" alt="Instagram" />
+        </a>
+    </div>
+    <!-- <div class="block main"> </div> -->
+    <!-- <div class="block main"></div>
+    <div class="block main"></div>
+    <div class="block main"></div>
+    <div class="block main"></div>
+    <div class="block main"></div> -->
+
+    <!-- <div class="block white"></div> -->
+    <!-- เพิ่มบล็อกตามต้องการ -->
+
+</div>

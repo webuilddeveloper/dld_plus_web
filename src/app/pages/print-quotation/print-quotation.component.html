@@ -1,0 +1,129 @@
+<div class="content-bottom">
+  <button class="btn-bot-print" (click)="exportPDF()"> <i class="fa fa-print"></i>
+    พิมพ์ / Print</button>
+</div>
+<div class="content-left">
+
+<button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
+</div>
+
+<div class="po-page" #poContent>
+  <div class="po-header">
+    <div class="brand">
+      <div class="top-icon">
+        <a href="#">
+          <img src="assets/icon_header.png" alt="Logo" />
+
+        </a>
+      </div>
+      <div class="company-info">
+        <h1>ใบเสนอราคา</h1>
+      </div>
+    </div>
+
+    <div class="doc-block">
+      <div class="doc-top">
+        <div><strong>วันที่ออก :</strong> {{model.createDate | dateFormat}}</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="addresses">
+    <div class="left">
+      <div class="label">ผู้ขาย</div>
+      <div class="name">{{company.name}}</div>
+      <div class="text">{{company.address}}</div>
+      <div class="tax">Tel: {{company.tel}}</div>
+      <div class="tax">Email: {{company.email}}</div>
+      <div class="tax">Website: {{company.website}}</div>
+
+      <div class="tax">เลขที่ภาษี: {{company.taxId}}</div>
+    </div>
+
+    <div class="right">
+      <div class="label">ผู้ซื้อ</div>
+      <div class="name">{{vendor.companyName}}</div>
+      <div class="text">{{vendor.addressLine}}</div>
+      <div class="tax">Tel: {{vendor.phone}}</div>
+      <div class="tax">Email: {{vendor.email}}</div>
+
+      <div class="tax">เลขที่ภาษี: {{vendor.taxId}}</div>
+    </div>
+  </section>
+
+  <section class="items">
+    <table class="items-table" aria-label="รายการสินค้า">
+      <thead>
+        <tr>
+          <th style="width:40px">ลำดับ</th>
+          <th style="width:300px">คำอธิบาย</th>
+          <th>ราคา/หน่วย</th>
+          <th>ส่วนลด</th>
+          <th>VAT</th>
+          <th>มูลค่าก่อนภาษี</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let it of items;let i = index">
+          <td>{{i+1}}</td>
+          <td class="desc">
+            <div class="desc-title">{{it.program}}</div>
+            <div class="desc-sub">{{it.package}} - จำนวน {{it.licenseCount}} Key - ระยะเวลา {{it.duration}} ปี</div>
+          </td>
+          <td class="num">{{it.price | number:'1.2-2'}}</td>
+          <td class="num">{{it.discount ?? 0}}</td>
+          <td class="num">{{it.vatPercent ?? 7}}%</td>
+          <td class="num">{{(it.price) | number:'1.2-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="summary">
+    <div class="summary-left">
+      <h4>หมายเหตุ</h4>
+      <div class="notes">{{model.description}}</div>
+    </div>
+
+    <div class="summary-right">
+      <div class="row">
+        <div class="label">มูลค่าที่คำนวณก่อนภาษี</div>
+        <div class="value">{{subtotal | number:'1.2-2'}} บาท</div>
+      </div>
+      <div class="row">
+        <div class="label">ภาษีมูลค่าเพิ่ม (7%)</div>
+        <div class="value">{{totalVat | number:'1.2-2'}} บาท</div>
+      </div>
+      <div class="row total">
+        <div class="label">จำนวนเงินทั้งสิ้น</div>
+        <div class="value big">{{total | number:'1.2-2'}} บาท</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="signatures">
+    <div class="sig-box">
+      <div class="sig-title">ผู้อนุมัติเอกสาร (ผู้ซื้อ)</div>
+      <div class="sig-line"></div>
+      <div class="sig-name">ชื่อ ..................................................................................
+      </div>
+      <div class="sig-date">วันที่ ____ / ____ / ______</div>
+    </div>
+
+    <div class="sig-box">
+      <div class="sig-title">ผู้อนุมัติเจ้าของเอกสาร (ผู้ซื้อ)</div>
+      <div class="sig-line"></div>
+      <div class="sig-name">ชื่อ ..................................................................................
+      </div>
+      <div class="sig-date">วันที่ ____ / ____ / ______</div>
+    </div>
+
+    <div class="sig-box">
+      <div class="sig-title">ผู้รับเอกสาร (ผู้ขาย)</div>
+      <div class="sig-line"></div>
+      <div class="sig-name">ชื่อ ..................................................................................
+      </div>
+      <div class="sig-date">วันที่ ____ / ____ / ______</div>
+    </div>
+  </section>
+</div>

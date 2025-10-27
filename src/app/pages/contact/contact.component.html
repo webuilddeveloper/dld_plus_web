@@ -1,0 +1,104 @@
+<app-sidebar></app-sidebar>
+
+
+<div class="main-content">
+
+  <section class="contact-section">
+    <div class="contact-background"
+      [style.background-image]="'linear-gradient(to bottom, transparent 90%, rgb(252, 255, 254) 100%), url(assets/bg_contact.jpg)'">
+    </div>
+
+    <div class="contact-content">
+      <h1 class="contact-title">
+        <span *ngFor="let char of contactTitleChars" class="char">{{ char }}</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="contact-frombody" #contactBox>
+    <form class="contact-form" (ngSubmit)="onSubmit()" #form="ngForm">
+      <h3 class="contact-send-title ">
+        <span>ส่งความคิดเห็นของคุณ</span>
+      </h3>
+      <!-- แถวที่ 1: First Name + Last Name -->
+      <div class="form-row row-2-cols">
+        <input type="text" name="firstName" ngModel placeholder="ชื่อ*" required />
+        <input type="text" name="lastName" ngModel placeholder="นามสกุล*" required />
+      </div>
+
+      <!-- แถวที่ 2: Email -->
+      <div class="form-row">
+        <input type="email" name="email" ngModel placeholder="E-mail*" required />
+      </div>
+
+      <!-- แถวที่ 3: Message -->
+      <div class="form-row">
+        <textarea name="message" ngModel placeholder="รายละเอียด...*" rows="5" required></textarea>
+      </div>
+
+      <!-- ปุ่มส่ง -->
+      <div class="form-row send-container">
+        <button type="submit" class="send-button">
+          <span>ส่ง</span>
+          <span class="arrow">→</span>
+        </button>
+      </div>
+    </form>
+
+  </section>
+
+  <section class="outer-contact-section">
+
+    <section class="contact-info-section" #linesContainer>
+      <div class="contact-container" #contactInfo>
+        <div class="center-img">
+          <img src="assets/contact.jpg" alt="icon" />
+        </div>
+        <div class="contact-info">
+          <p class="contact-line contact-header">ที่อยู่</p>
+          <p class="contact-line">กรมส่งเสริมการปกครองท้องถิ่น</p>
+          <p class="contact-line">ถนนนครราชสีมา แขวงดุสิต เขตดุสิต กรุงเทพ 10300</p>
+
+          <p class="contact-line contact-header">ติดต่อ</p>
+          <p class="contact-line">เลขหมายโทรศัพท์กลาง สถ. กด 0-2241-9000 ต่อเบอร์โทรภายใน</p>
+          <p class="contact-line">เลขหมายสื่อสารมหาดไทย (Hotline) กด 860 หรือ 51288 ต่อเบอร์โทรภายใน</p>
+          <p class="contact-line contact-header">อีเมล</p>
+          <p class="contact-line">saraban&#64;dla.go.th</p>
+        </div>
+      </div>
+
+    </section>
+  </section>
+
+
+
+
+
+
+  <!-- เนื้อหาอื่นๆ -->
+
+  <footer class="footer">
+    <div class="footer-column">
+      <h3>ที่อยู่</h3>
+      <p>กรมส่งเสริมการปกครองท้องถิ่น</p>
+      <p>ถนนนครราชสีมา แขวงดุสิต เขตดุสิต กรุงเทพ 10300</p>
+    </div>
+    <div class="footer-column">
+      <h3>ติดต่อ</h3>
+      <p>เลขหมายโทรศัพท์กลาง สถ. กด 0-2241-9000 ต่อเบอร์โทรภายใน</p>
+      <p>เลขหมายสื่อสารมหาดไทย (Hotline) กด 860 หรือ 51288 ต่อเบอร์โทรภายใน</p>
+      <p>อีเมล: saraban&#64;dla.go.th</p>
+    </div>
+    <div class="footer-column-end">
+      <h3>Social Media</h3>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank">
+          <img src="assets/facebook-white.png" alt="Facebook" />
+        </a>
+        <a href="https://instagram.com" target="_blank">
+          <img src="assets/instagram-white.png" alt="Instagram" />
+        </a>
+      </div>
+    </div>
+  </footer>
+</div>

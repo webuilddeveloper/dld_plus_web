@@ -1,0 +1,1592 @@
+.orbit-scene {
+  position: relative;
+  height: 100vh;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #00031d;
+  /* ✅ พื้นหลังเข้ม */
+  z-index: 1;
+}
+
+
+.welcome-text {
+  position: absolute;
+  top: 10vw;
+  left: 15vw;
+  font-size: 45px;
+  font-weight: bold;
+  z-index: 10;
+  /* white-space: nowrap; */
+  /* opacity: 0; */
+  color: #fff !important;
+  font-family: 'Orbitron';
+}
+
+.welcome-text {
+  position: absolute;
+  top: 10vw;
+  left: 13vw;
+  font-size: 50px;
+  font-weight: bold;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  color: black;
+  font-family: 'Orbitron';
+}
+
+.cursor {
+  animation: blink 1s steps(2, start) infinite;
+  font-weight: 400;
+  font-size: 32px;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+
+.center-icon-3d {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(0px);
+  transform-style: preserve-3d;
+  animation: fix-center 0.1s ease-in-out 0.2s forwards;
+  visibility: hidden;
+  /* ซ่อนไว้ก่อน */
+}
+
+@keyframes fix-center {
+  to {
+    visibility: visible;
+    transform: translate(-50%, -50%) translateZ(0px);
+  }
+}
+
+.subtext {
+  position: absolute;
+  bottom: 50px;
+  right: 40px;
+  font-size: 22px;
+  max-width: 650px;
+  line-height: 1.6;
+  color: #fff;
+  z-index: 10;
+}
+
+.center-icon-3d img {
+  width: 65vh;
+  height: 50vh;
+}
+
+
+/* ตัวห่อ orbit-layer ที่ใช้วางตำแหน่งตามแนวตั้ง */
+.orbit-layer-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%) translateY(calc((var(--layer-index) - 2) * 50px));
+}
+
+/* orbit-layer เป็นตัวหมุน */
+.orbit-layer {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.word-wrapper {
+  font-family: 'Great Vibes', cursive;
+  font-size: 14px;
+  color: rgb(236, 234, 234);
+  font-weight: normal;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  /* เพิ่มความชัด */
+}
+
+.main-content {
+  /* margin-left: 90px; */
+  /* เว้นให้ sidebar */
+  /* padding: 1rem; */
+  background-color: rgb(252, 255, 254);
+
+
+}
+
+
+/* จัดสองคอลัมน์ */
+.sentence.two-col {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) 1.4fr;
+  /* ซ้าย:ขวา */
+  gap: 32px;
+  align-items: start;
+  height: auto;
+  /* ❗ ต้องเป็น auto ไม่ใช่ 50vh */
+  padding: 60px 5% 40px;
+}
+
+/* Lottie ด้านซ้าย */
+.planning-lottie {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  /* ปรับได้ตามดีไซน์ */
+  pointer-events: none;
+}
+
+/* เส้นแกนของ timeline ให้ชิดซ้ายของคอลัมน์ขวา */
+.timeline.timeline-right::before {
+  left: 0;
+  /* จากเดิม 28px ถ้าของเก่าทับ ให้ใช้สำคัญกว่า */
+}
+
+/* Mobile: ซ้อนเป็นคอลัมน์เดียว */
+@media (max-width: 992px) {
+  .sentence.two-col {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 40px 5% 30px;
+  }
+
+  .planning-lottie {
+    min-height: 260px;
+  }
+}
+
+/* เว้นขอบบน+ล่างของทั้งไทม์ไลน์ */
+#digital-planning-timeline {
+  padding-block: 64px;
+  /* top & bottom padding */
+}
+
+/* ระยะห่างระหว่างแต่ละรายการ + ช่องไฟภายใน */
+#digital-planning-timeline .timeline-item {
+  margin-block: 20px;
+  /* ช่องว่างบน–ล่างระหว่าง items */
+  padding-block: 16px;
+  /* ช่องไฟภายใน item */
+}
+
+/* เว้นช่วงหัวข้อกับรายการแรกๆ ให้โล่งขึ้น */
+#digital-planning-timeline .timeline-title {
+  margin-block-end: 28px;
+}
+
+/* ปรับให้พอดีจอบนมือถือ */
+@media (max-width: 768px) {
+  #digital-planning-timeline {
+    padding-block: 40px;
+  }
+
+  #digital-planning-timeline .timeline-item {
+    margin-block: 16px;
+    padding-block: 12px;
+  }
+}
+
+.pricing {
+  background: #00031d;
+  color: #fff;
+  padding: 60px 5% 70px;
+}
+
+.pricing-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.pricing-subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 28px;
+}
+
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.price-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px 22px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.price-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(197, 175, 99, 0.6);
+  box-shadow: 0 18px 40px rgba(197, 175, 99, 0.2);
+}
+
+.price-card.recommend {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#0b0f3a, #0b0f3a) padding-box,
+    linear-gradient(135deg, #c5af63, rgba(255, 255, 255, 0.25)) border-box;
+}
+
+.price-card .badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  color: #111;
+  background: linear-gradient(135deg, #c5af63, #ffffff70);
+}
+
+.plan-name {
+  font-size: 1.1rem;
+  margin: 6px 0 2px;
+}
+
+.license {
+  font-size: 1rem;
+  opacity: .9;
+  margin-bottom: 6px;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 10px 0 16px;
+}
+
+.price span {
+  font-size: 1rem;
+  opacity: .8;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+}
+
+.features li {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+
+.features li::before {
+  content: '✓';
+  opacity: .9;
+  margin-top: 2px;
+}
+
+.btn-select {
+  display: block;
+  text-align: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  text-decoration: none;
+  transition: all .25s ease;
+}
+
+.btn-select:hover {
+  transform: translateY(-2px);
+  border-color: #c5af63;
+  box-shadow: 0 8px 24px rgba(197, 175, 99, 0.25);
+}
+
+.btn-select.primary {
+  background: linear-gradient(135deg, rgba(197, 175, 99, 0.9), rgba(255, 255, 255, 0.2));
+  border: none;
+  box-shadow: 0 10px 28px rgba(197, 175, 99, 0.35);
+}
+
+.note {
+  text-align: center;
+  opacity: .6;
+  font-size: .9rem;
+  margin-top: 12px;
+}
+
+/* มือถือ */
+@media (max-width: 768px) {
+  .price-grid {
+    gap: 16px;
+  }
+
+  .price {
+    font-size: 1.8rem;
+  }
+
+  .features li {
+    font-size: 0.9rem;
+  }
+}
+
+/* ป้ายโหมดการติดตั้ง */
+.deploy {
+  display: inline-block;
+  margin: 6px 0 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: .2px;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .15);
+}
+
+
+/* จัดให้อยู่กึ่งกลางคอลัมน์ซ้าย */
+.timeline-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  /* ✅ จัดกลางแนวนอน */
+  justify-content: center;
+  /* ✅ จัดกลางแนวตั้งในกล่องของมัน */
+  justify-self: center;
+  /* ✅ จัดกลางในกริดคอลัมน์ซ้าย */
+}
+
+/* ขนาดเล็กลง + ให้กึ่งกลางเสมอ */
+.sm-lottie {
+  width: 100%;
+  max-width: 320px;
+  /* ปรับได้ 240–360px */
+  min-height: 160px;
+  /* ปรับได้ */
+  margin: 0 auto;
+  /* ✅ ช่วยบังคับกลางอีกชั้น */
+  pointer-events: none;
+}
+
+/* มือถือ/แท็บเล็ตก็ให้กึ่งกลางเหมือนกัน */
+@media (max-width: 992px) {
+  .sm-lottie {
+    max-width: 280px;
+    min-height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sm-lottie {
+    max-width: 240px;
+    min-height: 140px;
+  }
+}
+
+
+/* ลดขนาดเฉพาะรายการหัวข้อในไทม์ไลน์ */
+.sentence .timeline .timeline-content li {
+  font-size: 0.95rem;
+  /* ปรับได้: 0.9–1rem */
+  line-height: 1.55;
+}
+
+/* มือถือให้เล็กลงอีกนิด */
+@media (max-width: 768px) {
+  .sentence .timeline .timeline-content li {
+    font-size: 0.9rem;
+  }
+}
+
+
+.sentence {
+  /* font-size: 1.4rem;
+  font-weight: 400;
+  display: flex;
+  gap: 0.5rem;
+  height: 50vh;
+  padding: 5% 5%; */
+
+  font-size: 1.4rem;
+  font-weight: 400;
+  display: block;
+  /* หรือคง flex ก็ได้ถ้าจำเป็น */
+  height: auto;
+  /* ❗ ปลดล็อกความสูง */
+  padding: 60px 5% 40px;
+  /* เผื่อพื้นที่หายใจ */
+}
+
+.sentence span {
+  cursor: default;
+  transition: color 0.3s ease;
+}
+
+.sentence .highlight {
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.highlight-flip {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  line-height: 1.5;
+  cursor: pointer;
+  vertical-align: baseline;
+  font-weight: bold;
+}
+
+.highlight-flip span {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+.highlight-flip span:first-child {
+  transform: translateY(0%);
+}
+
+.highlight-flip span:last-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(100%);
+}
+
+/* Hover effect */
+.highlight-flip:hover span:first-child {
+  transform: translateY(-100%);
+}
+
+.highlight-flip:hover span:last-child {
+  transform: translateY(0%);
+}
+
+/* เส้นใต้ */
+.highlight-flip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  /* ปรับให้เส้นไม่ติดตัวอักษร */
+  width: 0%;
+  height: 2px;
+  background-color: #0070f3;
+  transition: width 0.3s ease;
+}
+
+.highlight-flip:hover::after {
+  width: 100%;
+}
+
+.indent-first-line {
+  margin-left: 5%;
+}
+
+.news-container {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 20px;
+  background: #f8f8f8;
+  height: 80vh;
+}
+
+.news-slider {
+  display: flex;
+}
+
+.news-item {
+  height: 350px;
+  min-width: 300px;
+  max-width: 300px;
+  margin-right: 20px;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.news-item:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.news-item .image {
+  height: 70%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+  min-height: 200px;
+  background-color: #eee;
+}
+
+.news-item .image:hover {
+  transform: scale(1.05);
+}
+
+.news-item .text {
+  height: 30%;
+  padding: 12px;
+  color: white;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.13), rgba(0, 0, 0, 0.7));
+}
+
+.news-item .text h3 {
+  white-space: nowrap;
+  /* บรรทัดเดียว */
+  overflow: hidden;
+  /* ซ่อนส่วนเกิน */
+  text-overflow: ellipsis;
+  /* ... */
+  max-width: 100%;
+  /* กว้างเต็มพื้นที่ */
+  font-size: 1.2rem;
+  /* ปรับขนาดตามชอบ */
+  margin: 0 0 0.5rem 0;
+}
+
+.news-item .text p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* จำกัด 2 บรรทัด */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  /* ปล่อยให้ขึ้นบรรทัดใหม่ได้ */
+  line-height: 1.3em;
+  max-height: 2.6em;
+  /* 2 บรรทัด x line-height */
+  margin: 0;
+}
+
+.news-item .text h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.news-item .text p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.header-title {
+  font-size: 28px;
+  font-weight: 700;
+  padding: 30px 0 10px 0;
+  color: #333;
+  text-align: left;
+  /* animation: float 4s ease-in-out infinite; */
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.news-image {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.underline {
+  width: 100%;
+  height: 1px;
+  background: black;
+  opacity: 0.3;
+  margin: 0 auto 24px auto;
+  position: relative;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.video-container {
+  height: 90vh;
+  padding: 20px;
+}
+
+.video-gallery {
+  display: flex;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.video-gallery .video-card {
+  position: relative;
+  flex: 1;
+  transition: flex 0.5s ease, transform 0.5s ease;
+  overflow: hidden;
+  border-radius: 16px;
+  margin: 0 5px;
+  cursor: pointer;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-gallery .video-card.expanded {
+  flex: 7;
+  z-index: 10;
+}
+
+.video-gallery .video-card.collapsed {
+  flex: 1;
+  filter: brightness(0.5);
+}
+
+.video-gallery .video-card .thumb,
+.video-gallery .video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+
+.video-gallery .video-card .title-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 6px 0;
+}
+
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px 60px;
+  background-color: #000;
+  color: #fff;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  flex: 2;
+  min-width: 200px;
+}
+
+.footer-colum-end {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-column h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #fff;
+  border-bottom: 2px solid #fff;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.footer-column p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #ccc;
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+
+.social-icons img {
+  width: 36px;
+  height: 36px;
+}
+
+
+.icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.icon:hover {
+  background-color: #fff;
+  color: #111;
+  transform: rotate(360deg);
+}
+
+
+
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-image: url('assets/preview.jpg'); */
+  background-size: cover;
+  background-position: center;
+  filter: blur(0px);
+  transition: filter 0.3s ease-out;
+  z-index: 1;
+  will-change: transform, filter;
+}
+
+/* ให้ section นี้จัดกึ่งกลางทุกอย่าง และเป็นพื้นหลังมืด */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  /* ✅ จัดกลางง่ายสุด */
+  place-items: center;
+  /* ✅ กลางทั้งแกน X/Y */
+  padding: 40px;
+  overflow: hidden;
+  background: #00031d;
+  /* เผื่อ Lottie โหลดช้า */
+}
+
+/* Lottie พื้นหลังเต็มพื้นที่ อยู่ชั้นล่าง */
+.hero-lottie {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  /* ไม่ให้บังการคลิกปุ่ม */
+}
+
+/* เลเยอร์ไล่เฉดให้อ่านง่าย อยู่เหนือ Lottie */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.00) 20%,
+      rgba(255, 255, 255, 0.00) 80%,
+      rgba(255, 255, 255, 0.06) 100%);
+}
+
+/* เริ่มด้วยจางและเลื่อนลงเล็กน้อย */
+.timeline-item {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+
+
+/* กล่องข้อความ/ปุ่ม อยู่ชั้นบนสุดและจัดกลาง */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  /* ✅ เหนือ Lottie+overlay */
+  text-align: center;
+  top: auto;
+  /* ⛔ ยกเลิกการดันลง */
+  transform: none;
+  /* ⛔ ยกเลิกเลื่อน */
+  display: flex;
+  /* เสริม spacing สวย ๆ */
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: white;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+.hki-read-more {
+  position: absolute;
+  right: 100px;
+  /* ระยะห่างจากขอบขวา */
+  bottom: 24px;
+  /* ระยะห่างจากขอบล่าง */
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 12px 20px;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  z-index: 1;
+}
+
+.hki-read-more .arrow-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: white;
+  color: black;
+  border-radius: 50%;
+  font-size: 20px;
+  transition: transform 0.3s ease;
+  z-index: 2;
+  flex-shrink: 0;
+  padding-right: 15px;
+}
+
+.hki-read-more .read-text {
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+}
+
+.read-text {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.hki-read-more:hover .read-text {
+  color: black;
+}
+
+
+.hki-read-more .bg-fill {
+  content: '';
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 60px;
+  background: white;
+  border-radius: 999px;
+  z-index: 1;
+  transition: width 0.5s ease;
+}
+
+.hki-read-more:hover .bg-fill {
+  width: 100%;
+}
+
+.hki-read-more:hover .arrow-circle {
+  transform: translateX(4px);
+}
+
+.enter-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg,
+      rgba(197, 175, 99, 0.7),
+      rgba(255, 255, 255, 0.2));
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 112, 243, 0.3);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  /* เบลอพื้นหลัง */
+  -webkit-backdrop-filter: blur(20px);
+  /* รองรับ Safari */
+}
+
+.enter-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 112, 243, 0.4);
+}
+
+.enter-button .arrow {
+  transition: transform 0.3s ease;
+}
+
+.enter-button:hover .arrow {
+  transform: translateX(6px);
+}
+
+.bottom-icons {
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1000;
+}
+
+.bottom-icons img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.bottom-icons a {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.bottom-icons a::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #c5af63;
+  border-radius: 50%;
+  transform: scale(0.6);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.bottom-icons a:hover {
+  background-color: white;
+}
+
+.bottom-icons a:hover::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.bottom-icons a img {
+  width: 20px;
+  height: 20px;
+  transition: filter 0.3s ease;
+  z-index: 1;
+}
+
+.bottom-icons a:hover img {
+  filter: brightness(0);
+  /* ทำให้ไอคอนเป็นดำ */
+}
+
+.title-overlay {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* จำกัด 2 บรรทัด */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.3em;
+  max-height: 2.6em;
+  /* 2 บรรทัด x line-height */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.news-stack {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  padding: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-left {
+  flex: 1;
+  padding-right: 30px;
+}
+
+.cards-right {
+  flex: 1;
+  position: relative;
+  height: 400px;
+}
+
+.news-card {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 12px;
+  filter: blur(2px);
+  transform: translateY(0);
+  transition: filter 0.3s;
+}
+
+.news-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Parallax effect */
+.parallax-card {
+  will-change: transform;
+}
+
+.news-spread {
+  height: 100vh;
+  position: relative;
+  background: #f8f8f8;
+}
+
+.spread-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.spread-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Fade-in text */
+.fade-in-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-in-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-footer {
+  z-index: 999;
+}
+
+.contact-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-image: url('assets/preview.jpg'); */
+  background-size: cover;
+  background-position: center;
+  filter: blur(0px);
+  transition: filter 0.3s ease-out;
+  will-change: transform, filter;
+}
+
+/* ขนาดหน้าจอ Tablet */
+@media (max-width: 1024px) {
+  .center-icon-3d img {
+    width: 50vh;
+    height: 40vh;
+  }
+
+  .sentence {
+    font-size: 1.2rem;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 10% 10%;
+  }
+
+  .news-item {
+    min-width: 260px;
+    max-width: 260px;
+    height: 320px;
+  }
+
+  .video-gallery .video-card.expanded {
+    flex: 4;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 30px;
+  }
+
+  .hki-read-more {
+    right: 30px;
+    bottom: 20px;
+    font-size: 14px;
+  }
+}
+
+/* ขนาดหน้าจอมือถือ */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    /* เว้นให้ sidebar */
+    /* padding: 1rem; */
+    background-color: rgb(252, 255, 254);
+
+  }
+
+  .orbit-scene {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    /* หรือความสูงที่ต้องการ */
+    overflow: hidden;
+    background-color: #00031d;
+    /* ✅ พื้นหลังเข้ม */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lottie-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  ng-lottie {
+    position: relative;
+    z-index: 1;
+  }
+
+  .center-icon-3d img {
+    width: 40vh;
+    height: 30vh;
+  }
+
+  .sentence {
+    font-size: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 20% 10%;
+    height: 60vh;
+  }
+
+  .news-container {
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 20px;
+    background: #f8f8f8;
+    height: 70vh;
+  }
+
+
+  .news-item {
+    min-width: 240px;
+    max-width: 240px;
+    height: 300px;
+    margin-top: 50px;
+  }
+
+  .video-container {
+    height: 150vh;
+    padding: 20px;
+  }
+
+
+  .video-gallery {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .video-gallery .video-card {
+    flex: none;
+    height: 100%;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+  }
+
+  .footer {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .footer-column h3 {
+    font-size: 18px;
+  }
+
+  .footer-column p {
+    font-size: 14px;
+  }
+
+  .hki-read-more {
+    right: 20px;
+    bottom: 16px;
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .hki-read-more .arrow-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+
+  .enter-button {
+    font-size: 16px;
+    padding: 12px 24px;
+    gap: 10px;
+  }
+
+  .enter-button .arrow {
+    font-size: 16px;
+  }
+
+  .hero-sectio {
+    height: 70vh;
+  }
+
+  .video-gallery .video-card,
+  .video-gallery .video-card.expanded,
+  .video-gallery .video-card.collapsed {
+    flex: 1 1 100% !important;
+    /* เต็มความกว้างแบบเท่า ๆ กัน */
+    filter: none !important;
+    /* เอาฟิลเตอร์ความสว่างออก */
+    margin: 10px 0;
+    /* เว้นระยะห่างแนวตั้ง */
+    width: 100%;
+    height: 100%;
+  }
+
+  .welcome-text {
+    top: 30vw;
+    left: 20vw;
+    font-size: 32px;
+    text-align: center;
+    color: #fff !important;
+  }
+
+  .subtext {
+    font-family: 10px;
+    margin-top: 20px;
+    left: 20px;
+  }
+
+
+}
+
+@media (max-width: 480px) {
+  .enter-button {
+    font-size: 15px;
+    padding: 10px 20px;
+    gap: 8px;
+  }
+}
+
+CSS
+/* ... (โค้ด CSS ส่วนอื่นๆ ของคุณ) ... */
+
+/* ============================================== */
+/* ===         HERO SECTION STYLES (ใหม่)       === */
+/* ============================================== */
+
+/* --- 1. Base Style (ใช้ร่วมกันทุก section) --- */
+.hero-section {
+  position: relative;
+  min-height: 90vh;
+  padding: 40px 5%;
+  overflow: hidden;
+  background: #00031d;
+  color: #ffffff;
+  display: flex; /* ใช้ Flexbox เป็นตัวหลักในการจัดวาง */
+  align-items: center;
+}
+
+/* --- Lottie พื้นหลัง (ใช้ร่วมกันทุก section) --- */
+.hero-lottie-bg {
+  position: absolute;
+  /* inset: 0;
+  width: 100%;
+  height: 100%; */
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.8; /* ลดความสว่างพื้นหลังลงเล็กน้อย */
+}
+
+/* --- 2. Layout แบบดั้งเดิม (Centered) สำหรับระบบแรก --- */
+.hero-section.layout-centered {
+  justify-content: center; /* จัดให้อยู่กลางจอ */
+}
+
+.hero-section.layout-centered .hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- 3. Layout แบบการ์ดลอย (Floating Card) สำหรับระบบที่สอง --- */
+.hero-section.layout-card {
+  justify-content: flex-end; /* ดันการ์ดไปทางขวา */
+}
+
+.hero-card {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 500px;
+  padding: 32px 36px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.hero-card .hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* --- 4. Layout แบบแบ่งครึ่ง (Split Layout) สำหรับระบบที่สาม --- */
+.hero-section.layout-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 30px;
+}
+
+.hero-section.layout-split .hero-lottie-fg {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+  justify-self: center;
+  z-index: 2;
+}
+
+.hero-section.layout-split .hero-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* --- 5. สไตล์ข้อความและปุ่ม (ใช้ร่วมกัน) --- */
+.hero-title {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 12px;
+}
+.hero-details {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+.enter-button {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, rgba(197, 175, 99, 0.8), rgba(255, 255, 255, 0.25));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.enter-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(197, 175, 99, 0.3);
+}
+
+/* --- 6. Responsive สำหรับมือถือ --- */
+@media (max-width: 900px) {
+  .hero-section,
+  .hero-section.layout-split {
+    grid-template-columns: 1fr; /* กลับเป็น 1 คอลัมน์ */
+    padding: 60px 20px;
+    min-height: 80vh;
+  }
+
+  .hero-section.layout-card {
+    justify-content: center; /* จัดการ์ดกลางจอ */
+  }
+
+  .hero-section.layout-split .hero-lottie-fg {
+    grid-row: 1; /* Lottie ขึ้นก่อนเสมอ */
+    max-width: 350px;
+  }
+
+  .hero-content, .hero-card .hero-content,
+  .hero-section.layout-split .hero-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-title { font-size: 2rem; }
+  .hero-subtitle { font-size: 1.2rem; }
+}
+
+.elegant-theme {
+  background: linear-gradient(135deg, #00031d, #1a1340, #2b004d);
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* การ์ดโปร่งแบบ glass */
+.glass-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: 40px 36px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(197, 175, 99, 0.3);
+}
+
+/* ข้อความทอง */
+.gold-text {
+  background: linear-gradient(90deg, #f9e79f, #c5af63, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ปุ่มมีแสงเคลื่อนไหว */
+.glow-btn {
+  position: relative;
+  overflow: hidden;
+}
+.glow-btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.3), transparent, rgba(255,255,255,0.3));
+  transform: skewX(-25deg);
+  animation: lightMove 2.5s infinite;
+}
+@keyframes lightMove {
+  0% { left: -75%; }
+  50% { left: 125%; }
+  100% { left: 125%; }
+}
+
+/* reverse layout (ภาพขวา ข้อความซ้าย) */
+.hero-section.reverse {
+  direction: rtl;
+}
+.hero-section.reverse .hero-content,
+.hero-section.reverse .hero-card {
+  direction: ltr;
+}

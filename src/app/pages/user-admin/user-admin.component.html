@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<div class="user-menu-container" data-aos="fade-up">
+  <div class="user-header">
+    <h2>เมนูผู้ดูแลระบบ</h2>
+    <p>จัดการข้อมูลการขายและ License ของคุณได้ที่นี่</p>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-card" (click)="goTo('dashboard')">
+      <div class="icon-box">
+        <i class="fas fa-id-card"></i>
+      </div>
+      <h3>Dashboard</h3>
+      <p>แดชบอร์ดและสถิติ</p>
+    </div>
+    <div class="menu-card" (click)="goTo('license-manage')">
+      <div class="icon-box">
+        <i class="fas fa-file-text"></i>
+      </div>
+      <h3>จัดการใบสั่งซื้อ</h3>
+      <p>จัดการลงทะเทียนและดูข้อมูลใบสั่งซื้อในระบบ</p>
+    </div>
+    <div class="menu-card" (click)="goTo('manage')">
+      <div class="icon-box">
+        <i class="fas fa-user-pen"></i>
+      </div>
+      <h3>จัดการผู้ขาย</h3>
+      <p>จัดการผู้ขายที่ลงทะเบียนในระบบ</p>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,47 @@
+<header class="main-header" [class.sticky]="isSticky">
+  <div class="container">
+    <!-- โลโก้ -->
+    <div class="logo" routerLink="/">
+      <img src="assets/icon_header.png" alt="Logo" />
+    </div>
+
+    <!-- เมนูหลัก -->
+    <nav class="nav-links">
+      <a href="#" (click)="goPricing($event)">แพ็กเกจการใช้งาน</a>
+      <a routerLink="/about-us">เกี่ยวกับเรา</a>
+      <a href="https://www.modesolutions.co.th" target="_blank">ติดต่อเรา</a>
+
+      <!-- ▼ เมนูจัดการสมาชิก -->
+      <div class="dropdown" (click)="toggleDropdown($event)">
+        <button class="dropbtn">ระบบสมาชิก ▾</button>
+        <div class="dropdown-content" [class.show]="isDropdownOpen">
+          <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
+          <a routerLink="/login-member">เข้าสู่ระบบ</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ☰ Hamburger -->
+    <div class="menu-toggle" (click)="toggleMenu()">
+      <i class="fa" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+    </div>
+  </div>
+
+  <!-- 📱 Mobile Menu -->
+  <div class="mobile-menu" [class.open]="isMenuOpen">
+    <a href="#" (click)="goPricing($event)">แพ็กเกจการใช้งาน</a>
+    <a routerLink="/about-us">เกี่ยวกับเรา</a>
+    <a href="https://www.modesolutions.co.th" target="_blank">ติดต่อเรา</a>
+
+    <!-- 🔽 Dropdown มือถือ -->
+    <div class="mobile-dropdown">
+      <button (click)="toggleSubMenu()" class="mobile-dropbtn">
+        ระบบสมาชิก ▾
+      </button>
+      <div class="mobile-submenu" [class.open]="isSubMenuOpen">
+        <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
+        <a routerLink="/login-member">เข้าสู่ระบบ</a>
+      </div>
+    </div>
+  </div>
+</header>

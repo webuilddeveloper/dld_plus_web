@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+<div class="user-menu-container" data-aos="fade-up">
+  <div class="user-header">
+    <h2>เมนูผู้ใช้งาน</h2>
+    <p>จัดการข้อมูลการขายและ License ของคุณได้ที่นี่</p>
+  </div>
+
+  <div class="menu-grid">
+    <!-- เมนู 1: ลงทะเบียนสั่งซื้อ License -->
+    <div class="menu-card" (click)="goTo('dashboard')">
+      <div class="icon-box">
+        <i class="fas fa-id-card"></i>
+      </div>
+      <h3>Dashboard</h3>
+      <p>แดชบอร์ดและสถิติ</p>
+    </div>
+
+    <!-- เมนู 2: จัดการใบสั่งซื้อ -->
+    <div class="menu-card" (click)="goTo('sale-purchase-order')">
+      <div class="icon-box">
+        <i class="fas fa-file-text"></i>
+      </div>
+      <h3>ลงทะเบียนขาย</h3>
+      <p>จัดการลงทะเทียนและดูข้อมูลรายการคำสั่งซื้อ</p>
+    </div>
+
+    <!-- เมนู 3: ดูประวัติการขาย -->
+    <div class="menu-card" (click)="goTo('history')">
+      <div class="icon-box">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <h3>ดูประวัติการขาย</h3>
+      <p>ดูประวัติยอดขายย้อนหลัง</p>
+    </div>
+
+
+  </div>
+</div>
+
+<app-footer></app-footer>

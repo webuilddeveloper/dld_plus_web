@@ -1,0 +1,63 @@
+<app-sidebar></app-sidebar>
+
+<div class="news-detail-container">
+    <div class="news-detail">
+        <!-- Title -->
+        <h1 class="title">{{ model.title }}</h1>
+
+        <div class="h02 w100 bgc-ee mt20 mb20"></div>
+
+
+        <!-- Description -->
+        <p class="description" [innerHTML]="model.description"></p>
+
+        <!-- Main Image -->
+        <div class="main-image">
+            <img [src]="model.imageUrl" alt="Main News Image">
+        </div>
+
+        <!-- Image List -->
+        <div class="image-list">
+            <div class="thumb" *ngFor="let img of model?.imagesList" (click)="openImage(img.imageUrl)">
+                <img [src]="img.imageUrl" alt="Gallery Image">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal Overlay -->
+<div class="modal-overlay" *ngIf="selectedImage" (click)="closeImage()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <button class="close-button" (click)="closeImage()">×</button>
+        <img [src]="selectedImage" alt="Selected Image">
+    </div>
+</div>
+
+
+<div class="home-footer ">
+
+    <!-- เนื้อหาอื่นๆ -->
+
+    <footer class="footer">
+        <div class="footer-column">
+            <h3>ที่อยู่</h3>
+            <p>We-Lap</p>
+        </div>
+        <div class="footer-column">
+            <h3>ติดต่อ</h3>
+            <p>อีเมล: saraban&#64;dla.go.th</p>
+        </div>
+        <div class="footer-column-end">
+            <h3>Social Media</h3>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank">
+                    <img src="assets/facebook-white.png" alt="Facebook" />
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                    <img src="assets/instagram-white.png" alt="Instagram" />
+                </a>
+            </div>
+        </div>
+    </footer>
+</div>

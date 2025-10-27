@@ -1,0 +1,54 @@
+<!-- <app-sidebar></app-sidebar> -->
+<app-header></app-header>
+
+<div class="main-content">
+  <section class="hero-section">
+    <ng-lottie class="hero-lottie-bg" [options]="heroBgLottieOptions"></ng-lottie>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span *ngFor="let char of contactTitleChars" class="char">{{ char }}</span>
+      </h1>
+      <p class="hero-subtitle">ภารกิจและเป้าหมายของเรา</p>
+    </div>
+  </section>
+
+  <section class="features-wrapper">
+    <div class="roulette-head">
+      <h2 class="roulette-text" #rouletteText>What is we-lap?</h2>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card" *ngFor="let feature of features" #featureItem>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
+      <div class="feature-card" *ngFor="let feature of features_right" #featureItem>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- <footer class="footer">
+    <div class="footer-column">
+      <h3>ที่อยู่</h3>
+      <p>We-Lap</p>
+    </div>
+    <div class="footer-column">
+      <h3>ติดต่อ</h3>
+      <p>อีเมล: saraban&#64;dla.go.th</p>
+    </div>
+    <div class="footer-column-end">
+      <h3>Social Media</h3>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank">
+          <img src="assets/facebook-white.png" alt="Facebook" />
+        </a>
+        <a href="https://instagram.com" target="_blank">
+          <img src="assets/instagram-white.png" alt="Instagram" />
+        </a>
+      </div>
+    </div>
+  </footer>
+</div> -->
+<app-footer></app-footer>

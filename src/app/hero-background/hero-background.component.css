@@ -1,0 +1,50 @@
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* ป้องกันการบังปุ่ม */
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #328e2b 0%,
+    #20401c 40%,
+    #183017 75%,
+    #20401c 100%
+  );
+  background-size: 200% 200%;
+  animation: shiftBg 30s ease infinite;
+}
+
+:host::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5%;
+  background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+@keyframes shiftBg {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

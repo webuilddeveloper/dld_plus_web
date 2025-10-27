@@ -1,0 +1,276 @@
+<app-header></app-header>
+
+<div class="sales-history-container">
+  <button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
+
+  <h2 class="page-title">ลงทะเบียนขาย</h2>
+
+  <!-- รายละเอียดผู้ขาย -->
+  <div class="seller-info search-pagination flex-wrap gap-3">
+    <div class="col">
+      ค้นหา
+      <input type="text" placeholder="ค้นหาเลขคำสั่งซื้อ รหัสผู้ขาย ..." [(ngModel)]="criteriaModel.keySearch"
+        (input)="filterSales()" />
+    </div>
+    <!-- <div class="col">
+      สถานะ
+      <select name="" id="" [(ngModel)]="criteriaModel.status" (change)="readSale()">
+        <option value="" selected>ทุกสถานะ</option>
+        <option value="A" selected>อนุมัติแล้ว</option>
+        <option value="N" selected>รอตรวจสอบ</option>
+      </select>
+    </div> -->
+    <div class="col">
+      วันที่ลงทะเบียน
+      <input type="date" placeholder="ค้นหาหน่วยงาน จังหวัด..." [(ngModel)]="criteriaModel.startDate"
+        (input)="filterSales()" />
+    </div>
+    <div class="col">
+      ถึงวันที่
+      <input type="date" placeholder="ค้นหาหน่วยงาน จังหวัด..." [(ngModel)]="criteriaModel.endDate"
+        (input)="filterSales()" />
+    </div>
+  </div>
+
+
+  <!-- ตารางประวัติการขาย -->
+  <div class="table-wrapper">
+    <div class="head-table flex-wrap gap-3">
+      <div class="col"><span class="title">รายการ</span></div>
+      <div class="col d-flex justify-content-end w-fit gap-3">
+        <button class="save-btn" (click)="goToLicenseRegister()">
+          สร้างคำสั่งซื้อ
+        </button>
+
+      </div>
+
+    </div>
+    <div class="table-container">
+
+      <table class="sales-table">
+        <thead>
+          <tr>
+            <th>ลำดับ</th>
+            <th>ดำเนินการ</th>
+            <th>เลขคำสั่งซื้อ</th>
+            <th>รหัสผู้ขาย</th>
+            <th>องค์กร</th>
+            <th>โปรแกรม</th>
+            <th>แพ็กเกจ</th>
+            <!-- <th>สถานะ</th> -->
+            <th>วันที่ลงทะเบียน</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (sale of paginatedSales; track $index) {
+          <tr>
+            <td>{{ (currentSalePage - 1) * totalSalePages + $index + 1 }}</td>
+            <td>
+              <div class="action-buttons">
+                <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-hamburger" matTooltip="จัดการเอกสาร">
+                  <mat-icon>menu</mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu" class="custom-menu light-bg">
+
+                  <div *ngIf="!sale.orderId">
+                    <div class="menu-section-title">สร้างเอกสาร</div>
+                    <button mat-menu-item class="menu-item create" (click)="goToPurchaseOrder(sale)">
+                      <mat-icon>add_shopping_cart</mat-icon>
+                      <span>สร้างใบสั่งซื้อ (PO)</span>
+                    </button>
+
+                    <mat-divider></mat-divider>
+                  </div>
+
+
+                  <div class="menu-section-title">พิมพ์เอกสาร</div>
+                  <button mat-menu-item class="menu-item appoint" (click)="printDocument(sale, 'appoint')">
+                    <mat-icon>assignment_ind</mat-icon>
+                    <span>ใบแต่งตั้ง</span>
+                  </button>
+
+                  <button mat-menu-item class="menu-item quote" (click)="printDocument(sale, 'quote')">
+                    <mat-icon>request_quote</mat-icon>
+                    <span>ใบเสนอราคา</span>
+                  </button>
+
+                  <button *ngIf="sale?.orderId" mat-menu-item class="menu-item po" (click)="printDocument(sale, 'po')">
+                    <mat-icon>shopping_cart</mat-icon>
+                    <span>ใบสั่งซื้อ</span>
+                  </button>
+                </mat-menu>
+
+              </div>
+            </td>
+            <td>{{ sale.orderId }}</td>
+            <td>{{ sale.sellerCode }}</td>
+            <td>{{ sale.companyName }}</td>
+            <td>{{ sale.program }}</td>
+            <td>{{ sale.package }}</td>
+
+            <!-- <td><div [ngClass]="sale.orderStatus == 'A' ? 'd-success' : 'd-warning'" class="d-status">{{ sale.orderStatus == 'A' ?
+              'มี License' : 'ยังไม่มี License' }}</div></td>  -->
+            <td>{{ sale.createDate | date: 'dd/MM/yyyy' }}</td>
+
+          </tr>
+          }
+
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <button (click)="prevSalePage()" [disabled]="currentSalePage === 1">‹</button>
+      <span>หน้า {{ currentSalePage }} / {{ totalSalePages }}</span>
+      <button (click)="nextSalePage()" [disabled]="currentSalePage === totalSalePages">›</button>
+    </div>
+  </div>
+
+  <!-- Drawer Overlay -->
+  @if (isDrawer) {
+  <div class="drawer-overlay" (click)="closeDrawer()" [class.fade-out]="isClosing"></div>
+  }
+  <!-- Drawer Panel (Full Screen) -->
+
+  @if (isDrawer) {
+  <div class="drawer-full" [class.slide-out]="isClosing">
+    <div class="drawer-header">
+      <h3>รายละเอียด ผู้ลงทะเบียน</h3>
+      <button class="close-btn" (click)="closeDrawer()">×</button>
+    </div>
+
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <h4 class="org-name">
+        </h4>
+        <div class="drawer-table-wrapper">
+          <div class="gen-license-container">
+            <!-- <h2 class="page-title">🧾 สร้าง License Key</h2> -->
+            <!-- กรอบบน: ข้อมูลผู้ขาย / องค์กร -->
+            <div class="summary-box">
+              <div class="summary-row">
+                <div><strong>รหัสผู้ขาย:</strong> {{ model.sellerCode }}</div>
+                <div><strong>ชื่อโปรแกรม:</strong> {{ model.program }}</div>
+              </div>
+              <div class="summary-row">
+                <div><strong>ชื่อองค์กร:</strong> {{ model.companyName }}</div>
+                <div><strong>ชื่อแพ๊คเกจ:</strong> {{model.package}}</div>
+
+              </div>
+              <div class="summary-row">
+                <div><strong>จำนวน License:</strong> {{ model.licenseCount }}</div>
+                <div><strong>ราคาขาย:</strong> {{ model.price | number }} บาท</div>
+              </div>
+
+              <!-- <div class="summary-row">
+                <div>
+                  <strong>เอกสารแนบ:</strong>
+                  <a [hidden]="model.fileUrl" [href]="model.fileUrl" target="_blank" class="doc-link">ดูเอกสาร</a>
+                </div>
+
+              </div> -->
+            </div>
+
+            <!-- กรอบล่าง: License List -->
+            <div class="license-card">
+              <!-- <div class="header" style="display: flex;justify-content: space-between;">
+                <h3>🔑 รายการ License ที่จะสร้าง</h3>
+                <button class="btn-generate" *ngIf="listLicensKey.length == 0" (click)="generateLicensesbutton()">สร้าง
+                  License</button>
+              </div> -->
+              <div class="header" style="display: flex;justify-content: space-between;">
+                <h3>🔑 รายการ License</h3>
+              </div>
+
+              <table class="license-table" *ngIf="listLicensKey.length > 0">
+                <thead>
+                  <tr>
+                    <th>ลำดับ</th>
+                    <th>License Key</th>
+                    <th>สถานะ</th>
+                    <th>วันที่สร้าง</th>
+                    <th>จัดการ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let lic of listLicensKey; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td class="license-key">{{ lic.licenseKey }}</td>
+                    <td>
+                      <span [class.active]="lic.status === 'A'" [class.pending]="lic.status === 'N'">
+                        {{ lic.status === 'A' ? 'Active แล้ว' : 'รอ Activate' }}
+                      </span>
+                    </td>
+                    <td>{{ lic.createDate | date: 'dd/MM/yyyy' }}</td>
+                    <td>
+                      <button class="btn-action" (click)="copyLicense(lic.key)">📋 คัดลอก</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="empty-state" *ngIf="listLicensKey.length === 0">
+                <p>ยังไม่มี License ที่สร้าง</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+@if (showSuccessPopup) {
+<div class="popup-overlay">
+  <div class="popup-card">
+    <div class="popup-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+      </svg>
+    </div>
+    <h2>{{popupSuccessTitle}}</h2>
+    <div class="btn-c">
+      <button class="popup-btn" (click)="closePopup()">ตกลง</button>
+    </div>
+  </div>
+</div>
+}
+
+@if (showErrorPopup) {
+<div class="popup-overlay">
+  <div class="popup-card error-card">
+    <div class="popup-icon-error error-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </div>
+    <h2>เกิดข้อผิดพลาด</h2>
+    <p>{{ popupErrorMessage }}</p>
+    <div class="btn-c">
+      <button class="popup-btn error-btn" (click)="closeErrorPopup()">ปิด</button>
+    </div>
+  </div>
+</div>
+}
+
+@if (isShowDeletePopup) {
+<div class="popup-overlay">
+  <div class="popup-card error-card">
+    <div class="popup-icon-error error-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </div>
+    <h2>ยืนยันรายการ</h2>
+    <p>ต้องการลบรายการที่เลือกหรือไม่</p>
+    <div class="btn-c d-flex gap-3">
+      <button class="popup-btn secound" (click)="closeDeletePopup()">ยกเลิก</button>
+      <button class="popup-btn " (click)="deleteItem()">ตกลง</button>
+    </div>
+  </div>
+</div>
+}
+
+<app-footer></app-footer>

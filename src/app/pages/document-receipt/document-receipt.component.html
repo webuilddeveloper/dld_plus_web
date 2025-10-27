@@ -1,0 +1,92 @@
+<app-sidebar></app-sidebar>
+
+<div class="ptheader">
+    <div class="container">
+        <div class="d-flex" style="justify-content: flex-end;">
+            <div>
+                <!-- <span class="pointer mr10" (click)="downloadPDF()">
+                    <img src="./assets/icon_download.png" width="50" height="50" alt="icon_download.png">
+                </span> -->
+                <span class="pointer" (click)="downloadPDF()">
+                    <img src="assets/icon_print.png" width="50" height="50" alt="icon_print.png">
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div #receipt>
+    <div class="main-container">
+
+        <div class="ct-receipt">
+            <div class="top-icon">
+                <a href="#">
+                    <img src="assets/mode.png" alt="Logo" />
+
+                </a>
+            </div>
+            <div class="content-header">
+                <span class="content-h">Mode solutions</span>
+                <span class="content-sub">1078/1 หมู่ 4 ถนนแสงชูโต ตำบลท่าม่วง</span>
+                <span class="content-sub">อำเภอท่าม่วง จังหวัดกาญจนบุรี 71110</span>
+                <span class="content-sub">034-604645 , 062 - 5988225</span>
+                <span class="content-sub">info.modesolutions&#64;gmail.com</span>
+            </div>
+            <div class="h02 w100 bgc-ee mt20 mb20"></div>
+            <div class="content-invoice ">
+                <span class="invoice-h">Invoice #001</span>
+                <span class="invoice-sub">วันที่: {{toDate}}</span>
+                <span class="invoice-sub">กำหนดชำระ: {{payDate}}</span>
+            </div>
+            <!-- <div class="h02 w100 bgc-ee mt20 mb20"></div> -->
+
+            <div class="content-company">
+                <span class="company-h">ออกให้</span>
+                <span class="company-sub">{{model.companyName}}</span>
+            </div>
+
+            <table class="receipt-table">
+                <tr>
+                    <th colspan="1">รายละเอียด</th>
+                    <th>Total</th>
+                </tr>
+
+                <tr>
+                    <td>User License(LAP) จำนวนผู้ใช้ {{model.userCount}} User - {{durationTime}} ({{toDate}} - {{endDate}}) </td>
+                    <td>19,500 บาท / License </td>
+                </tr>
+
+                <tr class="right-align">    
+                    <td><strong>ยอดรวม</strong></td>
+                    <td><strong>{{total}} บาท</strong></td>
+                </tr>
+
+                <tr class="right-align">
+                    <td><strong>7.00% VAT</strong></td>
+                    <td><strong>{{vat}} บาท</strong></td>
+                </tr>
+
+                <tr class="right-align">
+                    <td><strong>Credit</strong></td>
+                    <td><strong>0.00 บาท</strong></td>
+                </tr>
+
+                <tr class="right-align">
+                    <td><strong>รวมทั้งสิ้น</strong></td>
+                    <td><strong>{{grandTotal}} บาท</strong></td>
+                </tr>
+            </table>
+
+            <div class="h02 w100 bgc-ee mt20 mb20"></div>
+
+            <div class="content-company">
+                <span class="company-h">กรุณาโอนเข้าบัญชี</span>
+                <span class="company-sub">ธนาคารกสิกรไทย เลขบัญชี 111-1-11111-1 ชื่อบัญชี We-LAP</span>
+            </div>
+
+            <!-- <div class="h02 w100 bgc-ee mt20 mb20"></div> -->
+            <!-- <span class="fz20 fw500 color-black mt10 align-self-start mt20">วัน เดือน ปี <span class="color-005 fwn">
+                &nbsp;&nbsp;{{editModel.createDate | dateFormat}}</span></span> -->
+
+        </div>
+    </div>
+</div>
