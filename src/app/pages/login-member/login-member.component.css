@@ -346,4 +346,9 @@ li {
     max-width: 240px;
     min-height: 140px;
   }
+
+  .group-label-regis {
+    flex-direction: column !important;
+    align-items: center;
+  }
 }

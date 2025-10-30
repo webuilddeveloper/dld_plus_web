@@ -35,6 +35,22 @@
       box-shadow: 0 6px 15px rgba($accent-orange, 0.25);
     }
   }
+
+  .goPdf {
+    background: #3d6f82;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px #c3d4d9;
+    }
+  }
 }
 
 .section {
@@ -307,6 +323,10 @@
   #digital-planning-timeline .timeline-item {
     margin-block: 16px;
     padding-block: 12px;
+  }
+
+  .btn-group {
+    flex-direction: column !important;
   }
 }
 

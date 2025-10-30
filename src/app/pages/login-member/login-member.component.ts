@@ -116,8 +116,9 @@ export class LoginMemberComponent {
           model = res;
           if (model.status == 'S') {
             localStorage.setItem('code', model?.objectData?.code);
-            localStorage.setItem('email', model?.objectData?.sellerCode);
-
+            localStorage.setItem('user', model?.objectData?.firstName);
+            localStorage.setItem('sellerCode', model?.objectData?.sellerCode);
+            localStorage.setItem('role', 'user');
             this.router.navigate(['user'], {
               // skipLocationChange: true,
             });

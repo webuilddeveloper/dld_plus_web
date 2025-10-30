@@ -13,10 +13,37 @@
 
       <!-- ▼ เมนูจัดการสมาชิก -->
       <div class="dropdown" (click)="toggleDropdown($event)">
-        <button class="dropbtn">ระบบสมาชิก ▾</button>
-        <div class="dropdown-content" [class.show]="isDropdownOpen">
+        <button class="dropbtn"><span>ระบบสมาชิก ▾</span></button>
+        <!-- <div class="dropdown-content" [class.show]="isDropdownOpen">
           <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
           <a routerLink="/login-member">เข้าสู่ระบบ</a>
+        </div> -->
+        <div class="dropdown-content" [class.show]="isDropdownOpen">
+          <ng-container *ngIf="!isLoggedIn; else loggedInMenu">
+            <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
+            <a routerLink="/login-member">เข้าสู่ระบบ</a>
+          </ng-container>
+
+          <ng-template #loggedInMenu>
+            <div class="user-box">
+              <div class="user-info" (click)="goToProfile()">
+                <i class="fa fa-user-circle"></i>
+                <div class="user-text">
+                  <div class="name">{{ userName }}</div>
+                  <div class="role">{{ userRole === 'admin' ? 'ผู้ดูแลระบบ' : 'ผู้ใช้งานทั่วไป' }}</div>
+                </div>
+              </div>
+              <hr />
+              <div class="manage-info">
+                <a (click)="goToProfile()"><i class="fa fa-cogs"></i> จัดการข้อมูล</a>
+              </div>
+              <hr />
+
+              <div class="logout-btn" (click)="logout()">
+                <i class="fa fa-sign-out"></i> ออกจากระบบ
+              </div>
+            </div>
+          </ng-template>
         </div>
       </div>
     </nav>
@@ -31,16 +58,49 @@
   <div class="mobile-menu" [class.open]="isMenuOpen">
     <a href="#" (click)="goPricing($event)">แพ็กเกจการใช้งาน</a>
     <a routerLink="/about-us">เกี่ยวกับเรา</a>
-    <a href="https://www.modesolutions.co.th" target="_blank">ติดต่อเรา</a>
+    <a href="https://webuild.co.th/#/" target="_blank">ติดต่อเรา</a>
 
     <!-- 🔽 Dropdown มือถือ -->
-    <div class="mobile-dropdown">
+    <!-- <div class="mobile-dropdown">
       <button (click)="toggleSubMenu()" class="mobile-dropbtn">
         ระบบสมาชิก ▾
       </button>
       <div class="mobile-submenu" [class.open]="isSubMenuOpen">
         <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
         <a routerLink="/login-member">เข้าสู่ระบบ</a>
+      </div>
+    </div> -->
+
+    <!-- 📱 Mobile Dropdown -->
+    <div class="mobile-dropdown">
+      <button (click)="toggleSubMenu()" class="mobile-dropbtn">
+        ระบบสมาชิก ▾
+      </button>
+
+      <div class="mobile-submenu" [class.open]="isSubMenuOpen">
+
+        <ng-container *ngIf="!isLoggedIn; else mobileLoggedInMenu">
+          <a routerLink="/vendor-register" (click)="toggleSubMenu()">ลงทะเบียนผู้ขาย</a>
+          <a routerLink="/login-member" (click)="toggleSubMenu()">เข้าสู่ระบบ</a>
+        </ng-container>
+
+        <ng-template #mobileLoggedInMenu>
+          <div class="mobile-user-box">
+            <div class="mobile-user-info" (click)="goToProfile()">
+              <i class="fa fa-user-circle"></i>
+              <div class="mobile-user-text">
+                <div class="name">{{ userName }}</div>
+                <div class="role">{{ userRole === 'admin' ? 'ผู้ดูแลระบบ' : 'ผู้ใช้งานทั่วไป' }}</div>
+              </div>
+            </div>
+            <div class="manage-info">
+              <a (click)="goToProfile()">จัดการข้อมูล</a>
+            </div>
+            <div class="mobile-logout-btn" (click)="logout()">
+              <i class="fa fa-sign-out"></i> ออกจากระบบ
+            </div>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

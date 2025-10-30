@@ -13,12 +13,38 @@ export class HeaderComponent {
   isSticky = false;
   constructor(
     private router: Router,
-  ) { }
+  ) {
+    // โหลดข้อมูลจาก localStorage
+    const storedUser = localStorage.getItem('user');
+    const storedRole = localStorage.getItem('role');
+
+    if (storedUser) {
+      this.userName = storedUser;
+      this.userRole = storedRole;
+      this.isLoggedIn = true;
+    }
+
+    // ปิด dropdown เมื่อ route เปลี่ยน
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe(() => {
+        this.isDropdownOpen = false;
+        this.isMenuOpen = false;
+      });
+
+    // ปิด dropdown เมื่อคลิกข้างนอก
+    document.addEventListener('click', () => (this.isDropdownOpen = false));
+  }
 
 
   isMenuOpen = false;
   isDropdownOpen = false;
   isSubMenuOpen = false;
+
+  // ✅ ข้อมูลผู้ใช้
+  isLoggedIn = false;
+  userName: string | null = null;
+  userRole: string | null = null;
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -38,6 +64,29 @@ export class HeaderComponent {
   @HostListener('window:scroll', [])
   onScroll() {
     this.isSticky = window.scrollY > 50;
+  }
+
+  // ✅ ไปหน้าตาม role
+  goToProfile() {
+    if (!this.userRole) return;
+
+    if (this.userRole === 'admin') {
+      this.router.navigate(['/user-admin']);
+    } else {
+      this.router.navigate(['/user']);
+    }
+
+    this.isDropdownOpen = false;
+  }
+
+  // ✅ ออกจากระบบ
+  logout() {
+    localStorage.clear();
+    this.userName = null;
+    this.userRole = null;
+    this.isLoggedIn = false;
+    this.router.navigate(['/login-member']);
+    this.isDropdownOpen = false;
   }
 
   goPricing(event: Event) {

@@ -580,5 +580,9 @@ export class HomeComponent implements AfterViewInit {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+
+  gotoPDF() {
+    window.open('https://khubdeedlt.we-builds.com/wb-document/images/welap/CATALOGDLD+.pdf', '_blank');
+  }
 }
 
