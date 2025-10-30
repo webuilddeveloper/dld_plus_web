@@ -6,10 +6,16 @@
   <h2 class="page-title">ประวัติการขาย License</h2>
 
   <!-- รายละเอียดผู้ขาย -->
-  <div class="seller-info">
-    <p><strong>ชื่อผู้ขาย:</strong> {{ model.companyName }}</p>
-    <p><strong>รหัสพนักงาน:</strong> {{ model.sellerCode }}</p>
+  <!-- <div class="seller-info"> -->
+
+  <div class="summary-box">
+    <div class="summary-row">
+      <div><strong>รหัสผู้ขาย:</strong> {{ model.sellerCode }}</div>
+      <div><strong>ชื่อองค์กร:</strong> {{ model.companyName }}</div>
+    </div>
   </div>
+  <!-- </div> -->
+
 
   <div class="seller-info search-pagination flex-wrap gap-3">
     <div class="col">
@@ -120,21 +126,25 @@
 
     <div class="drawer-content">
       <div class="drawer-inner">
-        <h4 class="org-name">
-          {{ selectedSale.companyName }} ({{ selectedSale.program }})
+        <div class="sale-header">
+          <h4 class="org-name">
+            {{ selectedSale.companyName }}
+            <span class="program-tag">({{ selectedSale.program }})</span>
+          </h4>
 
-        </h4>
-        <div style="
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-">
-          <p>จำนวน License ทั้งหมด: {{ selectedSale.licenseCount }}</p>
-          <button class="print-btn" (click)="exportAsXLSX()">
-            <i class="fa fa-print"></i>
-            <span> พิมพ์เอกสาร</span>
-          </button>
+          <div class="sale-info">
+            <p class="license-text">
+              จำนวน License ทั้งหมด:
+              <span class="count">{{ selectedSale.licenseCount }}</span>
+            </p>
+
+            <button class="print-btn" (click)="exportAsXLSX()">
+              <i class="fa fa-print"></i>
+              <span class="btn-text">พิมพ์เอกสาร</span>
+            </button>
+          </div>
         </div>
+
 
         <div class="table-container">
           <table class="license-table">

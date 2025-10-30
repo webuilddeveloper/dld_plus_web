@@ -11,57 +11,55 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-sale-download',
   templateUrl: './sale-download.component.html',
   styleUrls: ['./sale-download.component.scss'],
-  imports: [
-    CommonModule,
-    FormsModule,
-    HeaderComponent,
-    FooterComponent
-],
+  imports: [CommonModule, FormsModule, HeaderComponent, FooterComponent],
 })
 export class SaleDownloadComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public serviceProviderService: ServiceProviderService,
-  ) { }
+    public serviceProviderService: ServiceProviderService
+  ) {}
   documentList = [
     {
-      title: "TOR ระบบจัดการ License",
-      type: "pdf",
-      description: "รายละเอียด TOR สำหรับการจัดซื้อโปรแกรมระบบจัดการ License",
-      updateDate: "2025-10-01",
-      fileUrl: "assets/docs/tor-license.pdf"
+      title: '1_TOR ระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (Digital Local D)',
+      type: 'pdf',
+      description:
+        'รายละเอียด 1_TOR ระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (Digital Local D)',
+      updateDate: '2025-10-01',
+      fileUrl:
+        'https://dldsoftplus.com/docs/03.1_TOR ระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (Digital Local D.docx',
     },
     {
-      title: "ใบเสนอราคา Software",
-      type: "pdf",
-      description: "ตัวอย่างใบเสนอราคาสำหรับหน่วยงานราชการ",
-      updateDate: "2025-09-28",
-      fileUrl: "assets/docs/quotation.pdf"
+      title: 'บันทึกข้อความขออนุมัติ',
+      type: 'pdf',
+      description: 'รายละเอียด บันทึกข้อความขออนุมัติ',
+      updateDate: '2025-09-28',
+      fileUrl: 'https://dldsoftplus.com/docs/03.2_บันทึกข้อความขออนุมัติ.docx',
     },
     {
-      title: "แบบฟอร์มคำขอ",
-      type: "doc",
-      description: "เอกสารสำหรับติดต่อเจ้าหน้าที่เพื่อดำเนินการจัดซื้อ",
-      updateDate: "2025-09-25",
-      fileUrl: "assets/docs/request.doc"
+      title: 'ใบเสนอราคา',
+      type: 'doc',
+      description: 'รายละเอียดใบเสนอราคา',
+      updateDate: '2025-09-25',
+      fileUrl: 'https://dldsoftplus.com/docs/03.3_ใบเสนอราคา.docx',
     },
     {
-      title: "ข้อมูลประกอบการขาย (ZIP)",
-      type: "zip",
-      description: "รูปภาพและเอกสารประกอบโครงการทั้งหมด",
-      updateDate: "2025-09-20",
-      fileUrl: "assets/docs/sales-support.zip"
-    }
+      title: 'เอกสารแนะนำระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (DLD+)',
+      type: 'zip',
+      description:
+        'รายละเอียด เอกสารแนะนำระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (DLD+)',
+      updateDate: '2025-10-30',
+      fileUrl: 'https://dldsoftplus.com/docs/CatalogSmartPlan.pdf',
+    },
   ];
 
   ngOnInit(): void {}
 
   downloadFile(doc: any) {
-    window.open(doc.fileUrl, "_blank");
+    window.open(doc.fileUrl, '_blank');
   }
 
-    goBack() {
+  goBack() {
     // window.history.back();
     this.router.navigate(['user']);
   }
