@@ -5,7 +5,7 @@
 }
 
 .hero {
-  background: linear-gradient(135deg, $sky-tint, white);
+  // background: linear-gradient(135deg, $sky-tint, white);
   text-align: center;
   padding: 6rem 0;
 
@@ -961,6 +961,7 @@
   overflow: hidden;
   // background: #00031d;
   /* เผื่อ Lottie โหลดช้า */
+  z-index: 999;
 }
 
 /* Lottie พื้นหลังเต็มพื้นที่ อยู่ชั้นล่าง */
@@ -1370,8 +1371,6 @@
   .bento-grid > .pos-1 {
     grid-column: 1 / -1 !important; /* เต็ม 2 คอลัมน์ */
   }
-
-
 }
 
 /* ขนาดหน้าจอมือถือ */
@@ -2016,4 +2015,8 @@ li {
 
 .none-shadow {
   box-shadow: none !important;
+}
+
+.bg-main {
+  position: absolute;
 }

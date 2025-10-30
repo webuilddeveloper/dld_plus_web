@@ -26,30 +26,37 @@
 
   <div class="main-content">
 
-    <section id="hero" class="hero animated fade-up hero-section layout-centered">
-      <div class="d-flex align-items-center">
-        <div class="container group-center">
-          <h1 data-aos="fade-up">{{ content.hero.title }}</h1>
-          <p class="subtitle h5" data-aos="fade-up" data-aos-delay="400">{{ content.hero.subtitle }}</p>
-          <div data-aos="fade-up" data-aos-delay="600">
-            <button class="cta" (click)="scrollTo('overview')">{{ content.hero.cta }}</button>
+    <div class="fist-content">
+      <div class="bg-main col-12" data-aos="fade-in">
+        <ng-lottie class="hero-lottie-fg" [options]="waveBackgroundLottieOptions"></ng-lottie>
+      </div>
+      <section id="hero" class="hero animated fade-up hero-section layout-centered">
+        <div class="d-flex align-items-center">
+          <div class="container group-center">
+            <h1 data-aos="fade-up">{{ content.hero.title }}</h1>
+            <p class="subtitle h5" data-aos="fade-up" data-aos-delay="400">{{ content.hero.subtitle }}</p>
+            <div data-aos="fade-up" data-aos-delay="600">
+              <button class="cta" (click)="scrollTo('overview')">{{ content.hero.cta }}</button>
+            </div>
+
           </div>
 
-        </div>
-
-        <!-- <div class="timeline-top-left col-3" data-aos="zoom-in" data-aos-delay="700">
+          <!-- <div class="timeline-top-left col-3" data-aos="zoom-in" data-aos-delay="700">
           <ng-lottie class="hero-lottie-fg" [options]="brainstormingLottieOptions"></ng-lottie>
         </div> -->
 
-        <div class="timeline-bottom-right col-md-5 col-sm-12" data-aos="zoom-in" data-aos-delay="750">
-          <!-- 🆕 Top: Planng.json -->
-          <ng-lottie class="hero-lottie-fg" [options]="businessTeamLottieOptions"></ng-lottie>
+          <!-- <div class="timeline-bottom-right col-md-5 col-sm-12" data-aos="zoom-in" data-aos-delay="750">
+            <ng-lottie class="hero-lottie-fg" [options]="businessTeamLottieOptions"></ng-lottie>
+          </div> -->
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+
+
+
 
     <main id="overview">
-      <section class="bento-grid" >
+      <section class="bento-grid">
 
         <!-- top-left big round image -->
         <div class="bento-card pos-1 row-4 d-flex align-items-center none-shadow" data-aos="zoom-in"
@@ -203,6 +210,9 @@
 
 
   </div>
+
+
+
 
 </div>
 

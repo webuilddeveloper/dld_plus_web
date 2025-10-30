@@ -59,6 +59,30 @@ export class HomeComponent implements AfterViewInit {
     autoplay: true,
   };
 
+  businessTeamLottieOptions: AnimationOptions = {
+    path: 'assets/animations/Business team.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
+    loop: true,
+    autoplay: true,
+  };
+
+  brainstormingLottieOptions: AnimationOptions = {
+    path: 'assets/animations/Brainstorming.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
+    loop: true,
+    autoplay: true,
+  };
+
+   officeAccountantLottieOptions: AnimationOptions = {
+    path: 'assets/animations/Office Accountant.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
+    loop: true,
+    autoplay: true,
+  };
+
+  waveBackgroundLottieOptions: AnimationOptions = {
+    path: 'assets/animations/WAVE BACKGROUND.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
+    loop: true,
+    autoplay: true,
+  };
+
 
 
   isMobile = window.innerWidth <= 768;
@@ -159,23 +183,7 @@ export class HomeComponent implements AfterViewInit {
     { image: 'assets/news4.jpg' },
   ];
 
-  businessTeamLottieOptions: AnimationOptions = {
-    path: 'assets/animations/Business team.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
-    loop: true,
-    autoplay: true,
-  };
 
-  brainstormingLottieOptions: AnimationOptions = {
-    path: 'assets/animations/Brainstorming.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
-    loop: true,
-    autoplay: true,
-  };
-
-   officeAccountantLottieOptions: AnimationOptions = {
-    path: 'assets/animations/Office Accountant.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
-    loop: true,
-    autoplay: true,
-  };
 
   videoPlayers = new Map<string, HTMLVideoElement>();
 
