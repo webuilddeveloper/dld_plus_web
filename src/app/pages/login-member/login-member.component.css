@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
- 
+
 }
 
 .div-main {
@@ -99,15 +99,17 @@ li {
   display: flex;
   height: 100vh;
   background: #f5f6fa;
+  width: -webkit-fill-available;
+  max-width: 1440px;
 }
 
 .login-left {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-    background: linear-gradient(160deg, #00031d 0%, #101737 70%, #2d2a4a 100%);
+  /* background: linear-gradient(160deg, #00031d 0%, #101737 70%, #2d2a4a 100%); */
 
 }
 
@@ -123,28 +125,32 @@ li {
 }
 
 .login-right {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   align-items: center;
-  margin-left: 70px;
+  /* margin-left: 70px; */
 }
 
 .login-box {
-  background: white;
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  width: -webkit-fill-available;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .login-box h2 {
   margin-bottom: 20px;
-  color: #0033cc;
+  color: #3d6f82;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+
 }
 
 .form-control {
@@ -163,10 +169,17 @@ li {
 }
 
 .btn-login {
-  width: 100%;
-  background: #2d2a4a;
+  background: #f25a24;
   color: white;
-  margin-bottom: 20px;
+  width: fit-content;
+  align-self: center;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.btn-login:hover {
+  transform: translateY(-2px);
+  /* box-shadow: 0 16px 36px rgba(255, 220, 134, 0.45); */
+  box-shadow: -1px 3px 14px #ef8554;
 }
 
 .action-buttons {
@@ -187,11 +200,10 @@ li {
 
 .register-hint {
   font-size: 16px;
-  margin-top: 20px;
 }
 
 .register-link {
-  color: var(--nevy);
+  color: #3d6f82;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
@@ -199,6 +211,7 @@ li {
 
 .register-link:hover {
   text-decoration: underline;
+  color: #3d6f82;
 }
 
 .password-box {
@@ -220,6 +233,11 @@ li {
   color: #888;
 }
 
+.main-div {
+  background: #f5f6fa;
+  display: flex;
+  justify-content: center;
+}
 
 
 
@@ -293,7 +311,15 @@ li {
     border-radius: 12px;
     padding: 30px 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
   }
+}
+
+.form {
+  width: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .sm-lottie {

@@ -27,7 +27,7 @@ export class LoginMemberComponent {
 
 
   planngLottieOptions: AnimationOptions = {
-    path: 'assets/animations/Animated Dashboards.json',
+    path: 'assets/animations/Login Leady.json',
     loop: true,
     autoplay: true,
   };

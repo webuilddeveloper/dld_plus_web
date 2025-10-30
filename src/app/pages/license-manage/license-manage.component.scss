@@ -1,7 +1,7 @@
 /* พื้นหลังหลัก */
 .sales-history-container {
   max-width: 1200px;
-  margin: 40px auto;
+  margin: 100px auto 40px auto;
   padding: 24px;
   background: #f9fafc;
   border-radius: 16px;
@@ -135,7 +135,7 @@ select {
 }
 
 /* ตาราง */
-.sales-table {  
+.sales-table {
 min-width: 1500px;
   border-collapse: collapse;
 }
@@ -692,7 +692,7 @@ input:checked+.slider:before {
 .table-container {
   width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; 
+  -webkit-overflow-scrolling: touch;
   margin-top: 10px;
 }
 

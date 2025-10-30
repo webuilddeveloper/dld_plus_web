@@ -2,7 +2,8 @@
 .vendor-register {
   min-height: 100vh;
   padding: 120px 5% 120px;
-  background: linear-gradient(160deg, #00031d 0%, #101737 50%, #2d2a4a 100%);
+  /* background: linear-gradient(160deg, #00031d 0%, #101737 50%, #2d2a4a 100%); */
+  background-color: #f8f9fa;
   color: #fff;
   font-family: 'Inter', 'Prompt', sans-serif;
 }
@@ -14,11 +15,12 @@
   font-weight: 700;
   margin-bottom: 10px;
   letter-spacing: 0.5px;
+  color: #3d6f82;
 }
 
 .subtitle {
   text-align: center;
-  color: rgba(255,255,255,0.75);
+  color: #000;
   margin-bottom: 40px;
   font-size: 1rem;
 }
@@ -27,12 +29,13 @@
 .form-card {
   max-width: 1100px;
   margin: 0 auto;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
   padding: 40px 36px;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(14px);
+  background-color: #fff;
 }
 
 /* หัวข้อย่อย */
@@ -40,10 +43,11 @@ h3 {
   font-size: 1.3rem;
   margin: 32px 0 14px;
   font-weight: 600;
-  color: #ffdc86;
-  border-bottom: 1px solid rgba(255,220,134,0.3);
+  color: #3d6f82;
+  border-bottom: 1px solid #d1dce2;
   padding-bottom: 6px;
 }
+
 h4 {
   font-size: 1.1rem;
   margin: 22px 0 10px;
@@ -56,8 +60,11 @@ h4 {
   grid-template-columns: repeat(2, 1fr);
   gap: 18px;
 }
+
 @media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ฟิลด์แต่ละช่อง */
@@ -70,12 +77,12 @@ h4 {
 
 label {
   font-size: .95rem;
-  color: rgba(255,255,255,0.85);
+  color: #000;
   margin-top: 5px;
 }
 
 .req {
-  color: #ffcd6b;
+  color: #3d6f82;
 }
 
 /* input / textarea */
@@ -89,22 +96,25 @@ textarea {
   border-radius: 12px;
   border: none;
   outline: none;
-  background: rgba(255,255,255,0.08);
-  color: #fff;
+  /* background: rgba(255, 255, 255, 0.08); */
+  color: #3d6f82;
   font-size: .95rem;
   transition: all .25s ease;
   backdrop-filter: blur(6px);
+  border: 1px solid #000;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: rgba(255,255,255,0.55);
+  /* color: rgba(255, 255, 255, 0.171); */
+  color: rgba(43, 43, 43, 0.35);
 }
 
 input:focus,
 textarea:focus {
-  background: rgba(255,255,255,0.12);
-  box-shadow: 0 0 0 1px rgba(255,220,134,0.4), 0 0 8px rgba(255,220,134,0.3);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid #3d6f82;
+  box-shadow: 0 0 0 1px #ebeff1, 0 0 8px #ebeff1;
 }
 
 /* checkbox และ chips */
@@ -116,12 +126,12 @@ textarea:focus {
 }
 
 .chips label {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 999px;
   padding: 8px 14px;
   font-size: .9rem;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   transition: all .25s ease;
 }
@@ -131,7 +141,7 @@ textarea:focus {
 }
 
 .chips label:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   transform: translateY(-1px);
 }
 
@@ -141,10 +151,12 @@ textarea:focus {
   line-height: 1.6;
   font-size: .95rem;
 }
+
 .consent a {
-  color: #ffdc86;
+  color: #3d6f82;
   text-decoration: none;
 }
+
 .consent a:hover {
   text-decoration: underline;
 }
@@ -155,12 +167,12 @@ textarea:focus {
   padding: 14px 18px;
   border-radius: 14px;
   border: none;
-  color: #111;
+  color: #fff;
   font-weight: 700;
   cursor: pointer;
   font-size: 1.05rem;
-  background: linear-gradient(135deg, #ffe18a 0%, #ffffffb0 100%);
-  box-shadow: 0 10px 28px rgba(255,220,134,0.35);
+  /* background: linear-gradient(135deg, #ffe18a 0%, #ffffffb0 100%); */
+  background-color: #F26522;
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
@@ -172,13 +184,14 @@ textarea:focus {
 
 .submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(255,220,134,0.45);
+  /* box-shadow: 0 16px 36px rgba(255, 220, 134, 0.45); */
+  box-shadow: -1px 3px 14px #ef8554;
 }
 
 /* hr เส้นคั่น */
 hr {
   border: none;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   margin: 28px 0;
 }
 
@@ -188,8 +201,12 @@ hr {
   opacity: 0;
   transform: translateY(20px);
 }
+
 @keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ปรับ textarea */
@@ -198,7 +215,10 @@ textarea {
   min-height: 60px;
 }
 
-.err{ color: red; font-size: .85rem; }
+.err {
+  color: red;
+  font-size: .85rem;
+}
 
 .btn-c {
   display: flex;
@@ -212,23 +232,26 @@ select {
   border-radius: 12px;
   border: none;
   outline: none;
-  background: rgba(255,255,255,0.08);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  color: #3d6f82;
   font-size: .95rem;
   transition: all .25s ease;
   backdrop-filter: blur(6px);
-  appearance: none; /* ซ่อนลูกศร default */
+  appearance: none;
+  /* ซ่อนลูกศร default */
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 14px center;
   background-size: 14px;
+  border: 1px solid #000;
 }
 
 select:focus {
-  background: rgba(255,255,255,0.12);
-  box-shadow: 0 0 0 1px rgba(255,220,134,0.4), 0 0 8px rgba(255,220,134,0.3);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid #3d6f82;
+  box-shadow: 0 0 0 1px #ebeff1, 0 0 8px #ebeff1;
 }
 
 /* ปรับสี option */
@@ -270,11 +293,11 @@ select::-ms-expand {
   max-width: 450px;
   width: 90%;
   text-align: center;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: white;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
   padding: 30px 36px 36px;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
   animation: scaleIn .4s ease-out forwards;
 }
 
@@ -283,16 +306,17 @@ select::-ms-expand {
   margin: 0 auto 15px;
   width: 70px;
   height: 70px;
-  border: 2px solid #ffdc86;
+  border: 2px solid #3d6f82;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .popup-icon svg {
   width: 38px;
   height: 38px;
-  color: #ffdc86;
+  color: #3d6f82;
 }
 
 /* ข้อความใน Popup */
@@ -300,10 +324,11 @@ select::-ms-expand {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #fff;
+  color: #3d6f82;
 }
+
 .popup-card p {
-  color: rgba(255,255,255,0.75);
+  color: #000;
   margin-bottom: 28px;
   line-height: 1.6;
 }
@@ -314,27 +339,41 @@ select::-ms-expand {
   padding: 12px 18px;
   border-radius: 14px;
   border: none;
-  color: #111;
+  color: #fff;
   font-weight: 700;
   cursor: pointer;
   font-size: 1.0rem;
-  background: linear-gradient(135deg, #ffe18a 0%, #ffffffb0 100%);
-  box-shadow: 0 10px 28px rgba(255,220,134,0.35);
+  background-color: #F26522;
+  /* box-shadow: 0 10px 28px rgba(255, 220, 134, 0.35); */
   transition: transform .25s ease, box-shadow .25s ease;
 }
+
 .popup-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(255,220,134,0.45);
+  box-shadow: -1px 3px 14px #ef8554;
 }
 
 /* Animations สำหรับ Popup */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
+
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.85); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /*
@@ -346,13 +385,62 @@ select::-ms-expand {
 .error-icon {
   border-color: #ff8a8a;
 }
+
 .error-icon svg {
   color: #ff8a8a;
 }
+
 .error-btn {
   background: linear-gradient(135deg, #ff8a8a 0%, #ff5252 100%);
   box-shadow: 0 10px 28px rgba(255, 100, 100, 0.35);
 }
+
 .error-btn:hover {
   box-shadow: 0 16px 36px rgba(255, 100, 100, 0.45);
 }
+
+.div-img-file {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  width: -webkit-fill-available;
+  color: black;
+
+}
+
+.file-upload span{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #0074a8;
+  color: #3d6f82;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.file-upload span:hover {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: #fff !important;
+  background-color: #3d6f82;
+
+}
+
+.file-upload:hover {
+  opacity: 0.9;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+  /* ซ่อน input ตัวจริง */
+}
+
+/* .file-name {
+  color: #3d6f82;
+} */

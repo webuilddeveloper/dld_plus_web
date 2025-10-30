@@ -2,33 +2,36 @@
 <app-header></app-header>
 
 <div class="main-content">
-  <section class="hero-section">
-    <ng-lottie class="hero-lottie-bg" [options]="heroBgLottieOptions"></ng-lottie>
-    <div class="hero-content">
-      <h1 class="hero-title">
-        <span *ngFor="let char of contactTitleChars" class="char">{{ char }}</span>
-      </h1>
-      <p class="hero-subtitle">ภารกิจและเป้าหมายของเรา</p>
-    </div>
-  </section>
+  <div class="content">
+    <div class="col-lg-7 col-md-7 col-sm-12">
+      <section class="hero-section">
+        <!-- <ng-lottie class="hero-lottie-bg" [options]="heroBgLottieOptions"></ng-lottie> -->
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <span *ngFor="let char of contactTitleChars" class="char">{{ char }}</span>
+          </h1>
+          <p class="hero-subtitle">ภารกิจและเป้าหมายของเรา</p>
+        </div>
+      </section>
 
-  <section class="features-wrapper">
-    <div class="roulette-head">
-      <h2 class="roulette-text" #rouletteText>What is we-lap?</h2>
+      <section class="features-wrapper">
+        <div class="feature-grid">
+          <div class="feature-card" *ngFor="let feature of features" #featureItem>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.description }}</p>
+          </div>
+          <div class="feature-card" *ngFor="let feature of features_right" #featureItem>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.description }}</p>
+          </div>
+        </div>
+      </section>
     </div>
+    <div class="col-lg-5 col-md-5 col-sm-12">
 
-    <div class="feature-grid">
-      <div class="feature-card" *ngFor="let feature of features" #featureItem>
-        <h3>{{ feature.title }}</h3>
-        <p>{{ feature.description }}</p>
-      </div>
-      <div class="feature-card" *ngFor="let feature of features_right" #featureItem>
-        <h3>{{ feature.title }}</h3>
-        <p>{{ feature.description }}</p>
-      </div>
     </div>
-  </section>
-
+  </div>
+</div>
   <!-- <footer class="footer">
     <div class="footer-column">
       <h3>ที่อยู่</h3>
@@ -51,4 +54,5 @@
     </div>
   </footer>
 </div> -->
-<app-footer></app-footer>
+
+  <app-footer></app-footer>

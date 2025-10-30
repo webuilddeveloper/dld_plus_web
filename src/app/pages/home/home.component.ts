@@ -23,13 +23,15 @@ import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 import AOS from 'aos';
 import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
+import { NavbarComponent } from '../../navbar/navbar.component';
+import { BentoCardComponent } from "../../conponent/bento-card/bento-card.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, LottieComponent, HeaderComponent, FooterComponent],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements AfterViewInit {
   constructor(
@@ -38,27 +40,6 @@ export class HomeComponent implements AfterViewInit {
     private router: Router,
     public serviceProviderService: ServiceProviderService
   ) {}
-
-  // 🌌 Background Animation (loop ตลอดเวลา)
-  bgLottieOptions: AnimationOptions = {
-    path: 'assets/animations/Background looping animation.json', // 👈 ใส่ชื่อไฟล์ animation ของเพื่อน
-    loop: true,
-    autoplay: true,
-  };
-
-  lottieOptions: AnimationOptions = {
-    path: 'assets/animations/Strategy Execution diagram.json', // 👈 ไฟล์ Lottie
-    loop: true,
-    autoplay: true,
-  };
-
-  // เพิ่ม property นี้ในคลาส HomeComponent
-  heroBgLottieOptions: AnimationOptions = {
-    // ✅ แนะนำเปลี่ยนชื่อไฟล์ให้ไม่มีช่องว่าง เช่น circuit-background-2.json
-    path: 'assets/animations/circuit background 2.json',
-    loop: true,
-    autoplay: true,
-  };
 
   planningLottieOptions: AnimationOptions = {
     path: 'assets/animations/planning.json', // ← ไฟล์ของเพื่อน
@@ -78,29 +59,7 @@ export class HomeComponent implements AfterViewInit {
     autoplay: true,
   };
 
-  smartPlanLottieOptions: AnimationOptions = {
-    path: 'assets/animations/Strategy.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
-    loop: true,
-    autoplay: true,
-  };
 
-  dldPlusLottieOptions: AnimationOptions = {
-    path: 'assets/animations/planning.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
-    loop: true,
-    autoplay: true,
-  };
-
-  smartPlanBGLottieOptions: AnimationOptions = {
-    path: 'assets/animations/Smart_Plan2.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
-    loop: true,
-    autoplay: true,
-  };
-
-  digitallocalLottieOptions: AnimationOptions = {
-    path: 'assets/animations/Digital_Local.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
-    loop: true,
-    autoplay: true,
-  };
 
   isMobile = window.innerWidth <= 768;
 
@@ -199,6 +158,24 @@ export class HomeComponent implements AfterViewInit {
     { image: 'assets/news3.jpg' },
     { image: 'assets/news4.jpg' },
   ];
+
+  businessTeamLottieOptions: AnimationOptions = {
+    path: 'assets/animations/Business team.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
+    loop: true,
+    autoplay: true,
+  };
+
+  brainstormingLottieOptions: AnimationOptions = {
+    path: 'assets/animations/Brainstorming.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
+    loop: true,
+    autoplay: true,
+  };
+
+   officeAccountantLottieOptions: AnimationOptions = {
+    path: 'assets/animations/Office Accountant.json', // <-- ใช้ Animation อื่นเพื่อความหลากหลาย
+    loop: true,
+    autoplay: true,
+  };
 
   videoPlayers = new Map<string, HTMLVideoElement>();
 
@@ -574,4 +551,32 @@ export class HomeComponent implements AfterViewInit {
       }
     );
   }
+
+  @ViewChild(NavbarComponent) navbar!: NavbarComponent;
+  content: any = null;
+
+  contact = { name: '', email: '', message: '' };
+
+  ngOnInit() {
+    fetch('/assets/data/site-content.json')
+      .then(res => res.json())
+      .then(data => this.content = data);
+  }
+
+  onSectionChange(sectionId: any) {
+    if (this.navbar) this.navbar.activeSection = sectionId;
+  }
+
+  sendMessage() {
+    alert(`ขอบคุณครับ คุณ ${this.contact.name}\nข้อความของคุณถูกส่งเรียบร้อย!`);
+    this.contact = { name: '', email: '', message: '' };
+  }
+
+  scrollTo(sectionId: string) {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }
+

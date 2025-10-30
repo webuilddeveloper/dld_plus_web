@@ -1,0 +1,11 @@
+<nav [class.scrolled]="isScrolled">
+  <div class="container nav-content">
+    <div class="logo" (click)="scrollTo('hero')"><img src="./assets/logo.png" alt=""></div>
+    <ul class="menu">
+      <li [class.active]="activeSection === 'overview'" (click)="scrollTo('overview')">ภาพรวม</li>
+      <li [class.active]="activeSection === 'modules'" (click)="scrollTo('modules')">โมดูล</li>
+      <li [class.active]="activeSection === 'benefits'" (click)="scrollTo('benefits')">ประโยชน์</li>
+      <li [class.active]="activeSection === 'contact'" (click)="scrollTo('contact')">ติดต่อ</li>
+    </ul>
+  </div>
+</nav>

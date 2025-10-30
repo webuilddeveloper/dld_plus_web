@@ -148,15 +148,23 @@
 
     <div class="field">
       <label for="companyAffidavitFile">
-        <span *ngIf="form.get('sellerType')?.value === 'company'">
+        @if (form.get('sellerType')?.value === 'company') {
+        <span>
           1. หนังสือรับรองบริษัท (ไม่เกิน 6 เดือน) <span class="req">*</span>
         </span>
-        <span *ngIf="form.get('sellerType')?.value === 'person'">
+        }
+        @if (form.get('sellerType')?.value === 'person') {
+        <span>
           1. สำเนาบัตรประชาชน <span class="req">*</span>
         </span>
+        }
       </label>
-      <input type="file" id="companyAffidavitFile" class="file-input" accept=".pdf,.jpg,.jpeg,.png"
-        (change)="onFileSelect($event, 'companyAffidavitFile')">
+
+      <label class="file-upload">
+        <input type="file" id="companyAffidavitFile" class="file-input" accept=".pdf,.jpg,.jpeg,.png"
+          (change)="onFileSelect($event, 'companyAffidavitFile')">
+        <span>{{fileName || '📁 เลือกไฟล์'}}</span>
+      </label>
 
       <span class="file-name" *ngIf="form.get('companyAffidavitFile')?.value">
         {{ form.get('companyAffidavitFile')?.value.name }}
@@ -187,7 +195,8 @@
   </form>
 </section>
 
-<div class="popup-overlay" *ngIf="showSuccessPopup">
+@if (showSuccessPopup) {
+<div class="popup-overlay">
   <div class="popup-card">
     <div class="popup-icon">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
@@ -201,8 +210,10 @@
     </div>
   </div>
 </div>
+}
 
-<div class="popup-overlay" *ngIf="showErrorPopup">
+@if (showErrorPopup) {
+<div class="popup-overlay" >
   <div class="popup-card error-card">
     <div class="popup-icon error-icon">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
@@ -216,5 +227,6 @@
     </div>
   </div>
 </div>
+}
 
 <app-footer></app-footer>

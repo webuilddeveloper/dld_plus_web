@@ -20,6 +20,7 @@
       </button>
     </div>
 
+    <div class="div-table">
     <table class="sales-table">
       <thead>
         <tr>
@@ -48,6 +49,7 @@
         </tr>
       </tbody>
     </table>
+  </div>
     <div class="pagination">
       <button (click)="prevSalePage()" [disabled]="currentSalePage === 1">‹</button>
       <span>หน้า {{ currentSalePage }} / {{ totalSalePages }}</span>

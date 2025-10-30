@@ -1,46 +1,51 @@
 <app-header></app-header>
 
-<div class="login-container">
-  <!-- ฝั่งซ้าย โลโก้ -->
-  <div class="login-left" data-aos="fade-right">
-    <ng-lottie class="sm-lottie planng-lottie" [options]="planngLottieOptions" data-aos="slide-right"
-      data-aos-duration="650">
-    </ng-lottie>
-  </div>
+<div class="main-div">
+  <div class="login-container">
+    <!-- ฝั่งซ้าย โลโก้ -->
+    <div class="login-left col-lg-7 col-md-6 col-sm-12" data-aos="fade-right">
+      <ng-lottie class="sm-lottie planng-lottie" [options]="planngLottieOptions" data-aos="slide-right"
+        data-aos-duration="650">
+      </ng-lottie>
+    </div>
 
-  <!-- ฝั่งขวา กล่องฟอร์ม -->
-  <div class="login-right" data-aos="fade-left">
-    <div class="login-box">
-      <h2>เข้าสู่ระบบ</h2>
+    <!-- ฝั่งขวา กล่องฟอร์ม -->
+    <div class="login-right col-lg-5 col-md-6 col-sm-12" data-aos="fade-left">
+      <div class="login-box">
+        <h2>เข้าสู่ระบบ</h2>
 
-      <form #loginForm="ngForm">
-        <div class="form-group">
-          <label for="sellerCode">ชื่อผู้ใช้</label>
-          <input type="sellerCode" id="sellerCode" name="sellerCode" [(ngModel)]="model.sellerCode" class="form-control"
-            placeholder="ชื่อผู้ใช้" required />
-        </div>
-
-        <div class="form-group">
-          <label for="password">รหัสผ่าน</label>
-          <div class="password-box">
-            <input class="form-control" [type]="showPassword ? 'text' : 'password'" id="password" name="password"
-              [(ngModel)]="model.password" placeholder="รหัสผ่าน">
-            <span class="toggle-icon" (click)="showPassword = !showPassword">
-              <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-            </span>
+        <form #loginForm="ngForm" class="form">
+          <div class="form-group">
+            <!-- <label for="sellerCode">ชื่อผู้ใช้</label> -->
+            <input type="sellerCode" id="sellerCode" name="sellerCode" [(ngModel)]="model.sellerCode"
+              class="form-control" placeholder="ชื่อผู้ใช้" required />
           </div>
-        </div>
 
-        <button (click)="login()" type="submit" class="btn btn-login">
-          เข้าสู่ระบบ
-        </button>
-        <div class="register-hint">
-          หากยังไม่ได้ทำการลงทะเบียนผู้ขาย
-        </div>
-        <a routerLink="/vendor-register" class="register-link">สามารถลงทะเบียนได้ที่นี่</a>
-      </form>
+          <div class="form-group">
+            <!-- <label for="password">รหัสผ่าน</label> -->
+            <div class="password-box">
+              <input class="form-control" [type]="showPassword ? 'text' : 'password'" id="password" name="password"
+                [(ngModel)]="model.password" placeholder="รหัสผ่าน">
+              <span class="toggle-icon" (click)="showPassword = !showPassword">
+                <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </span>
+            </div>
+          </div>
+
+
+          <button (click)="login()" type="submit" class="btn btn-login">
+            เข้าสู่ระบบ
+          </button>
+          <div class="d-flex gap-2">
+            <div class="register-hint">
+            หากยังไม่ได้ทำการลงทะเบียนผู้ขาย
+          </div>
+          <a routerLink="/vendor-register" class="register-link">สามารถลงทะเบียนได้ที่นี่</a>
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
 </div>
-
 <app-footer></app-footer>

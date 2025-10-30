@@ -12,6 +12,9 @@ import { provideLottieOptions } from 'ngx-lottie';
 import player from 'lottie-web';
 import { provideToastr } from 'ngx-toastr';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
@@ -31,3 +34,16 @@ bootstrapApplication(AppComponent, {
     provideLottieOptions({ player: () => player }),
   ],
 }).catch(err => console.error(err));
+
+AOS.init({
+  startEvent: 'load',      // เริ่มเมื่อโหลดหน้าเสร็จ
+  once: true,              // เล่นแค่ครั้งเดียว
+  offset: 0,               // ให้เริ่มที่ขอบบนเลย
+  duration: 800,           // ความเร็ว animation
+  easing: 'ease-out-cubic',
+});
+
+// force refresh หลังจากโหลดครบ
+window.addEventListener('load', () => {
+  setTimeout(() => AOS.refreshHard(), 100);
+});

@@ -11,7 +11,7 @@ import { filter } from 'rxjs';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  title = 'we-lap-web';
+  title = 'dld-plus-web';
 
   constructor(
     private serviceProviderService: ServiceProviderService,

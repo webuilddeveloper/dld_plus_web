@@ -1,7 +1,7 @@
 /* พื้นหลังหลัก */
 .sales-history-container {
   max-width: 1100px;
-  margin: 40px auto;
+  margin: 100px auto 40px auto;
   padding: 24px;
   background: #f9fafc;
   border-radius: 16px;
@@ -282,4 +282,8 @@ body.drawer-open {
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.div-table {
+  overflow: scroll;
 }

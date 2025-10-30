@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "we-lap-web": {
+    "dld-plus-web": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/we-lap-web",
+            "outputPath": "dist/dld-plus-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "we-lap-web:build:production"
+              "buildTarget": "dld-plus-web:build:production"
             },
             "development": {
-              "buildTarget": "we-lap-web:build:development"
+              "buildTarget": "dld-plus-web:build:development"
             }
           },
           "defaultConfiguration": "development"

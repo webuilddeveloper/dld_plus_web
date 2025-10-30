@@ -49,47 +49,49 @@
 
     </div>
 
-    <table class="sales-table">
-      <thead>
-        <tr>
-          <th>
-            <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleAll()" name="selectAll" />
-          </th>
-          <th>ลำดับ</th>
-          <th>สถานะ</th>
-          <th>ชื่อผู้ติดต่อ</th>
-          <th>เลขประจำตัวผู้เสียภาษี</th>
-          <th>ประเภทผู้ขาย</th>
-          <th>วันที่ลงทะเบียน</th>
-          <th>ดำเนินการ</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (sale of paginatedSales; track $index) {
-        <tr>
-          <td>
-            <input type="checkbox" [(ngModel)]="sale.selected" name="selected_{{ $index }}"
-              (change)="checkIfAllSelected()" />
-          </td>
-          <td>{{ (currentSalePage - 1) * totalSalePages + $index + 1 }}</td>
-          <td>
-            <div [ngClass]="sale.status == 'A' ? 'd-success' : 'd-warning'" class="d-status">{{ sale.status == 'A' ?
-              'อนุมัติแล้ว' : 'รอตรวจสอบ' }}</div>
-          </td>
-          <td>{{ sale.contactName }}</td>
-          <td>{{ sale.taxId }}</td>
-          <td>{{ sale.sellerType == 'person' ? 'บุคคลธรรมดา' : 'นิติบุคคล' }}</td>
-          <td>{{ sale.createDate | date: 'dd/MM/yyyy' }}</td>
-          <td>
-            <button class=" detail-btn" (click)="openDrawer(sale)">
-              ดูรายละเอียด
-            </button>
-          </td>
-        </tr>
-        }
+    <div class="div-table">
+      <table class="sales-table">
+        <thead>
+          <tr>
+            <th>
+              <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleAll()" name="selectAll" />
+            </th>
+            <th>ลำดับ</th>
+            <th>สถานะ</th>
+            <th>ชื่อผู้ติดต่อ</th>
+            <th>เลขประจำตัวผู้เสียภาษี</th>
+            <th>ประเภทผู้ขาย</th>
+            <th>วันที่ลงทะเบียน</th>
+            <th>ดำเนินการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (sale of paginatedSales; track $index) {
+          <tr>
+            <td>
+              <input type="checkbox" [(ngModel)]="sale.selected" name="selected_{{ $index }}"
+                (change)="checkIfAllSelected()" />
+            </td>
+            <td>{{ (currentSalePage - 1) * totalSalePages + $index + 1 }}</td>
+            <td>
+              <div [ngClass]="sale.status == 'A' ? 'd-success' : 'd-warning'" class="d-status">{{ sale.status == 'A' ?
+                'อนุมัติแล้ว' : 'รอตรวจสอบ' }}</div>
+            </td>
+            <td>{{ sale.contactName }}</td>
+            <td>{{ sale.taxId }}</td>
+            <td>{{ sale.sellerType == 'person' ? 'บุคคลธรรมดา' : 'นิติบุคคล' }}</td>
+            <td>{{ sale.createDate | date: 'dd/MM/yyyy' }}</td>
+            <td>
+              <button class=" detail-btn" (click)="openDrawer(sale)">
+                ดูรายละเอียด
+              </button>
+            </td>
+          </tr>
+          }
 
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
     <div class="pagination">
       <button (click)="prevSalePage()" [disabled]="currentSalePage === 1">‹</button>
       <span>หน้า {{ currentSalePage }} / {{ totalSalePages }}</span>

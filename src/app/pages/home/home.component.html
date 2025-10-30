@@ -1,25 +1,18 @@
-<app-header></app-header>
+<!-- <app-navbar [activeSection]="navbar?.activeSection ?? ''"></app-navbar> -->
+
+<!-- <app-header></app-header> -->
 
 
 <div class="main-content">
   <!-- <app-hero-background></app-hero-background> -->
 
-  <div class="welcome-text" #welcomeText>WE-LAP&nbsp;&nbsp;</div>
+  <!-- <div class="welcome-text" #welcomeText>DLD+&nbsp;&nbsp;</div> -->
 
-  <div class="orbit-scene">
-    <!-- <app-hero-background></app-hero-background> -->
+  <!-- <div class="orbit-scene">
     <ng-lottie class="lottie-bg" [options]="bgLottieOptions"
       style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 0;"></ng-lottie>
 
-    <!-- Center icon เป็นส่วนหนึ่งของฉาก 3D -->
-    <!-- <div class="center-icon-3d">
-      <img src="assets/icon_home.png" alt="icon" />
-    </div>
-    <div class="orbit-layer-wrapper" *ngFor="let row of orbitWords; let i = index" [style.--layer-index]="i">
-      <div class="orbit-layer" #layer>
-        <div class="word-wrapper" *ngFor="let word of row">{{ word }}</div>
-      </div>
-    </div> -->
+
     <ng-lottie [options]="lottieOptions" width="300px" height="300px"></ng-lottie>
 
   </div>
@@ -27,88 +20,116 @@
     เครื่องมือวางแผนพัฒนาท้องถิ่นแบบดิจิทัลรวบรวม จัดเก็บ <br>และวิเคราะห์ข้อมูลอย่างเป็นระบบ
     <br>เพื่อช่วยให้องค์กรปกครองส่วนท้องถิ่นวางแผนได้รวดเร็ว แม่นยำ <br>เชื่อมโยงงบประมาณกับแผนงาน โปร่งใส ตรวจสอบได้
     และเปิดโอกาสให้ประชาชนมีส่วนร่วม
-  </div>
+  </div> -->
 
   <app-header></app-header>
 
   <div class="main-content">
-    <section class="hero-section layout-centered">
-      <ng-lottie class="hero-lottie-bg" [options]="heroBgLottieOptions"></ng-lottie>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1 class="hero-title">ระบบแผนงานอัตโนมัติ</h1>
-        <p class="hero-subtitle">(Local Auto Planning : LAP)</p>
-        <p class="hero-details">ระบบสำหรับองค์กรปกครองส่วนท้องถิ่นทุกระดับ ออกแบบมาเพื่อช่วย</p>
-        <p class="hero-details">เก็บรวบรวม วิเคราะห์ และจัดทำแผนพัฒนาท้องถิ่นโดยอัตโนมัติ</p>
-        <br>
-        <a href="https://khubdeedlt.we-builds.com/wb-document/images/welap/CATALOGLAP.pdf" target="_blank" class="enter-button">
-          <span class="text">ดูรายละเอียด</span>
-        </a>
+
+    <section id="hero" class="hero animated fade-up hero-section layout-centered">
+      <div class="d-flex align-items-center">
+        <div class="container group-center">
+          <h1 data-aos="fade-up">{{ content.hero.title }}</h1>
+          <p class="subtitle h5" data-aos="fade-up" data-aos-delay="400">{{ content.hero.subtitle }}</p>
+          <div data-aos="fade-up" data-aos-delay="600">
+            <button class="cta" (click)="scrollTo('overview')">{{ content.hero.cta }}</button>
+          </div>
+
+        </div>
+
+        <!-- <div class="timeline-top-left col-3" data-aos="zoom-in" data-aos-delay="700">
+          <ng-lottie class="hero-lottie-fg" [options]="brainstormingLottieOptions"></ng-lottie>
+        </div> -->
+
+        <div class="timeline-bottom-right col-md-5 col-sm-12" data-aos="zoom-in" data-aos-delay="750">
+          <!-- 🆕 Top: Planng.json -->
+          <ng-lottie class="hero-lottie-fg" [options]="businessTeamLottieOptions"></ng-lottie>
+        </div>
       </div>
     </section>
 
-    <!-- 🌟 ระบบจัดทำแผนพัฒนาท้องถิ่น -->
-    <section class="hero-section layout-split elegant-theme" data-aos="fade-up">
-      <ng-lottie class="hero-lottie-bg" [options]="smartPlanBGLottieOptions"></ng-lottie>
-      <ng-lottie class="hero-lottie-fg" [options]="smartPlanLottieOptions"></ng-lottie>
+    <main id="overview">
+      <section class="bento-grid" >
 
-      <div class="hero-card glass-card" data-aos="fade-left" data-aos-delay="100">
-        <h1 class="hero-title gold-text">ระบบจัดทำแผนพัฒนาท้องถิ่น</h1>
-        <p class="hero-subtitle">(Smart Plan)</p>
-        <p class="hero-details">เครื่องมือช่วยจัดทำแผนพัฒนาท้องถิ่นอย่างมีประสิทธิภาพ ครบถ้วนตามระเบียบ</p>
-        <p class="hero-details">เชื่อมโยงยุทธศาสตร์สู่การปฏิบัติจริง</p>
-        <a href="https://khubdeedlt.we-builds.com/wb-document/images/welap/CatalogSmartPlan.pdf" target="_blank" class="enter-button glow-btn">
-          <span class="text">ดูรายละเอียด</span>
-        </a>
-      </div>
-    </section>
+        <!-- top-left big round image -->
+        <div class="bento-card pos-1 row-4 d-flex align-items-center none-shadow" data-aos="zoom-in"
+          data-aos-delay="410">
+          <h2 class="timeline-title" data-aos="fade-up">เครื่องมือวางแผนพัฒนาท้องถิ่นแบบดิจิทัล
+          </h2>
+          <div style="width: 350px;"><ng-lottie class="hero-lottie-fg" [options]="businessTeamLottieOptions"
+              data-aos-delay="460"></ng-lottie></div>
+        </div>
 
-    <!-- 🌐 แผนพัฒนาท้องถิ่นดิจิทัลพลัส -->
-    <section class="hero-section layout-split elegant-theme reverse" data-aos="fade-up">
-      <ng-lottie class="hero-lottie-bg" [options]="digitallocalLottieOptions"></ng-lottie>
-      <ng-lottie class="hero-lottie-fg" [options]="dldPlusLottieOptions"></ng-lottie>
+        <div class="bento-card pos-2 none-shadow" data-aos="zoom-in" data-aos-delay="450">
+          <ng-lottie class="hero-lottie-fg" [options]="officeAccountantLottieOptions"></ng-lottie>
+        </div>
 
-      <div class="hero-card glass-card" data-aos="fade-right" data-aos-delay="100">
-        <h1 class="hero-title gold-text">แผนพัฒนาท้องถิ่นดิจิทัลพลัส</h1>
-        <p class="hero-subtitle">(Digital Local Development Plus: DLD+)</p>
-        <p class="hero-details">ยกระดับการวางแผนด้วยข้อมูลเชิงลึกและแดชบอร์ดวิเคราะห์ขั้นสูง</p>
-        <p class="hero-details">ช่วยให้ผู้บริหารตัดสินใจได้แม่นยำ โปร่งใส และรวดเร็ว</p>
-        <a href="https://khubdeedlt.we-builds.com/wb-document/images/welap/CATALOGDLD+.pdf" target="_blank" class="enter-button glow-btn">
-          <span class="text">ดูรายละเอียด</span>
-        </a>
-      </div>
-    </section>
+        <div class="bento-card pos-3 card-bg-1" data-aos="zoom-in" data-aos-delay="550">
+          <div class="card-title">รวบรวมข้อมูลอย่างเป็นระบบ</div>
+          <li>เก็บข้อมูลจากหลายแหล่ง เช่น ข้อมูลงบประมาณ โครงการ และความต้องการของชุมชน</li>
+          <li>จัดเก็บในรูปแบบดิจิทัลเพื่อความสะดวกในการเข้าถึงและอัปเดต</li>
+        </div>
 
-    <!-- <div class="sentence" #sentence>
-    <p class="leading-relaxed text-lg text-gray-800">
-      <span class="indent-first-line">
-        พัฒนา</span> <span class="highlight-flip"><span>เครื่องมือวางแผน</span><span>เครื่องมือวางแผน</span></span>
-      ที่มี <span class="highlight-flip"><span>ประสิทธิภาพ</span><span>ประสิทธิภาพ</span></span>
-      เพื่อให้องค์กรปกครองส่วนท้องถิ่นสามารถจัดทำแผนพัฒนาได้อย่างรวดเร็ว เป็นระบบ และลดข้อผิดพลาด
-      พร้อมจัดเก็บข้อมูลในรูปแบบ <span class="highlight-flip"><span>ดิจิทัล</span><span>ดิจิทัล</span></span> สร้าง
-      <span class="highlight-flip"><span>ฐานข้อมูลกลาง</span><span>ฐานข้อมูลกลาง</span></span> ที่ครบถ้วนและถูกต้อง
-      เพื่อสนับสนุนการบริหารจัดการอย่างมีประสิทธิผล
+        <div class="bento-card pos-4 none-shadow" data-aos="zoom-in" data-aos-delay="500">
+          <ng-lottie class="sm-lottie strategy-lottie" [options]="strategyLottieOptions" data-aos="slide-right"
+            data-aos-duration="650" data-aos-delay="240">
+          </ng-lottie>
+        </div>
 
-      สนับสนุนการวิเคราะห์และ <span
-        class="highlight-flip"><span>จัดลำดับความสำคัญ</span><span>จัดลำดับความสำคัญ</span></span> ของโครงการ
-      เพื่อกำหนด <span class="highlight-flip"><span>ทิศทางการพัฒนา</span><span>ทิศทางการพัฒนา</span></span>
-      ที่สอดคล้องกับความต้องการของพื้นที่
-      พร้อมเชื่อมโยงแผนงานกับ <span class="highlight-flip"><span>งบประมาณ</span><span>งบประมาณ</span></span>
-      อย่างเป็นระบบและ <span class="highlight-flip"><span>โปร่งใส</span><span>โปร่งใส</span></span>
+        <div class="bento-card pos-5" data-aos="zoom-in" data-aos-delay="550">
+          <div class="card-title">วิเคราะห์ข้อมูลเพื่อการตัดสินใจ</div>
+          <li>ใช้เทคโนโลยีช่วยวิเคราะห์แนวโน้มและความสัมพันธ์ของข้อมูล</li>
+          <li>ช่วยให้การวางแผนพัฒนาเป็นไปอย่างมีหลักฐานรองรับ (Data-driven)</li>
+        </div>
 
-      ส่งเสริม <span class="highlight-flip"><span>การมีส่วนร่วม</span><span>การมีส่วนร่วม</span></span>
-      ของประชาชนในการเข้าถึงข้อมูลและแสดงความคิดเห็น
-      พร้อมระบบ <span class="highlight-flip"><span>ติดตาม</span><span>ติดตาม</span></span> และ <span
-        class="highlight-flip"><span>ประเมินผล</span><span>ประเมินผล</span></span> โครงการในทุกขั้นตอน
-      เพื่อความ <span class="highlight-flip"><span>ก้าวหน้า</span><span>ก้าวหน้า</span></span> และ <span
-        class="highlight-flip"><span>ผลสัมฤทธิ์</span><span>ผลสัมฤทธิ์</span></span> ที่ชัดเจน
-    </p>
+        <div class="bento-card pos-6 none-shadow" data-aos="fade-up" data-aos-delay="450">
+          <ng-lottie class="sm-lottie planng-lottie" [options]="planngLottieOptions" data-aos="zoom-in">
+          </ng-lottie>
+        </div>
 
-  </div> -->
-    <div class="sentence two-col" #sentence>
-      <!-- ซ้าย: Lottie (สามตัวเรียงลง) -->
+        <div class="bento-card pos-7" data-aos="zoom-in" data-aos-delay="550">
+          <div class="card-title">สนับสนุนการวางแผนอย่างรวดเร็วและแม่นยำ</div>
+          <li>ลดเวลาการรวบรวมข้อมูลและจัดทำแผน</li>
+          <li>เพิ่มความถูกต้องของการจัดลำดับความสำคัญและงบประมาณ</li>
+        </div>
+
+        <div class="bento-card pos-8 none-shadow" data-aos="zoom-in" data-aos-delay="450">
+          <ng-lottie class="hero-lottie-fg" [options]="officeAccountantLottieOptions"></ng-lottie>
+        </div>
+
+        <div class="bento-card pos-9" data-aos="zoom-in" data-aos-delay="550">
+          <div class="card-title">เชื่อมโยงงบประมาณกับแผนงานโดยตรง</div>
+          <li>แสดงความสัมพันธ์ระหว่าง “โครงการ–งบประมาณ–ผลลัพธ์”</li>
+          <li>ช่วยติดตามการใช้จ่ายและประเมินผลการดำเนินงานได้ชัดเจน</li>
+        </div>
+
+        <div class="bento-card pos-10 none-shadow" data-aos="zoom-in" data-aos-delay="450">
+          <ng-lottie class="hero-lottie-fg" [options]="brainstormingLottieOptions"></ng-lottie>
+        </div>
+
+        <div class="bento-card pos-11" data-aos="zoom-in" data-aos-delay="550">
+          <div class="card-title">เพิ่มความโปร่งใสและตรวจสอบได้</div>
+          <li>มีระบบรายงานและติดตามแผนแบบเรียลไทม์</li>
+          <li>ประชาชนและหน่วยงานที่เกี่ยวข้องสามารถเข้ามาตรวจสอบได้ง่าย</li>
+        </div>
+
+        <div class="bento-card pos-12 none-shadow" data-aos="zoom-in" data-aos-delay="450">
+          <ng-lottie class="sm-lottie planning-lottie" [options]="planningLottieOptions" data-aos="slide-right"
+            data-aos-duration="650" data-aos-delay="120">
+          </ng-lottie>
+        </div>
+
+        <div class="bento-card pos-13" data-aos="zoom-in" data-aos-delay="550">
+          <div class="card-title">เปิดโอกาสให้ประชาชนมีส่วนร่วม</div>
+          <li>ให้ประชาชนเสนอความคิดเห็น โครงการ หรือปัญหาในพื้นที่</li>
+          <li>ส่งเสริมการมีส่วนร่วมในกระบวนการวางแผนท้องถิ่นอย่างแท้จริง</li>
+        </div>
+      </section>
+    </main>
+
+
+    <!-- <div class="sentence two-col" #sentence>
       <div class="timeline-left">
-        <!-- 🆕 Top: Planng.json -->
         <ng-lottie class="sm-lottie planng-lottie" [options]="planngLottieOptions" data-aos="slide-right"
           data-aos-duration="650">
         </ng-lottie>
@@ -123,119 +144,7 @@
       </div>
 
 
-
-
-      <!-- ขวา: ไทม์ไลน์ -->
-      <section id="digital-planning-timeline" class="timeline timeline-right">
-        <h2 class="timeline-title" data-aos="fade-up">เครื่องมือวางแผนพัฒนาท้องถิ่นแบบดิจิทัล</h2>
-
-        <div class="timeline-item" data-aos="fade-up" data-aos-delay="0">
-          <div class="timeline-dot" data-aos="zoom-in" data-aos-delay="50">🗂️</div>
-          <div class="timeline-content">
-            <h3>รวบรวมข้อมูลอย่างเป็นระบบ</h3>
-            <ul>
-              <li>เก็บข้อมูลจากหลายแหล่ง เช่น ข้อมูลงบประมาณ โครงการ และความต้องการของชุมชน</li>
-              <li>จัดเก็บในรูปแบบดิจิทัลเพื่อความสะดวกในการเข้าถึงและอัปเดต</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-          <div class="timeline-dot" data-aos="zoom-in" data-aos-delay="150">📊</div>
-          <div class="timeline-content">
-            <h3>วิเคราะห์ข้อมูลเพื่อการตัดสินใจ</h3>
-            <ul>
-              <li>ใช้เทคโนโลยีช่วยวิเคราะห์แนวโน้มและความสัมพันธ์ของข้อมูล</li>
-              <li>ช่วยให้การวางแผนพัฒนาเป็นไปอย่างมีหลักฐานรองรับ (Data-driven)</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-          <div class="timeline-dot" data-aos="zoom-in" data-aos-delay="250">⚡</div>
-          <div class="timeline-content">
-            <h3>สนับสนุนการวางแผนอย่างรวดเร็วและแม่นยำ</h3>
-            <ul>
-              <li>ลดเวลาการรวบรวมข้อมูลและจัดทำแผน</li>
-              <li>เพิ่มความถูกต้องของการจัดลำดับความสำคัญและงบประมาณ</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-          <div class="timeline-dot" data-aos="zoom-in" data-aos-delay="350">🔗</div>
-          <div class="timeline-content">
-            <h3>เชื่อมโยงงบประมาณกับแผนงานโดยตรง</h3>
-            <ul>
-              <li>แสดงความสัมพันธ์ระหว่าง “โครงการ–งบประมาณ–ผลลัพธ์”</li>
-              <li>ช่วยติดตามการใช้จ่ายและประเมินผลการดำเนินงานได้ชัดเจน</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
-          <div class="timeline-dot" data-aos="zoom-in" data-aos-delay="450">🔍</div>
-          <div class="timeline-content">
-            <h3>เพิ่มความโปร่งใสและตรวจสอบได้</h3>
-            <ul>
-              <li>มีระบบรายงานและติดตามแผนแบบเรียลไทม์</li>
-              <li>ประชาชนและหน่วยงานที่เกี่ยวข้องสามารถเข้ามาตรวจสอบได้ง่าย</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item" data-aos="fade-up" data-aos-delay="500">
-          <div class="timeline-dot" data-aos="zoom-in" data-aos-delay="550">🤝</div>
-          <div class="timeline-content">
-            <h3>เปิดโอกาสให้ประชาชนมีส่วนร่วม</h3>
-            <ul>
-              <li>ให้ประชาชนเสนอความคิดเห็น โครงการ หรือปัญหาในพื้นที่</li>
-              <li>ส่งเสริมการมีส่วนร่วมในกระบวนการวางแผนท้องถิ่นอย่างแท้จริง</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
-
-
-
-
-
-    <!-- <section id="news-section" class="news-container" #newsSection>
-    <h2 class="header-title ">ข่าวล่าสุด</h2>
-    <div class="underline" #underline></div>
-
-    <div class="news-slider" #slider (mouseenter)="pauseSlide()" (mouseleave)="resumeSlide()">
-      <div class="news-item" *ngFor="let news of modelNews" (click)="openNews(news)">
-        <div class="image" [style.backgroundImage]="'url(' + news.imageUrl + ')'"></div>
-        <div class="text">
-          <h3>{{ news.title }}</h3>
-          <p [innerHTML]="news.description"></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="video-container">
-    <h2 class="header-title ">คลิปข่าว</h2>
-    <div class="underline" #underlineRef></div>
-    <section class="video-gallery">
-      <div class="video-card" *ngFor="let video of extendedVideoList; let i = index"
-        [class.expanded]="hoveredIndex === i" [class.collapsed]="hoveredIndex !== null && hoveredIndex !== i"
-        (mouseenter)="onHover(i)" (mouseleave)="onLeave()" (click)="onClick(i)">
-
-        <iframe *ngIf="hoveredIndex === i" [src]="getYoutubeEmbedUrl(video.youtubeId)" frameborder="0"
-          allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 260px;"></iframe>
-
-
-        <img *ngIf="hoveredIndex !== i" [src]="getYoutubeThumbnail(video.youtubeId)"
-          (error)="fallbackThumbnail($event, video.youtubeId)" class="thumb" />
-
-        <div class="title-overlay">{{ video.title }}</div>
-      </div>
-    </section>
-
-  </div> -->
+    </div> -->
 
     <section id="pricing" class="pricing" data-aos="fade-up">
       <h2 class="pricing-title">แพ็กเกจการใช้งาน</h2>
@@ -295,5 +204,6 @@
 
   </div>
 
+</div>
 
-  <app-footer></app-footer>
+<app-footer></app-footer>

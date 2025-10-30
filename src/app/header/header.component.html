@@ -1,13 +1,13 @@
-<header class="main-header" [class.sticky]="isSticky">
+<header class="main-header d-flex justify-content-center" [class.sticky]="isSticky">
   <div class="container">
     <!-- โลโก้ -->
-    <div class="logo" routerLink="/">
-      <img src="assets/icon_header.png" alt="Logo" />
-    </div>
+    <a class="logo" href="#">
+      <img src="./assets/logo.png" alt="logo">
+    </a>
 
     <!-- เมนูหลัก -->
     <nav class="nav-links">
-      <a href="#" (click)="goPricing($event)">แพ็กเกจการใช้งาน</a>
+      <a href="#">แพ็กเกจการใช้งาน</a>
       <a routerLink="/about-us">เกี่ยวกับเรา</a>
       <a href="https://www.modesolutions.co.th" target="_blank">ติดต่อเรา</a>
 
@@ -23,7 +23,7 @@
 
     <!-- ☰ Hamburger -->
     <div class="menu-toggle" (click)="toggleMenu()">
-      <i class="fa" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+      <i class="fa" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'" style="color: #3d6f82;"></i>
     </div>
   </div>
 

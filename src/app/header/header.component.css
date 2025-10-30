@@ -2,15 +2,15 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background: linear-gradient(160deg, #00031d 0%, #101737 50%, #2d2a4a 100%);
-  color: #fff;
+  background: transparent;
+  color: #000;
   z-index: 1000;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); */
 
   &.sticky {
-    background: linear-gradient(160deg, #00031d 0%, #101737 50%, #2d2a4a 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    background: #fff;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 14%);
   }
 
   .container {
@@ -37,14 +37,14 @@
     gap: 30px;
 
     a {
-      color: #fff;
+      color: #000;
       text-decoration: none;
       font-size: 18px;
       position: relative;
       transition: color 0.3s ease;
 
       &:hover {
-        color: #00bcd4;
+        color: #3d6f82;
       }
 
       &::after {
@@ -54,7 +54,7 @@
         left: 0;
         width: 0%;
         height: 2px;
-        background: #00bcd4;
+        background: #3d6f82;
         transition: width 0.3s ease;
       }
 
@@ -65,7 +65,7 @@
 
     .dropbtn {
       text-decoration: none;
-      color: #fff;
+      color: #000;
       background: none;
       border: none;
       cursor: pointer;
@@ -85,15 +85,15 @@
   .mobile-menu {
     display: none;
     flex-direction: column;
-    background: #0b223f;
+    background: #fff;
     text-align: center;
-    padding: 15px 0;
+    /* padding: 15px 0; */
     position: absolute;
-    top: 70px;
+    top: 90px;
     left: 0;
     width: 100%;
     transition: all 0.4s ease;
-    transform: translateY(-100%);
+    transform: translateY(-153%);
     opacity: 0;
     z-index: 999;
   }
@@ -102,15 +102,17 @@
     display: flex;
     transform: translateY(0);
     opacity: 1;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 14%);
   }
 
   .mobile-menu a {
-    color: #fff;
-    padding: 10px;
+    padding: 15px 10px;
     font-size: 18px;
     text-decoration: none;
     display: block;
     transition: background 0.3s ease;
+    border-bottom: 1px solid #e6e6e6;
+    color: #3d6f82;
 
     &:hover {
       background: rgba(255, 255, 255, 0.1);
@@ -121,7 +123,7 @@
   .mobile-dropdown {
     .mobile-dropbtn {
       background: none;
-      color: #fff;
+      color: #3d6f82;
       font-size: 20px;
       border: none;
       cursor: pointer;
@@ -130,7 +132,7 @@
       text-align: center;
       transition: background 0.3s ease;
 
-     
+
     }
 
     /* ⤵️ Submenu */
@@ -141,21 +143,23 @@
       transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
-      background: #102c55;
+      background: #fff;
     }
 
     .mobile-submenu.open {
       max-height: 200px; /* ขยายเวลาเปิด */
       opacity: 1;
-      padding-bottom: 5px;
+      /* padding-bottom: 5px; */
     }
 
     .mobile-submenu a {
       padding: 12px 20px;
       font-size: 18px;
       text-align: left;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      /* border-top: 1px solid rgba(255, 255, 255, 0.1); */
       transition: background 0.3s ease;
+      text-align: center;
+      border: none;
 
       &:hover {
         background: rgba(255, 255, 255, 0.15);
@@ -185,7 +189,7 @@
   display: none;
   position: absolute;
   right: 0;
-  background: linear-gradient(160deg, #00031d 0%, #101737 50%, #2d2a4a 100%);
+  background: #fff;
   min-width: 200px;
   border-radius: 8px;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);
@@ -202,7 +206,7 @@
   text-decoration: none;
   transition: background 0.3s ease;
 
- 
+
 }
 
 .dropdown-content.show,

@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.bento-card {
+  height: auto;
+  min-height: 48px;
+  padding: 14px;
+  border-radius: 18px;
+  // background: white;
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  // background: antiquewhite;
+  background-color: transparent;
+  align-items: center;
+}

@@ -37,6 +37,7 @@ export class VendorRegisterComponent implements OnInit {
   showSuccessPopup = false;
   showErrorPopup = false;
   popupErrorMessage = '';
+  fileName = 'กรุณาเลือกไฟล์';
   private sellerTypeSubscription: Subscription | undefined;
 
   // จะสร้างจริงใน ngOnInit
@@ -214,6 +215,7 @@ export class VendorRegisterComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
+      this.fileName = file.name;
 
       // (Optional) ตรวจสอบขนาดไฟล์
       if (file.size > 5 * 1024 * 1024) {
