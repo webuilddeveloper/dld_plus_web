@@ -26,33 +26,33 @@ export class SaleDownloadComponent implements OnInit {
   ) { }
   documentList = [
     {
-      title: "TOR ระบบจัดการ License",
+      title: "1_TOR ระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (Digital Local D)",
       type: "pdf",
-      description: "รายละเอียด TOR สำหรับการจัดซื้อโปรแกรมระบบจัดการ License",
+      description: "รายละเอียด 1_TOR ระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (Digital Local D)",
       updateDate: "2025-10-01",
-      fileUrl: "assets/docs/tor-license.pdf"
+      fileUrl: "https://dldsoftplus.com/docs/03.1_TOR ระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (Digital Local D.docx"
     },
     {
-      title: "ใบเสนอราคา Software",
+      title: "บันทึกข้อความขออนุมัติ",
       type: "pdf",
-      description: "ตัวอย่างใบเสนอราคาสำหรับหน่วยงานราชการ",
+      description: "รายละเอียด บันทึกข้อความขออนุมัติ",
       updateDate: "2025-09-28",
-      fileUrl: "assets/docs/quotation.pdf"
+      fileUrl: "https://dldsoftplus.com/docs/03.2_บันทึกข้อความขออนุมัติ.docx"
     },
     {
-      title: "แบบฟอร์มคำขอ",
+      title: "ใบเสนอราคา",
       type: "doc",
-      description: "เอกสารสำหรับติดต่อเจ้าหน้าที่เพื่อดำเนินการจัดซื้อ",
+      description: "รายละเอียดใบเสนอราคา",
       updateDate: "2025-09-25",
-      fileUrl: "assets/docs/request.doc"
+      fileUrl: "https://dldsoftplus.com/docs/03.3_ใบเสนอราคา.docx"
     },
-    {
-      title: "ข้อมูลประกอบการขาย (ZIP)",
-      type: "zip",
-      description: "รูปภาพและเอกสารประกอบโครงการทั้งหมด",
-      updateDate: "2025-09-20",
-      fileUrl: "assets/docs/sales-support.zip"
-    }
+    // {
+    //   title: "ข้อมูลประกอบการขาย (ZIP)",
+    //   type: "zip",
+    //   description: "รูปภาพและเอกสารประกอบโครงการทั้งหมด",
+    //   updateDate: "2025-09-20",
+    //   fileUrl: "assets/docs/sales-support.zip"
+    // }
   ];
 
   ngOnInit(): void {}
