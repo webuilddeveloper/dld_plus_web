@@ -23,7 +23,6 @@ import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 import AOS from 'aos';
 import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
-import { NavbarComponent } from '../../navbar/navbar.component';
 import { BentoCardComponent } from "../../conponent/bento-card/bento-card.component";
 
 @Component({
@@ -560,7 +559,6 @@ export class HomeComponent implements AfterViewInit {
     );
   }
 
-  @ViewChild(NavbarComponent) navbar!: NavbarComponent;
   content: any = null;
 
   contact = { name: '', email: '', message: '' };
@@ -569,10 +567,6 @@ export class HomeComponent implements AfterViewInit {
     fetch('/assets/data/site-content.json')
       .then(res => res.json())
       .then(data => this.content = data);
-  }
-
-  onSectionChange(sectionId: any) {
-    if (this.navbar) this.navbar.activeSection = sectionId;
   }
 
   sendMessage() {
