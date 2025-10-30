@@ -135,8 +135,8 @@ select {
 }
 
 /* ตาราง */
-.sales-table {  
-min-width: 100%;
+.sales-table {
+  min-width: 1400px;
   border-collapse: collapse;
 }
 
@@ -693,7 +693,7 @@ input:checked+.slider:before {
 .table-container {
   width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; 
+  -webkit-overflow-scrolling: touch;
   margin-top: 10px;
 }
 
@@ -805,4 +805,13 @@ input:checked+.slider:before {
 
 ::ng-deep .mat-mdc-menu-panel.custom-menu.light-bg {
   animation: fadeSlideIn 0.25s ease-out;
+}
+
+th {
+  text-align: center !important;
+  text-wrap-mode: nowrap;
+}
+
+td{
+  text-wrap-mode: nowrap;
 }

@@ -4,7 +4,7 @@
 </div>
 <div class="content-left">
 
-<button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
+  <button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
 </div>
 
 <div class="po-page" #poContent>
@@ -24,7 +24,7 @@
 
     <div class="doc-block">
       <div class="doc-top">
-        <div><strong>เลขที่เอกสาร :</strong> {{model.orderId}}</div>
+        <div><strong>เลขที่เอกสาร :</strong> {{model.poCode}}</div>
         <div><strong>วันที่ออก :</strong> {{model.createDate | dateFormat}}</div>
       </div>
     </div>
@@ -42,10 +42,25 @@
       <div class="tax">เลขที่ภาษี: {{company.taxId}}</div>
     </div>
 
-    <div class="right">
+    <div *ngIf="isAdmin" class="right">
       <div class="label">ผู้ซื้อ</div>
-      <div class="name">{{model.companyName}}</div>
-      <div class="meta">รหัสลูกค้า: {{model.sellerCode}}</div>
+      <div class="name">{{model.name}}</div>
+      <div class="text">{{model.address}}</div>
+      <div class="tax">Tel: {{model.tel}}</div>
+      <div class="tax">Email: {{model.email}}</div>
+      <div class="tax">Website: {{model.website}}</div>
+      <div class="tax">เลขที่ภาษี: {{model.taxId}}</div>
+    </div>
+
+    <div *ngIf="!isAdmin" class="right">
+      <div class="label">ผู้ซื้อ</div>
+      <div class="name">{{model.name}}</div>
+      <div class="text">{{model.address}}</div>
+      <div class="tax">Tel: {{model.tel}}</div>
+      <div class="tax">Email: {{model.email}}</div>
+      <div class="tax">Website: {{model.website}}</div>
+      <div class="tax">เลขที่ภาษี: {{model.taxId}}</div>
+
     </div>
   </section>
 
@@ -66,12 +81,12 @@
           <td>{{it.no}}</td>
           <td class="desc">
             <div class="desc-title">{{it.program}}</div>
-            <div class="desc-sub">{{it.package}} - จำนวน {{it.licenseCount}} Key - ระยะเวลา {{it.duration}} ปี</div>
+            <div class="desc-sub">{{it.package}} - จำนวน {{it.licenseCount}} License</div>
           </td>
           <td class="num">{{it.price | number:'1.2-2'}}</td>
           <td class="num">{{it.discount ?? 0}}</td>
           <td class="num">{{it.vatPercent ?? 7}}%</td>
-          <td class="num">{{(it.price) | number:'1.2-2'}}</td>
+          <td class="num">{{subtotal | number:'1.2-2'}}</td>
         </tr>
       </tbody>
     </table>
@@ -81,6 +96,9 @@
     <div class="summary-left">
       <h4>หมายเหตุ</h4>
       <div class="notes">{{model.description}}</div>
+      <div class="notes">Email: {{model.endUserEmail}}</div>
+      <div class="notes">Tel: {{model.endUserPhone}}</div>
+
     </div>
 
     <div class="summary-right">
@@ -89,7 +107,7 @@
         <div class="value">{{subtotal | number:'1.2-2'}} บาท</div>
       </div>
       <div class="row">
-        <div class="label">ภาษีมูลค่าเพิ่ม ({{items[0]?.vatPercent}}%)</div>
+        <div class="label">ภาษีมูลค่าเพิ่ม (7%)</div>
         <div class="value">{{totalVat | number:'1.2-2'}} บาท</div>
       </div>
       <div class="row total">

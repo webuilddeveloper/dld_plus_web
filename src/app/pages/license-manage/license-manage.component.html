@@ -38,9 +38,9 @@
     <div class="head-table flex-wrap gap-3">
       <div class="col"><span class="title">รายการ</span></div>
       <div class="col d-flex justify-content-end w-fit gap-3">
-        <button class="save-btn" (click)="goToLicenseRegister()">
+        <!-- <button class="save-btn" (click)="goToLicenseRegister()">
           สร้างใบคำสั่งซื้อ
-        </button>
+        </button> -->
 
       </div>
 
@@ -51,28 +51,61 @@
         <thead>
           <tr>
             <th>ลำดับ</th>
-            <th>เลขคำสั่งซื้อ</th>
-            <th>รหัสผู้ขาย</th>
-            <th>องค์กร</th>
-            <th>โปรแกรม</th>
-            <th>สถานะ</th>
-            <th>วันที่ลงทะเบียน</th>
             <th>ดำเนินการ</th>
+
+            <th>เลขที่ใบออเดอร์</th>
+            <th>เลขที่คำสั่งซื้อ</th>
+            <th>เลขที่ใบอนุญาต</th>
+            <th>รหัสผู้ขาย</th>
+            <th>หน่วยงาน</th>
+            <th>โปรแกรม</th>
+            <th>วันที่ลงทะเบียน</th>
           </tr>
         </thead>
         <tbody>
           @for (sale of paginatedSales; track $index) {
           <tr>
-            <td>{{ (currentSalePage - 1) * totalSalePages + $index + 1 }}</td>
+            <td>{{ $index + 1 }}</td>
+            <td>
+              <div class="action-buttons">
+                <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-hamburger" matTooltip="จัดการเอกสาร">
+                  <mat-icon>menu</mat-icon>
+                </button>
 
-            <td>{{ sale.orderId }}</td>
+                <mat-menu #menu="matMenu" class="custom-menu light-bg">
+
+                  <div>
+                    <div class="menu-section-title">รายละเอียด</div>
+                    <button mat-menu-item class="menu-item create" (click)="openDrawer(sale)">
+                      <mat-icon>visibility</mat-icon>
+                      <span>ดูรายละเอียด</span>
+                    </button>
+
+                    <mat-divider></mat-divider>
+                  </div>
+
+                  <div class="menu-section-title">พิมพ์เอกสาร</div>
+                  <button mat-menu-item class="menu-item quote" (click)="printQuotation(sale)">
+                    <mat-icon>request_quote</mat-icon>
+                    <span>ใบเสนอราคา</span>
+                  </button>
+
+                  <button *ngIf="sale?.poCode" mat-menu-item class="menu-item po" (click)="printPO(sale)">
+                    <mat-icon>shopping_cart</mat-icon>
+                    <span>ใบสั่งซื้อ</span>
+                  </button>
+                </mat-menu>
+
+              </div>
+            </td>
+            <td>{{ sale.orderCode }}</td>
+            <td>{{ sale.poCode }}</td>
+            <td>{{ sale.licenseCode }}</td>
             <td>{{ sale.sellerCode }}</td>
             <td>{{ sale.companyName }}</td>
             <td>{{ sale.program }}</td>
-            <td><div [ngClass]="sale.orderStatus == 'A' ? 'd-success' : 'd-warning'" class="d-status">{{ sale.orderStatus == 'A' ?
-              'มี License' : 'ยังไม่มี License' }}</div></td> 
-            <td>{{ sale.createDate | date: 'dd/MM/yyyy' }}</td>
-            <td>
+            <td>{{ sale.createDate | dateFormat }}</td>
+            <!-- <td>
               <div class="action-buttons">
                 <button class="detail-btn" (click)="openDrawer(sale)">
                   <i class="fa fa-eye"></i>
@@ -85,7 +118,7 @@
                 </button>
               </div>
 
-            </td>
+            </td> -->
           </tr>
           }
 
@@ -123,62 +156,58 @@
             <div class="summary-box">
               <div class="summary-row">
                 <div><strong>รหัสผู้ขาย:</strong> {{ model.sellerCode }}</div>
-                <div><strong>ชื่อโปรแกรม:</strong> {{ model.program }}</div>
+                <div><strong>ชื่อองค์กร:</strong> {{ model.companyName }}</div>
+
               </div>
               <div class="summary-row">
-                <div><strong>ชื่อองค์กร:</strong> {{ model.companyName }}</div>
+                <div><strong>ชื่อโปรแกรม:</strong> {{ model.program }}</div>
                 <div><strong>ชื่อแพ๊คเกจ:</strong> {{model.package}}</div>
-
               </div>
               <div class="summary-row">
                 <div><strong>จำนวน License:</strong> {{ model.licenseCount }}</div>
                 <div><strong>ราคาขาย:</strong> {{ model.price | number }} บาท</div>
               </div>
-
-              <!-- <div class="summary-row">
-                <div>
-                  <strong>เอกสารแนบ:</strong>
-                  <a [hidden]="model.fileUrl" [href]="model.fileUrl" target="_blank" class="doc-link">ดูเอกสาร</a>
-                </div>
-
-              </div> -->
             </div>
 
             <!-- กรอบล่าง: License List -->
             <div class="license-card">
-              <div class="header" style="display: flex;justify-content: space-between;">
+              <div class="header-box">
                 <h3>🔑 รายการ License ที่จะสร้าง</h3>
-                <button class="btn-generate" *ngIf="listLicensKey.length == 0" (click)="generateLicensesbutton()">สร้าง
-                  License</button>
+
+                <button class="btn-generate" *ngIf="listLicensKey.length == 0" (click)="generateLicensesbutton()">
+                  สร้าง License
+                </button>
               </div>
 
-              <table class="license-table" *ngIf="listLicensKey.length > 0">
-                <thead>
-                  <tr>
-                    <th>ลำดับ</th>
-                    <th>License Key</th>
-                    <th>สถานะ</th>
-                    <th>วันที่สร้าง</th>
-                    <th>จัดการ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let lic of listLicensKey; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td class="license-key">{{ lic.licenseKey }}</td>
-                    <td>
-                      <span [class.active]="lic.status === 'A'" [class.pending]="lic.status === 'N'">
-                        {{ lic.status === 'A' ? 'Active แล้ว' : 'รอ Activate' }}
-                      </span>
-                    </td>
-                    <td>{{ lic.createDate | date: 'dd/MM/yyyy' }}</td>
-                    <td>
-                      <button class="btn-action" (click)="copyLicense(lic.key)">📋 คัดลอก</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="table-container">
 
+                <table class="license-table" *ngIf="listLicensKey.length > 0">
+                  <thead>
+                    <tr>
+                      <th>ลำดับ</th>
+                      <th>License Key</th>
+                      <th>สถานะ</th>
+                      <th>วันที่สร้าง</th>
+                      <th>จัดการ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let lic of listLicensKey; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td class="license-key">{{ lic.licenseKey }}</td>
+                      <td>
+                        <span [class.active]="lic.status === 'A'" [class.pending]="lic.status === 'N'">
+                          {{ lic.status === 'A' ? 'Active แล้ว' : 'รอ Activate' }}
+                        </span>
+                      </td>
+                      <td>{{ lic.createDate | dateFormat }}</td>
+                      <td>
+                        <button class="btn-action" (click)="copyLicense(lic.key)">📋 คัดลอก</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <div class="empty-state" *ngIf="listLicensKey.length === 0">
                 <p>ยังไม่มี License ที่สร้าง</p>
               </div>

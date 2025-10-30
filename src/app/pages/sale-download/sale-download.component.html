@@ -1,0 +1,28 @@
+<app-header></app-header>
+<button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
+
+<div class="document-page" data-aos="fade-up">
+    <h2>📄 ดาวน์โหลดเอกสารสำหรับผู้ใช้งาน</h2>
+    <p class="sub-text">สามารถดาวน์โหลดเอกสาร TOR และแบบฟอร์มต่าง ๆ ได้จากที่นี่</p>
+
+    <div class="document-grid">
+        <div class="document-card" *ngFor="let doc of documentList" data-aos="zoom-in" data-aos-delay="150">
+            <div class="icon-box">
+                <i class="fa fa-file-pdf-o" *ngIf="doc.type === 'pdf'"></i>
+                <i class="fa fa-file-word-o" *ngIf="doc.type === 'doc'"></i>
+                <i class="fa fa-file-zip-o" *ngIf="doc.type === 'zip'"></i>
+            </div>
+
+            <div class="doc-info">
+                <h4>{{ doc.title }}</h4>
+                <p class="desc">{{ doc.description }}</p>
+                <small>อัปเดตล่าสุด: {{ doc.updateDate | date }}</small>
+            </div>
+
+            <button class="btn-download" (click)="downloadFile(doc)">
+                <i class="fa fa-download"></i> ดาวน์โหลด
+            </button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

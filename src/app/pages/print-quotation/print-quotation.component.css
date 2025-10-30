@@ -296,6 +296,26 @@
   .sig-box {
     width: 100%;
   }
+
+  .addresses .left {
+    width: 100%;
+  }
+
+  .addresses .right {
+    width: 100%;
+  }
+
+  .summary .summary-left {
+    width: 100%;
+  }
+
+   .summary .summary-right {
+    width: 100%;
+  }
+
+  .signatures .sig-box {
+    width: 100%;
+  }
 }
 
 /* Print styles */
@@ -467,4 +487,20 @@
 
 .back-btn:hover {
   text-decoration: underline;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 10px;
+}
+
+th {
+  text-align: center !important;
+  text-wrap-mode: nowrap;
+}
+
+td{
+  text-wrap-mode: nowrap;
 }

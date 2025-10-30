@@ -108,7 +108,6 @@ export class LicenseRegisterUserPoComponent implements OnInit {
       })
       .subscribe(
         (data) => {
-          debugger
           let model: any = {};
           model = data;
           if (model.status == 'S') {

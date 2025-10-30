@@ -12,6 +12,11 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
+import { DateFormatPipe } from "../../date-format.pipe";
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-license-manage',
@@ -21,6 +26,11 @@ import { FooterComponent } from '../../footer/footer.component';
     ReactiveFormsModule,
     HeaderComponent,
     FooterComponent,
+    DateFormatPipe,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
   ],
   templateUrl: './license-manage.component.html',
   styleUrl: './license-manage.component.scss',
@@ -60,12 +70,12 @@ export class LicenseManageComponent {
   subDistrictList: any[] = [];
 
   currentPage = 1;
-  itemsPerPage = 5;
+  itemsPerPage = 10;
   totalPages = 1;
-  limit = 5;
+  limit = 9999;
 
   currentSalePage = 1;
-  saleItemsPerPage = 5;
+  saleItemsPerPage = 10;
   totalSalePages = 1;
   selectedIndex: number = 0;
   form!: FormGroup;
@@ -78,7 +88,7 @@ export class LicenseManageComponent {
   constructor(
     private serviceProvider: ServiceProviderService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     // this.selectedSale = {};
@@ -95,6 +105,18 @@ export class LicenseManageComponent {
     });
     return;
   }
+
+  printQuotation(sale: any) {
+    let data = {
+      model: JSON.stringify(sale),
+    };
+    this.router.navigate(['print-quotation'], {
+      queryParams: data,
+      skipLocationChange: true,
+    });
+    return;
+  }
+
 
   goToLicenseRegister() {
     this.router.navigate(['license-register']);
@@ -117,7 +139,7 @@ export class LicenseManageComponent {
             this.updateSalePagination();
           }
         },
-        (err) => {}
+        (err) => { }
       );
   }
 
@@ -143,7 +165,7 @@ export class LicenseManageComponent {
           this.model = temp.objectData[0];
           this.generateLicenses();
         },
-        (err) => {}
+        (err) => { }
       );
 
     this.isDrawer = true;
@@ -151,7 +173,7 @@ export class LicenseManageComponent {
 
   generateLicenses() {
     let payload = {
-      orderCode: this.model.code,
+      orderCode: this.model.orderCode,
       sellerCode: this.model.sellerCode,
       program: this.model.program,
       licenseCount: this.model.licenseCount,
@@ -162,13 +184,13 @@ export class LicenseManageComponent {
         temp = data;
         this.listLicensKey = temp.objectData;
       },
-      (err) => {}
+      (err) => { }
     );
   }
 
   generateLicensesbutton() {
     let payload = {
-      orderCode: this.model.code,
+      orderCode: this.model.orderCode,
       sellerCode: this.model.sellerCode,
       program: this.model.program,
       licenseCount: this.model.licenseCount,
@@ -236,17 +258,75 @@ export class LicenseManageComponent {
         },
       });
   }
-
+  
   filterSales() {
-    const term = this.criteriaModel.keySearch.toLowerCase();
-    this.filteredSales = this.salesList.filter(
-      (s) =>
-        s.orderId.toLowerCase().includes(term) ||
-        s.sellerCode.toLowerCase().includes(term)
-    );
+    const term = this.criteriaModel.keySearch?.toLowerCase() || '';
+    const startDate = this.criteriaModel.startDate
+      ? new Date(this.criteriaModel.startDate)
+      : null;
+    const endDate = this.criteriaModel.endDate
+      ? new Date(this.criteriaModel.endDate)
+      : null;
+
+    this.filteredSales = this.salesList.filter((s) => {
+      const po = s.poCode?.toLowerCase() || '';
+      const seller = s.sellerCode?.toLowerCase() || '';
+      const order = s.orderCode?.toLowerCase() || '';
+      const license = s.licenseCode?.toLowerCase() || '';
+      const company = s.companyName?.toLowerCase() || '';
+      const program = s.program?.toLowerCase() || '';
+
+      const searchMatch =
+        po.includes(term) ||
+        seller.includes(term) ||
+        order.includes(term) ||
+        license.includes(term) ||
+        company.includes(term) ||
+        program.includes(term);
+
+      // 🕒 แปลง createDate จาก string 'yyyyMMddHHmmss' → Date object
+      const createDate = s.createDate ? this.parseCustomDate(s.createDate) : null;
+
+      let dateMatch = true;
+      if (startDate && endDate) {
+        // ✅ กรณีเลือกช่วงวันที่
+        dateMatch = !!(
+          createDate &&
+          createDate >= startDate &&
+          createDate <= new Date(endDate.getTime() + 86400000 - 1)
+        );
+      } else if (startDate) {
+        // ✅ เฉพาะ startDate
+        dateMatch = !!(createDate && createDate >= startDate);
+      } else if (endDate) {
+        // ✅ เฉพาะ endDate
+        dateMatch = !!(
+          createDate &&
+          createDate <= new Date(endDate.getTime() + 86400000 - 1)
+        );
+      }
+
+      return searchMatch && dateMatch;
+    });
+
     this.currentSalePage = 1;
     this.updateSalePagination();
   }
+
+  /**
+   * 🧩 ฟังก์ชันช่วยแปลงจาก "yyyyMMddHHmmss" → Date
+   */
+  parseCustomDate(dateStr: string): Date | null {
+    if (!/^\d{14}$/.test(dateStr)) return null; // ต้องมี 14 ตัวเลข
+    const year = Number(dateStr.substring(0, 4));
+    const month = Number(dateStr.substring(4, 6)) - 1; // เดือนเริ่มที่ 0
+    const day = Number(dateStr.substring(6, 8));
+    const hour = Number(dateStr.substring(8, 10));
+    const minute = Number(dateStr.substring(10, 12));
+    const second = Number(dateStr.substring(12, 14));
+    return new Date(year, month, day, hour, minute, second);
+  }
+
 
   updateSalePagination() {
     this.totalSalePages = Math.ceil(
@@ -313,12 +393,10 @@ export class LicenseManageComponent {
         ...this.selectedSale,
         attachment: undefined,
       };
-      debugger;
 
       this.serviceProvider
         .post(
-          `/vendorRegister/${
-            this.selectedSale?.code != undefined ? 'update' : 'create'
+          `/vendorRegister/${this.selectedSale?.code != undefined ? 'update' : 'create'
           }`,
           payload
         )
@@ -348,7 +426,6 @@ export class LicenseManageComponent {
           },
         });
     } else {
-      debugger;
       console.log('ฟอร์มไม่ถูกต้อง');
       Object.values(form.controls).forEach((control) => {
         control.markAsTouched();
@@ -380,7 +457,23 @@ export class LicenseManageComponent {
     }
   }
 
-  update() {}
+  onSearch() {
+    // this.readSale();
+    this.filterSales();
+  }
+
+  onClearFilter() {
+    this.criteriaModel.keySearch = '';
+    this.criteriaModel.startDate = '';
+    this.criteriaModel.endDate = '';
+    this.filteredSales = [...this.salesList]; // คืนค่าเต็ม
+    this.currentSalePage = 1;
+    this.updateSalePagination();
+  }
+
+
+
+  update() { }
 
   thaiIdValidator(id: any) {
     // ไม่ต้อง validate ถ้าไม่มีค่า (ปล่อยให้ Validators.required จัดการ)

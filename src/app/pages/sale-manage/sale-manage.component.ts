@@ -13,6 +13,7 @@ import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
 import { Router } from '@angular/router';
 import { FileUploadService } from '../../shares/file-upload.service copy';
+import { DateFormatPipe } from "../../date-format.pipe";
 
 @Component({
   selector: 'app-sale-manage',
@@ -22,6 +23,7 @@ import { FileUploadService } from '../../shares/file-upload.service copy';
     ReactiveFormsModule,
     HeaderComponent,
     FooterComponent,
+    DateFormatPipe
   ],
   templateUrl: './sale-manage.component.html',
   styleUrl: './sale-manage.component.scss',
@@ -57,12 +59,12 @@ export class SaleManageComponent {
   subDistrictList: any[] = [];
 
   currentPage = 1;
-  itemsPerPage = 5;
+  itemsPerPage = 10;
   totalPages = 1;
-  limit = 5;
+  limit = 999;
 
   currentSalePage = 1;
-  saleItemsPerPage = 5;
+  saleItemsPerPage = 10;
   totalSalePages = 1;
   selectedIndex: number = 0;
   form!: FormGroup;
@@ -96,7 +98,7 @@ export class SaleManageComponent {
     private serviceProvider: ServiceProviderService,
     private router: Router,
     private fileuploadService: FileUploadService
-  ) {}
+  ) { }
 
   ngOnInit() {
     // this.selectedSale = {};
@@ -123,7 +125,7 @@ export class SaleManageComponent {
             this.updateSalePagination();
           }
         },
-        (err) => {}
+        (err) => { }
       );
   }
 
@@ -136,7 +138,7 @@ export class SaleManageComponent {
           this.provinceList = model.objectData;
         }
       },
-      (err) => {}
+      (err) => { }
     );
   }
 
@@ -151,7 +153,7 @@ export class SaleManageComponent {
             this.districtList = model.objectData;
           }
         },
-        (err) => {}
+        (err) => { }
       );
   }
 
@@ -166,7 +168,7 @@ export class SaleManageComponent {
             this.subDistrictList = model.objectData;
           }
         },
-        (err) => {}
+        (err) => { }
       );
   }
 
@@ -270,13 +272,62 @@ export class SaleManageComponent {
       });
   }
 
-  filterSales() {
-    const term = this.criteriaModel.keySearch.toLowerCase();
-    this.filteredSales = this.salesList.filter(
-      (s) =>
-        s.companyName.toLowerCase().includes(term) ||
-        s.contactName.toLowerCase().includes(term)
-    );
+  // filterSales() {
+  //   const term = this.criteriaModel.keySearch.toLowerCase();
+  //   this.filteredSales = this.salesList.filter(
+  //     (s) =>
+  //       s.companyName.toLowerCase().includes(term) ||
+  //       s.contactName.toLowerCase().includes(term) ||
+  //       s.taxId.toLowerCase().includes(term)
+  //   );
+  //   this.currentSalePage = 1;
+  //   this.updateSalePagination();
+  // }
+
+   filterSales() {
+    const term = this.criteriaModel.keySearch?.toLowerCase() || '';
+    const startDate = this.criteriaModel.startDate
+      ? new Date(this.criteriaModel.startDate)
+      : null;
+    const endDate = this.criteriaModel.endDate
+      ? new Date(this.criteriaModel.endDate)
+      : null;
+
+    this.filteredSales = this.salesList.filter((s) => {
+      const taxId = s.taxId?.toLowerCase() || '';
+      const contac = s.contactName?.toLowerCase() || '';
+      const company = s.companyName?.toLowerCase() || '';
+
+      const searchMatch =
+        taxId.includes(term) ||
+        contac.includes(term) ||
+        company.includes(term) 
+
+      // 🕒 แปลง createDate จาก string 'yyyyMMddHHmmss' → Date object
+      const createDate = s.createDate ? this.parseCustomDate(s.createDate) : null;
+
+      let dateMatch = true;
+      if (startDate && endDate) {
+        // ✅ กรณีเลือกช่วงวันที่
+        dateMatch = !!(
+          createDate &&
+          createDate >= startDate &&
+          createDate <= new Date(endDate.getTime() + 86400000 - 1)
+        );
+      } else if (startDate) {
+        // ✅ เฉพาะ startDate
+        dateMatch = !!(createDate && createDate >= startDate);
+      } else if (endDate) {
+        // ✅ เฉพาะ endDate
+        dateMatch = !!(
+          createDate &&
+          createDate <= new Date(endDate.getTime() + 86400000 - 1)
+        );
+      }
+
+      return searchMatch && dateMatch;
+    });
+
     this.currentSalePage = 1;
     this.updateSalePagination();
   }
@@ -305,6 +356,18 @@ export class SaleManageComponent {
     }
   }
 
+    parseCustomDate(dateStr: string): Date | null {
+    if (!/^\d{14}$/.test(dateStr)) return null; // ต้องมี 14 ตัวเลข
+    const year = Number(dateStr.substring(0, 4));
+    const month = Number(dateStr.substring(4, 6)) - 1; // เดือนเริ่มที่ 0
+    const day = Number(dateStr.substring(6, 8));
+    const hour = Number(dateStr.substring(8, 10));
+    const minute = Number(dateStr.substring(10, 12));
+    const second = Number(dateStr.substring(12, 14));
+    return new Date(year, month, day, hour, minute, second);
+  }
+
+
   goBack() {
     this.router.navigate(['user-admin']);
   }
@@ -315,6 +378,10 @@ export class SaleManageComponent {
   }
 
   submit(form: NgForm) {
+    if (this.selectedSale?.sellerType === 'person') {
+      this.selectedSale.companyName = "";
+    }
+
     if (form.valid && !this.thaiIdValidator(this.selectedSale.taxId)) {
       this.submitting.set(true);
 
@@ -346,12 +413,10 @@ export class SaleManageComponent {
         ...this.selectedSale,
         attachment: undefined,
       };
-      debugger;
 
       this.serviceProvider
         .post(
-          `/vendorRegister/${
-            this.selectedSale?.code != undefined ? 'update' : 'create'
+          `/vendorRegister/${this.selectedSale?.code != undefined ? 'update' : 'create'
           }`,
           payload
         )
@@ -381,7 +446,6 @@ export class SaleManageComponent {
           },
         });
     } else {
-      debugger;
       console.log('ฟอร์มไม่ถูกต้อง');
       Object.values(form.controls).forEach((control) => {
         control.markAsTouched();
@@ -413,7 +477,7 @@ export class SaleManageComponent {
     }
   }
 
-  update() {}
+  update() { }
 
   thaiIdValidator(id: any) {
     // ไม่ต้อง validate ถ้าไม่มีค่า (ปล่อยให้ Validators.required จัดการ)

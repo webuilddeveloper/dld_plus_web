@@ -68,9 +68,9 @@ export class LicenseRegisterUserComponent implements OnInit {
   ];
   packages: any =
     [
-      { name: 'Basic', keys: 1 },
-      { name: 'Enterprise', keys: 5 },
-      { name: 'Organize', keys: 10 },
+      { name: 'Basic', keys: 1, price: 18000, },
+      { name: 'Enterprise', keys: 5, price: 80000, },
+      { name: 'Organize', keys: 10, price: 150000, },
     ];
 
   availablePackages: any[] = [];
@@ -80,7 +80,7 @@ export class LicenseRegisterUserComponent implements OnInit {
 
   ngOnInit() {
     AOS.init();
-    this.model.sellerCode = localStorage.getItem('email') ?? '';
+    this.model.sellerCode = localStorage.getItem('sellerCode') ?? '';
   }
   onProgramChange() {
     this.availablePackages = this.packages[this.model.program] || [];
@@ -94,6 +94,13 @@ export class LicenseRegisterUserComponent implements OnInit {
         : this.model.package == 'Enterprise'
           ? 5
           : 10;
+
+    this.model.price =
+      this.model.package == 'Basic'
+        ? 18000
+        : this.model.package == 'Enterprise'
+          ? 80000
+          : 150000;
   }
 
   onFileSelected(event: any) {
@@ -126,12 +133,14 @@ export class LicenseRegisterUserComponent implements OnInit {
       sellerCode: this.model.sellerCode,
       companyName: this.model.companyName,
       companyAddress: this.model.companyAddress,
+      companyEmail: this.model.companyEmail,
+      companyPhone: this.model.companyPhone,
       licenseCount: this.model.licenseCount,
       program: this.programs[0].name,
       programCode: this.programs[0].code,
       package: this.model.package,
       reference: this.model.reference,
-      price: this.model.price
+      price: this.model.price,
     };
 
     this.serviceProviderService

@@ -23,7 +23,7 @@
     <div class="col">
       วันที่ลงทะเบียน
       <input type="date" placeholder="ค้นหาหน่วยงาน จังหวัด..." [(ngModel)]="criteriaModel.startDate"
-        (input)="filterSales()" />
+        (change)="filterSales()" />
     </div>
     <div class="col">
       ถึงวันที่
@@ -46,15 +46,16 @@
 
     </div>
     <div class="table-container">
-
       <table class="sales-table">
         <thead>
           <tr>
             <th>ลำดับ</th>
             <th>ดำเนินการ</th>
-            <th>เลขคำสั่งซื้อ</th>
+            <th>เลขที่ใบออเดอร์</th>
+            <th>เลขที่ใบสั่งซื้อ (PO)</th>
+            <th>เลขที่ใบอนุญาต</th>
             <th>รหัสผู้ขาย</th>
-            <th>องค์กร</th>
+            <th>หน่วยงาน</th>
             <th>โปรแกรม</th>
             <th>แพ็กเกจ</th>
             <!-- <th>สถานะ</th> -->
@@ -62,9 +63,8 @@
           </tr>
         </thead>
         <tbody>
-          @for (sale of paginatedSales; track $index) {
-          <tr>
-            <td>{{ (currentSalePage - 1) * totalSalePages + $index + 1 }}</td>
+          <tr *ngFor="let sale of paginatedSales; let i = index">
+            <td>{{i + 1 }}</td>
             <td>
               <div class="action-buttons">
                 <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-hamburger" matTooltip="จัดการเอกสาร">
@@ -73,7 +73,7 @@
 
                 <mat-menu #menu="matMenu" class="custom-menu light-bg">
 
-                  <div *ngIf="!sale.orderId">
+                  <div *ngIf="!sale.poCode">
                     <div class="menu-section-title">สร้างเอกสาร</div>
                     <button mat-menu-item class="menu-item create" (click)="goToPurchaseOrder(sale)">
                       <mat-icon>add_shopping_cart</mat-icon>
@@ -95,7 +95,7 @@
                     <span>ใบเสนอราคา</span>
                   </button>
 
-                  <button *ngIf="sale?.orderId" mat-menu-item class="menu-item po" (click)="printDocument(sale, 'po')">
+                  <button *ngIf="sale?.poCode" mat-menu-item class="menu-item po" (click)="printDocument(sale, 'po')">
                     <mat-icon>shopping_cart</mat-icon>
                     <span>ใบสั่งซื้อ</span>
                   </button>
@@ -103,7 +103,9 @@
 
               </div>
             </td>
-            <td>{{ sale.orderId }}</td>
+            <td>{{ sale.orderCode }}</td>
+            <td>{{ sale.poCode }}</td>
+            <td>{{ sale.licenseCode }}</td>
             <td>{{ sale.sellerCode }}</td>
             <td>{{ sale.companyName }}</td>
             <td>{{ sale.program }}</td>
@@ -111,10 +113,10 @@
 
             <!-- <td><div [ngClass]="sale.orderStatus == 'A' ? 'd-success' : 'd-warning'" class="d-status">{{ sale.orderStatus == 'A' ?
               'มี License' : 'ยังไม่มี License' }}</div></td>  -->
-            <td>{{ sale.createDate | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ sale.createDate | dateFormat }}</td>
 
           </tr>
-          }
+
 
         </tbody>
       </table>
@@ -201,7 +203,7 @@
                         {{ lic.status === 'A' ? 'Active แล้ว' : 'รอ Activate' }}
                       </span>
                     </td>
-                    <td>{{ lic.createDate | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ lic.createDate | dateFormat }}</td>
                     <td>
                       <button class="btn-action" (click)="copyLicense(lic.key)">📋 คัดลอก</button>
                     </td>

@@ -5,7 +5,7 @@
 
 .po-page {
   max-width: 900px;
-  margin: 50px auto;
+  margin: 40px auto;
   background: #fff;
   padding: 28px;
   border-radius: 8px;
@@ -187,9 +187,9 @@
     }
 
     .notes {
-      color: #6e7b86;
-      font-size: 13px;
-      min-height: 56px;
+      color: #475862;
+      font-size: 14px;
+      /* min-height: 56px; */
     }
   }
 
@@ -247,7 +247,7 @@
     }
 
     .sig-line {
-      height: 40px;
+      height: 30px;
       border-bottom: 2px solid #cbd8df;
       margin-bottom: 15px;
     }

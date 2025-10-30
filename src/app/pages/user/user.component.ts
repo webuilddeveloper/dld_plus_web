@@ -25,13 +25,15 @@ export class UserComponent implements OnInit {
 
 
   ngOnInit(): void {
-    AOS.init({
-      offset: 120,
-      duration: 800,
-      easing: 'ease-in-out-sine',
-      delay: 100,
-      once: false,
-    });
+setTimeout(() => {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: false,
+        mirror: true,
+      });
+      AOS.refresh();
+    }, 100);
   }
 
 
@@ -42,6 +44,8 @@ export class UserComponent implements OnInit {
       this.router.navigate(['sale-history']);
     } else if (page === 'sale-purchase-order') {
       this.router.navigate(['sale-purchase-order']);
+    }  else if (page === 'download') {
+      this.router.navigate(['sale-download']);
     }
   }
 }

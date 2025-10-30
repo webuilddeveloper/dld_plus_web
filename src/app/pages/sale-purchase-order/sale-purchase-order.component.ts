@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { DateFormatPipe } from "../../date-format.pipe";
 
 @Component({
   selector: 'app-sale-purchase-order',
@@ -28,7 +29,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    DateFormatPipe
   ],
   templateUrl: './sale-purchase-order.component.html',
   styleUrl: './sale-purchase-order.component.scss',
@@ -70,12 +72,12 @@ export class SalePurchaseOrderComponent {
   subDistrictList: any[] = [];
 
   currentPage = 1;
-  itemsPerPage = 5;
+  itemsPerPage = 10;
   totalPages = 1;
-  limit = 5;
+  limit = 9999;
 
   currentSalePage = 1;
-  saleItemsPerPage = 5;
+  saleItemsPerPage = 10;
   totalSalePages = 1;
   selectedIndex: number = 0;
   form!: FormGroup;
@@ -93,7 +95,7 @@ export class SalePurchaseOrderComponent {
 
   ngOnInit() {
     // this.selectedSale = {};
-    this.sellerCode = localStorage.getItem('email') ?? '';
+    this.sellerCode = localStorage.getItem('sellerCode') ?? '';
 
     this.callRead();
   }
@@ -151,7 +153,7 @@ export class SalePurchaseOrderComponent {
   downloadPDF(param: any, latestSale: any) {
 
     let payload = {
-      "appNo": param.appointmentNo,
+      "appNo": param.orderCode,
       "reference": param.reference,
       "vendorName": latestSale.companyName,
       "vendorAddress": latestSale.addressLine,
@@ -328,16 +330,54 @@ export class SalePurchaseOrderComponent {
       });
   }
 
+  // filterSales() {
+  //   const term = this.criteriaModel.keySearch.toLowerCase();
+  //   this.filteredSales = this.salesList.filter(
+  //     (s) =>
+  //       s.poCode.toLowerCase().includes(term) ||
+  //       s.sellerCode.toLowerCase().includes(term)
+  //   );
+  //   this.currentSalePage = 1;
+  //   this.updateSalePagination();
+  // }
+
   filterSales() {
     const term = this.criteriaModel.keySearch.toLowerCase();
-    this.filteredSales = this.salesList.filter(
-      (s) =>
-        s.orderId.toLowerCase().includes(term) ||
-        s.sellerCode.toLowerCase().includes(term)
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const dateNow = `${year}${month}${day}`;
+    const start = this.criteriaModel.startDate != undefined ? this.criteriaModel.startDate.replace(/-/g, "") : "";
+    const end = this.criteriaModel.endDate != undefined ? this.criteriaModel.endDate.replace(/-/g, "") : "";
+    this.filteredSales = this.modelList.filter(
+      (s: any) =>
+        (s.orderCode.toLowerCase().includes(term) ||
+          s.poCode.toLowerCase().includes(term) ||
+          s.licenseCode.toLowerCase().includes(term) ||
+          s.companyName.toLowerCase().includes(term) ||
+          s.program.toLowerCase().includes(term) ||
+          s.package.toLowerCase().includes(term) ||
+          s.licenseCount.toString().toLowerCase().includes(term)) && (s.createDate.substring(0, 8) >= start && s.createDate.substring(0, 8) <= end)
+
     );
     this.currentSalePage = 1;
     this.updateSalePagination();
   }
+
+  // filterDate() {
+  //   const now = new Date();
+  //   const year = now.getFullYear();
+  //   const month = String(now.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มจาก 0
+  //   const day = String(now.getDate()).padStart(2, '0');
+  //   const dateNow = `${year}${month}${day}`;
+  //   const start = this.criteriaModel.startDate != undefined ? this.criteriaModel.startDate.replace(/-/g, "") : dateNow;
+  //   const end = this.criteriaModel.endDate != undefined ? this.criteriaModel.endDate.replace(/-/g, "") : dateNow;
+  //   this.filteredSales = this.modelList.filter((item: any) => item.createDate.substring(0, 8) >= start && item.createDate.substring(0, 8) <= end);
+
+  //   this.currentSalePage = 1;
+  //   this.updateSalePagination();
+  // }
 
   updateSalePagination() {
     this.totalSalePages = Math.ceil(
@@ -364,7 +404,7 @@ export class SalePurchaseOrderComponent {
   }
 
   goBack() {
-    this.router.navigate(['user-admin']);
+    this.router.navigate(['user']);
   }
 
   toggleApprove(event: Event) {
@@ -404,7 +444,6 @@ export class SalePurchaseOrderComponent {
         ...this.selectedSale,
         attachment: undefined,
       };
-      debugger;
 
       this.serviceProvider
         .post(
@@ -438,7 +477,6 @@ export class SalePurchaseOrderComponent {
           },
         });
     } else {
-      debugger;
       console.log('ฟอร์มไม่ถูกต้อง');
       Object.values(form.controls).forEach((control) => {
         control.markAsTouched();

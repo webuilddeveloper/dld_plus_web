@@ -19,39 +19,119 @@ import { SalePurchaseOrderComponent } from './pages/sale-purchase-order/sale-pur
 import { LicenseRegisterUserPoComponent } from './pages/license-register-user-po/license-register-user-po.component';
 import { PrintPoComponent } from './pages/print-po/print-po.component';
 import { PrintQuotationComponent } from './pages/print-quotation/print-quotation.component';
-
+import { authGuard } from './guards/auth.guard';
+import { SaleDownloadComponent } from './pages/sale-download/sale-download.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'about-us', component: AboutUsComponent },
-  { path: 'license-register', component: LicenseRegisterComponent },
   { path: 'document-receipt', component: DocumentReceiptComponent },
   { path: 'news-detail', component: NewsDetailComponent },
   {
     path: 'vendor-register',
     loadComponent: () =>
-      import('./pages/vendor-register/vendor-register.component')
-        .then(m => m.VendorRegisterComponent)
+      import('./pages/vendor-register/vendor-register.component').then(
+        (m) => m.VendorRegisterComponent
+      ),
   },
   {
     path: 'login-member',
     loadComponent: () =>
-      import('./pages/login-member/login-member.component').then(m => m.LoginMemberComponent),
+      import('./pages/login-member/login-member.component').then(
+        (m) => m.LoginMemberComponent
+      ),
   },
-  { path: 'user', component: UserComponent },
-  { path: 'sale-history', component: SaleHistoryComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'license-generator', component: LicenseGeneratorComponent },
-  { path: 'sale-manage', component: SaleManageComponent },
-  { path: 'user-admin', component: UserAdminComponent },
-  { path: 'license-manage', component: LicenseManageComponent },
-  { path: 'print-po', component: PrintPoComponent },
-  { path: 'license-print', component: LicensePrintComponent },
-  { path: 'license-register-user', component: LicenseRegisterUserComponent },
-  { path: 'sale-purchase-order', component: SalePurchaseOrderComponent },
-  { path: 'license-register-user-po', component: LicenseRegisterUserPoComponent },
-  { path: 'print-quotation', component: PrintQuotationComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user', 'admin'] }, // ✅ ผู้ใช้ทั่วไปและแอดมินเข้าได้
+  },
+  {
+    path: 'print-po',
+    component: PrintPoComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user', 'admin'] },
+  },
+  {
+    path: 'user',
+    component: UserComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user'] }, // ✅ ผู้ใช้ทั่วไป
+  },
+  {
+    path: 'sale-purchase-order',
+    component: SalePurchaseOrderComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user'] },
+  },
+  {
+    path: 'license-register-user',
+    component: LicenseRegisterUserComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user'] },
+  },
+  {
+    path: 'license-register-user-po',
+    component: LicenseRegisterUserPoComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user'] },
+  },
+  {
+    path: 'sale-history',
+    component: SaleHistoryComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user'] },
+  },
+  {
+    path: 'license-print',
+    component: LicensePrintComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user'] },
+  },
+  {
+    path: 'sale-download',
+    component: SaleDownloadComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user'] },
+  },
+  {
+    path: 'print-quotation',
+    component: PrintQuotationComponent,
+    canActivate: [authGuard],
+    data: { roles: ['user', 'admin'] },
+  },
+  {
+    path: 'user-admin',
+    component: UserAdminComponent,
+    canActivate: [authGuard],
+    data: { roles: ['admin'] }, // ✅ แค่ admin เข้าได้
+  },
+  {
+    path: 'license-manage',
+    component: LicenseManageComponent,
+    canActivate: [authGuard],
+    data: { roles: ['admin'] },
+  },
+  {
+    path: 'sale-manage',
+    component: SaleManageComponent,
+    canActivate: [authGuard],
+    data: { roles: ['admin'] },
+  },
+  {
+    path: 'license-register',
+    component: LicenseRegisterComponent,
+    canActivate: [authGuard],
+    data: { roles: ['admin'] },
+  },
+  {
+    path: 'license-generator',
+    component: LicenseGeneratorComponent,
+    canActivate: [authGuard],
+    data: { roles: ['admin'] },
+  },
 
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];

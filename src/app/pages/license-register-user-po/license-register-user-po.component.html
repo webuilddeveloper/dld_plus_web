@@ -16,21 +16,35 @@
         </div>
 
         <div class="form-group">
-          <label>ชื่อองค์กร</label>
+          <label>ชื่อหน่วยงาน</label>
           <input type="text" name="companyName" [(ngModel)]="model.companyName" required #companyName="ngModel"
-            class="form-control" placeholder="ชื่อองค์กร" disabled />
+            class="form-control" placeholder="ชื่อหน่วยงาน" disabled />
         </div>
 
         <div class="form-group">
-          <label>ที่ตั้งองค์กร</label>
-          <input type="text" name="companyAddress" [(ngModel)]="model.companyAddress" required #companyAddress="ngModel"
-            class="form-control" placeholder="ที่ตั้งองค์กร" disabled />
+          <label>ที่ตั้งหน่วยงาน</label>
+          <textarea name="companyAddress" [(ngModel)]="model.companyAddress" required #companyAddress="ngModel"
+            class="form-control" rows="3" placeholder="ที่ตั้งหน่วยงาน" disabled>
+          </textarea>
+        </div>
+
+        <div class="form-group">
+          <label>อีเมลหน่วยงาน</label>
+          <input type="text" name="companyEmail" [(ngModel)]="model.companyEmail" required #companyEmail="ngModel"
+            class="form-control" placeholder="อีเมลหน่วยงาน" disabled />
+        </div>
+
+        <div class="form-group">
+          <label>เบอร์ติดต่อหน่วยงาน</label>
+          <input type="text" name="companyPhone" [(ngModel)]="model.companyPhone" required #companyPhone="ngModel"
+            class="form-control" placeholder="เบอร์ติดต่อหน่วยงาน" disabled />
         </div>
 
         <div class="form-group">
           <label>อ้างถึง (โครงการ)</label>
-          <input type="text" name="reference" [(ngModel)]="model.reference" required #reference="ngModel" class="form-control"
-            placeholder="ชื่อโครงการ" disabled />
+          <textarea name="reference" [(ngModel)]="model.reference" required #reference="ngModel" class="form-control"
+            rows="3" placeholder="ชื่อโครงการ" disabled>
+          </textarea>
         </div>
 
         <div class="form-group">
@@ -65,12 +79,15 @@
 
         <div class="form-group">
           <label>หมายเหตุ (ระบุหน่วยงานเพื่อใช้ในการสร้าง User)</label>
-          <input type="text" name="description" [(ngModel)]="model.description" required #description="ngModel"
-            class="form-control" placeholder="หน่วยงาน" />
+          <textarea name="description" [(ngModel)]="model.description" required #description="ngModel"
+            class="form-control" rows="3" placeholder="หน่วยงาน">
+          </textarea>
+
           <div class="error" *ngIf="description.invalid && licenseForm.submitted">
             กรุณากรอกหมายเหตุ (ระบุหน่วยงานเพื่อใช้ในการสร้าง User)
           </div>
         </div>
+
 
         <button type="submit" class="submit-btn">ยืนยัน</button>
       </form>

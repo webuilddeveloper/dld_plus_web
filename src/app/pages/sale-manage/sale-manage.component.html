@@ -22,11 +22,13 @@
     </div>
     <div class="col">
       วันที่ลงทะเบียน
-      <input type="date" [(ngModel)]="criteriaModel.startDate" (input)="readSale()" />
+      <input type="date" placeholder="ค้นหาหน่วยงาน จังหวัด..." [(ngModel)]="criteriaModel.startDate"
+        (input)="filterSales()" />
     </div>
     <div class="col">
       ถึงวันที่
-      <input type="date" [(ngModel)]="criteriaModel.endDate" (input)="readSale()" />
+      <input type="date" placeholder="ค้นหาหน่วยงาน จังหวัด..." [(ngModel)]="criteriaModel.endDate"
+        (input)="filterSales()" />
     </div>
   </div>
 
@@ -49,7 +51,9 @@
 
     </div>
 
-    <div class="div-table">
+    <div class="table-container">
+
+
       <table class="sales-table">
         <thead>
           <tr>
@@ -72,7 +76,7 @@
               <input type="checkbox" [(ngModel)]="sale.selected" name="selected_{{ $index }}"
                 (change)="checkIfAllSelected()" />
             </td>
-            <td>{{ (currentSalePage - 1) * totalSalePages + $index + 1 }}</td>
+            <td>{{ $index + 1 }}</td>
             <td>
               <div [ngClass]="sale.status == 'A' ? 'd-success' : 'd-warning'" class="d-status">{{ sale.status == 'A' ?
                 'อนุมัติแล้ว' : 'รอตรวจสอบ' }}</div>
@@ -80,7 +84,7 @@
             <td>{{ sale.contactName }}</td>
             <td>{{ sale.taxId }}</td>
             <td>{{ sale.sellerType == 'person' ? 'บุคคลธรรมดา' : 'นิติบุคคล' }}</td>
-            <td>{{ sale.createDate | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ sale.createDate | dateFormat }}</td>
             <td>
               <button class=" detail-btn" (click)="openDrawer(sale)">
                 ดูรายละเอียด
@@ -146,7 +150,7 @@
             </div>
           </div>
           <div class="box-input flex-wrap gap-3">
-            <div class="col">
+            <div *ngIf="selectedSale.sellerType == 'company'" class="col">
               <label for="">ชื่อบริษัท/หน่วยงาน <span class="req">*</span></label>
               <input type="text" name="companyName" placeholder="ชื่อบริษัท/หน่วยงาน"
                 [(ngModel)]="selectedSale.companyName" #companyName="ngModel" required />

@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="user-menu-container" data-aos="fade-up">
+<div class="user-menu-container">
   <div class="user-header">
     <h2>เมนูผู้ใช้งาน</h2>
     <p>จัดการข้อมูลการขายและ License ของคุณได้ที่นี่</p>
@@ -34,6 +34,14 @@
       <p>ดูประวัติยอดขายย้อนหลัง</p>
     </div>
 
+    <!-- เมนู 4: ดาวโหลดเอกสาร -->
+    <div class="menu-card" (click)="goTo('download')">
+      <div class="icon-box">
+        <i class="fas fa-download"></i>
+      </div>
+      <h3>ดาวน์โหลดเอกสาร</h3>
+      <p>ดาวน์โหลดเอกสารที่เกี่ยวข้อง</p>
+    </div>
 
   </div>
 </div>

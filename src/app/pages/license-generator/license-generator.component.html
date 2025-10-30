@@ -54,7 +54,7 @@
               {{ lic.status === 'A' ? 'Active แล้ว' : 'รอ Activate' }}
             </span>
           </td>
-          <td>{{ lic.createDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ lic.createDate | dateFormat }}</td>
           <td>
             <button class="btn-action" (click)="copyLicense(lic.key)">📋 คัดลอก</button>
           </td>

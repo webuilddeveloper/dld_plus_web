@@ -7,6 +7,10 @@ import { ServiceProviderService } from '../../shares/service-provider.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DateFormatPipe } from '../../date-format.pipe';
 import { ExcelService } from '../../shares/excel.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-sale-history',
@@ -18,7 +22,11 @@ import { ExcelService } from '../../shares/excel.service';
     HeaderComponent,
     FooterComponent,
     DateFormatPipe,
-  ],
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+],
 })
 export class SaleHistoryComponent {
   constructor(
@@ -76,13 +84,17 @@ export class SaleHistoryComponent {
   paginatedLicenses: any[] = [];
   filteredSales: any[] = [];
   paginatedSales: any[] = [];
+  criteriaModel: any = {
+    keySearch: '',
+    status: '',
+  };
 
   currentPage = 1;
-  itemsPerPage = 5;
+  itemsPerPage = 10;
   totalPages = 1;
 
   currentSalePage = 1;
-  saleItemsPerPage = 5;
+  saleItemsPerPage = 10;
   totalSalePages = 1;
 
   vendorRegisterCode = '';
@@ -99,7 +111,7 @@ export class SaleHistoryComponent {
   openDrawer(sale: any) {
     this.selectedSale = sale;
     this.serviceProviderService
-      .post('License/read', { orderCode: this.selectedSale.code })
+      .post('License/read', { orderCode: this.selectedSale.orderCode })
       .subscribe(
         (data) => {
           let temp: any = {};
@@ -184,16 +196,47 @@ export class SaleHistoryComponent {
     }
   }
 
+  // filterSales() {
+  //   const term = this.searchSales.toLowerCase();
+  //   this.listLicenseRegister = this.tempList.filter(
+  //     (s: any) =>
+  //       s.orderCode.toLowerCase().includes(term) ||
+  //       s.poCode.toLowerCase().includes(term) ||
+  //       s.licenseCode.toLowerCase().includes(term) ||
+  //       s.companyName.toLowerCase().includes(term) ||
+  //       s.program.toLowerCase().includes(term) ||
+  //       s.package.toLowerCase().includes(term) ||
+  //       s.licenseCount.toString().toLowerCase().includes(term)
+
+  //   );
+  //   this.currentSalePage = 1;
+  //   this.updateSalePagination();
+  // }
+
   filterSales() {
-    const term = this.searchSales.toLowerCase();
+    const term = this.criteriaModel.keySearch.toLowerCase();
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มจาก 0
+    const day = String(now.getDate()).padStart(2, '0');
+    const dateNow = `${year}${month}${day}`;
+    const start = this.criteriaModel.startDate != undefined ? this.criteriaModel.startDate.replace(/-/g, "") : dateNow;
+    const end = this.criteriaModel.endDate != undefined ? this.criteriaModel.endDate.replace(/-/g, "") : dateNow;
     this.listLicenseRegister = this.tempList.filter(
       (s: any) =>
+        (s.orderCode.toLowerCase().includes(term) ||
+        s.poCode.toLowerCase().includes(term) ||
+        s.licenseCode.toLowerCase().includes(term) ||
         s.companyName.toLowerCase().includes(term) ||
-        s.program.toLowerCase().includes(term)
+        s.program.toLowerCase().includes(term) ||
+        s.package.toLowerCase().includes(term) ||
+        s.licenseCount.toString().toLowerCase().includes(term)) && (s.createDate.substring(0, 8) >= start && s.createDate.substring(0, 8) <= end)
+
     );
     this.currentSalePage = 1;
     this.updateSalePagination();
   }
+
 
   updateSalePagination() {
     this.totalSalePages = Math.ceil(

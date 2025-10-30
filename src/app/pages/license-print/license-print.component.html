@@ -1,9 +1,18 @@
+<div class="content-bottom">
+  <button class="btn-bot-print" (click)="printPDF()"> <i class="fa fa-print"></i>
+    พิมพ์ / Print</button>
+</div>
+<div class="content-left">
+
+  <button class="back-btn" (click)="goBack()">← กลับไปเมนูหลัก</button>
+</div>
+
 <div class="license-container" id="license-content">
   <div class="license-header">
-    <img src="assets/icon_header.png" alt="We-LAP Logo" class="logo" />
+    <img src="assets/logoMain2.png" alt="We-LAP Logo" class="logo" />
     <div class="header-text">
       <h2>Software License Certificate</h2>
-      <p>We-LAP Co., Ltd.</p>
+      <p>We Build & Operate</p>
     </div>
   </div>
 
@@ -12,13 +21,12 @@
   <!-- Transaction Information -->
   <div class="section info-row">
     <div>
-      <p><strong>Transaction Type:</strong> {{ model.transactionType }}</p>
-      <p><strong>Service Duration:</strong> {{ model.duration }}</p>
+      <p><strong>Transaction Type:</strong> {{ model.package }} - {{model.program}}</p>
+      <p><strong>Service Duration:</strong> 1 Year</p>
       <p><strong>Period:</strong> {{ model.period }}</p>
     </div>
     <div class="right-info">
-      <p><strong>Order Number:</strong> {{ model.orderNumber }}</p>
-      <p><strong>Issued By:</strong> {{ model.issuedBy }}</p>
+      <p><strong>Order Number:</strong> {{ model.licenseCode }}</p>
     </div>
   </div>
 
@@ -26,21 +34,21 @@
   <div class="section user-section">
     <div class="column">
       <h3>End User Information</h3>
-      <p><strong>Company:</strong> {{ model.endUser.company }}</p>
-      <p><strong>Contact:</strong> {{ model.endUser.contact }}</p>
-      <p><strong>Email:</strong> {{ model.endUser.email }}</p>
-      <p><strong>Phone:</strong> {{ model.endUser.phone }}</p>
-      <p><strong>Address:</strong> {{ model.endUser.address }}</p>
+      <p><strong>Company:</strong> {{ model.companyName }}</p>
+      <!-- <p><strong>Contact:</strong> {{ model.contact }}</p> -->
+      <p><strong>Email:</strong> {{ model.companyEmail }}</p>
+      <p><strong>Phone:</strong> {{ model.companyPhone }}</p>
+      <p><strong>Address:</strong> {{ model.companyAddress }}</p>
     </div>
 
     <!-- Partner Information -->
     <div class="column">
       <h3>Partner Information</h3>
-      <p><strong>Company:</strong> {{ model.partner.company }}</p>
-      <p><strong>Contact:</strong> {{ model.partner.contact }}</p>
-      <p><strong>Email:</strong> {{ model.partner.email }}</p>
-      <p><strong>Phone:</strong> {{ model.partner.phone }}</p>
-      <p><strong>Address:</strong> {{ model.partner.address }}</p>
+      <p><strong>Company:</strong> {{ modelVendor.companyName }}</p>
+      <p><strong>Contact:</strong> {{ modelVendor.contactName }}</p>
+      <p><strong>Email:</strong> {{ modelVendor.email }}</p>
+      <p><strong>Phone:</strong> {{ modelVendor.phone }}</p>
+      <p><strong>Address:</strong> {{ modelVendor.addressLine }}</p>
     </div>
   </div>
 
@@ -55,20 +63,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let key of model.licenses; let i = index">
+        <tr *ngFor="let key of listLicenseKey; let i = index">
           <td>{{ i + 1 }}</td>
-          <td>{{ key }}</td>
+          <td>{{ key.licenseKey }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <div class="footer">
-    <p><strong>Support Contact:</strong> support@we-lap.co.th | Tel: 02-123-4567</p>
-    <p><strong>Address:</strong> 49/13 Moo 9, Bangtalad, Pakkret, Nonthaburi 11120</p>
+    <p><strong>Support Contact:</strong> support@webuild.co.th | Tel: 02 272 2575</p>
+    <p><strong>Address:</strong> 19/1-2 Wangdek Building, 8th floor Soi Yasoob1, ถนน วิภาวดีรังสิต Jompol, เขตจตุจักร กรุงเทพมหานคร 10900</p>
   </div>
 </div>
-
+<!-- 
 <div class="btn-area">
   <button (click)="printPDF()">🖨️ ปริ้นใบ License</button>
-</div>
+</div> -->

@@ -113,7 +113,6 @@ export class LicenseRegisterComponent implements OnInit {
       (data) => {
         let model: any = {};
         model = data;
-        debugger
         if (model.status == 'E') {
           this.toastr.warning(model.message, 'Warning');
           return;

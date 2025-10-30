@@ -1,0 +1,108 @@
+.document-page {
+  text-align: center;
+  padding: 30px 50px 100px 50px;
+
+  h2 {
+    color: var(--nevy);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .sub-text {
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 16px;
+  }
+}
+
+.document-grid {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.document-card {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+
+  }
+}
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  background: var(--nevy);
+  color: #fff;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.doc-info {
+  margin-bottom: 15px;
+
+  h4 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .desc {
+    font-size: 14px;
+    color: #777;
+    height: 38px;
+    overflow: hidden;
+  }
+}
+
+.btn-download {
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+
+  i {
+    margin-right: 6px;
+  }
+
+  &:hover {
+    background: #1e874b;
+    transform: scale(1.06);
+  }
+}
+
+@media (max-width: 768px) {
+  // .document-page {
+  //   padding: 100px 20px;
+  // }
+}
+
+.back-btn {
+  margin-top: 25vh;
+  margin-left: 10vh;
+  background: none;
+  border: none;
+  color: #4a90e2;
+  font-size: 16px;
+  cursor: pointer;
+}

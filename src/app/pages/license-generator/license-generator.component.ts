@@ -10,12 +10,13 @@ import { ServiceProviderService } from '../../shares/service-provider.service';
 import { FooterComponent } from "../../footer/footer.component";
 import { HeaderComponent } from "../../header/header.component";
 import { ToastrService } from 'ngx-toastr';
+import { DateFormatPipe } from "../../date-format.pipe";
 
 
 @Component({
   selector: 'app-license-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, FooterComponent, HeaderComponent],
+  imports: [CommonModule, FormsModule, FooterComponent, HeaderComponent, DateFormatPipe],
   templateUrl: './license-generator.component.html',
   styleUrls: ['./license-generator.component.css'],
 })
@@ -44,7 +45,6 @@ export class LicenseGeneratorComponent implements OnInit {
   licenses: any[] = [];
 
   ngOnInit() {
-    debugger
     this.activatedRoute.queryParams.subscribe(params => {
       this.data = params;
       this.callRead();

@@ -7,6 +7,7 @@
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
   max-width: 850px;
   margin: 0 auto;
+  margin-top: 30px;
 }
 
 .license-header {
@@ -106,4 +107,63 @@ td {
 .btn-area button:hover {
   background: linear-gradient(90deg, #1e88e5, #00acc1);
   transform: translateY(-2px);
+}
+
+.content-bottom {
+  margin-top: 30px;
+  text-align: center;
+  position: absolute;
+  right: 40px;
+}
+
+.content-left {
+  text-align: center;
+  position: absolute;
+  left: 40px;
+    margin-top: 30px;
+
+}
+
+.btn-bot-print {
+  background: #2a6b82;
+  color: #fff;
+  border: 0;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.top-icon {
+  width: 80px;
+  text-align: center;
+}
+
+.top-icon img {
+  width: 100px;
+  height: 100px;
+}
+
+.btn-bot-back {
+  margin-left: 50px;
+  background: red;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #4a90e2;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
 }

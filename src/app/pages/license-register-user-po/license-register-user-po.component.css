@@ -5,6 +5,7 @@
   margin: 20px auto 80px;
   font-family: "Prompt", sans-serif;
   color: #222;
+  padding: 0 20px;
 }
 
 .page-title {
@@ -22,7 +23,7 @@
 
 .form-card {
   margin-top: 20px;
-  width: 480px;
+  max-width: 480px;
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;

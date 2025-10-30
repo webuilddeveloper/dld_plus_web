@@ -37,14 +37,7 @@ export class PrintQuotationComponent implements OnInit {
 
   @ViewChild('poContent') poContent!: ElementRef;
 
-  company = {
-    name: 'บริษัท We-LAP',
-    address: 'ห้องเลขที่ ถนน กาญจนาภิเษก แขวง บางแค เขตบางแค กรุงเทพมหานคร 10160',
-    tel: '1485',
-    email: 'we-lap@mail.com',
-    website: 'www.we-lap.co.th',
-    taxId: '0105556133378'
-  };
+  company: any = {};
 
   model: any = {};
 
@@ -52,44 +45,106 @@ export class PrintQuotationComponent implements OnInit {
   };
 
   items: any = [];
+  role: any = "";
 
+  isAdmin: any = false;
 
 
   ngOnInit(): void {
+
+    this.role = localStorage.getItem('role');
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.model = JSON.parse(params['model']);
-      if (this.model.package != "" && this.model.package != null) {
-        switch (this.model.package) {
+      let temp = JSON.parse(params['model']);
+      this.items.push(temp);
+      if (temp.package != "" && temp.package != null) {
+        switch (temp.package) {
           case 'Basic':
-            this.model.price = 18000;
+            temp.price = 18000;
             break;
           case 'Enterprise':
-            this.model.price = 80000;
+            temp.price = 80000;
             break;
           case 'Organize':
-            this.model.price = 150000;
+            temp.price = 150000;
             break;
           default:
-            this.model.price = 0;
+            temp.price = 0;
             break;
         }
       }
-      this.items.push(this.model);
-      this.readVendor();
+
+      if (this.role == "admin") {
+        this.calReadAdmin(temp);
+      } else {
+        this.readVendor(temp);
+      }
+
+
+      // this.model = JSON.parse(params['model']);
+
+      // this.items.push(this.model);
+      // this.readVendor();
     });
 
   }
 
-  readVendor() {
-    this.serviceProviderService.post("vendorRegister/read", { "sellerCode": this.model.sellerCode }).subscribe(
+ readVendor(param: any) {
+    this.company = {
+      name: 'บริษัท วี บิลด์ แอนด์ โอเปอร์เรต จำกัด',
+      address: '19/1-2 อาคารวังเด็ก 2 ชั้น 8 ซ.ยาสูบ1 ถ.วิภาวดีรังสิต แขวงจอมพล เขตจตุจักร กรุงเทพมหานคร 10900',
+      tel: '02-272-2575',
+      email: 'support@webuild.co.th',
+      website: 'https://www.webuild.co.th/',
+    };
+
+    this.serviceProviderService.post("vendorRegister/read", { "sellerCode": param.sellerCode }).subscribe(
       (data) => {
         let temp: any = {};
         temp = data;
         this.vendor = temp.objectData[0];
+
+        this.model = {
+          name: this.vendor.companyName,
+          address: this.vendor.addressLine,
+          tel: this.vendor.phone,
+          email: this.vendor.email,
+          website: this.vendor.website,
+          taxId: this.vendor.taxId,
+          poCode: param.poCode,
+          createDate: param.createDate,
+          description: param.description,
+          endUserEmail: param.companyEmail,
+          endUserPhone: param.companyPhone,
+        };
       },
       (err) => {
       }
     );
+  }
+
+  calReadAdmin(param: any) {
+    this.isAdmin = true;
+    this.model = {
+      name: 'บริษัท วี บิลด์ แอนด์ โอเปอร์เรต จำกัด',
+      address: '19/1-2 อาคารวังเด็ก 2 ชั้น 8 ซ.ยาสูบ1 ถ.วิภาวดีรังสิต แขวงจอมพล เขตจตุจักร กรุงเทพมหานคร 10900',
+      tel: '02-272-2575',
+      email: 'support@webuild.co.th',
+      website: 'https://www.webuild.co.th/',
+      poCode: param.poCode,
+      createDate: param.createDate,
+      description: param.description,
+      endUserEmail: param.companyEmail,
+      endUserPhone: param.companyPhone,
+    };
+
+    this.company = {
+      name: 'บริษัท Mode Solutions',
+      address: '1078/1 หมู่ 4 ถนนแสงชูโต ตำบลท่าม่วง อำเภอท่าม่วง จังหวัดกาญจนบุรี 71110',
+      tel: '034-604645 , 062 - 5988225',
+      email: 'info.modesolutions@gmail.com',
+      website: 'https://www.modesolutions.co.th',
+    };
+
   }
 
   exportPDF() {
@@ -103,25 +158,36 @@ export class PrintQuotationComponent implements OnInit {
     html2pdf().from(this.poContent.nativeElement).set(opt as any).save();
   }
 
-  get subtotal() {
-    return this.items.reduce((s: any, it: any) => s + it.price, 0);
+get subtotal() {
+    return this.items.reduce((s: number, it: any) => {
+      const vatRate = (it.vatPercent ?? 7) / 100;
+      const priceBeforeVat = it.price / (1 + vatRate);
+      return s + priceBeforeVat;
+    }, 0);
   }
 
   get totalVat() {
-    return this.items.reduce((s: any, it: any) => {
-      const line = it.price * ((it.vatPercent ?? 7) / 100);
-      return s + line;
+    return this.items.reduce((s: number, it: any) => {
+      const vatRate = (it.vatPercent ?? 7) / 100;
+      const vatAmount = (it.price / (1 + vatRate)) * vatRate;
+      return s + vatAmount;
     }, 0);
   }
 
   get total() {
     return this.subtotal + this.totalVat;
   }
-
   print() {
     window.print();
   }
 
-  goBack() { this.router.navigate(['sale-purchase-order']); }
+
+  goBack() {
+    if (this.role == 'admin') {
+      this.router.navigate(['license-manage']);
+    } else {
+      this.router.navigate(['sale-purchase-order']);
+    }
+  }
 
 }

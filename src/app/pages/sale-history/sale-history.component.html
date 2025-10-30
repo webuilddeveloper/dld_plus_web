@@ -11,45 +11,96 @@
     <p><strong>รหัสพนักงาน:</strong> {{ model.sellerCode }}</p>
   </div>
 
+  <div class="seller-info search-pagination flex-wrap gap-3">
+    <div class="col">
+      ค้นหา
+      <input type="text" placeholder="ค้นหาเลขคำสั่งซื้อ รหัสผู้ขาย ..." [(ngModel)]="criteriaModel.keySearch"
+        (input)="filterSales()" />
+    </div>
+    <!-- <div class="col">
+      สถานะ
+      <select name="" id="" [(ngModel)]="criteriaModel.status" (change)="readSale()">
+        <option value="" selected>ทุกสถานะ</option>
+        <option value="A" selected>อนุมัติแล้ว</option>
+        <option value="N" selected>รอตรวจสอบ</option>
+      </select>
+    </div> -->
+    <div class="col">
+      วันที่ลงทะเบียน
+      <input type="date" placeholder="ค้นหาหน่วยงาน จังหวัด..." [(ngModel)]="criteriaModel.startDate"
+        (change)="filterSales()" />
+    </div>
+    <div class="col">
+      ถึงวันที่
+      <input type="date" placeholder="ค้นหาหน่วยงาน จังหวัด..." [(ngModel)]="criteriaModel.endDate"
+        (input)="filterSales()" />
+    </div>
+  </div>
+
   <!-- ตารางประวัติการขาย -->
   <div class="table-wrapper">
-    <div class="search-pagination">
+    <!-- <div class="search-pagination">
       <input type="text" placeholder="ค้นหาองค์กรหรือโปรแกรม.." [(ngModel)]="searchSales" (input)="filterSales()" />
-      <button class="save-btn" (click)="goToLicenseRegister()">
-        สร้างใบคำสั่งซื้อ
-      </button>
-    </div>
+    </div> -->
 
-    <div class="div-table">
-    <table class="sales-table">
-      <thead>
-        <tr>
-          <th>ลำดับ</th>
-          <th>องค์กร</th>
-          <th>โปรแกรม</th>
-          <th>แพ๊คเกจ</th>
-          <th>จำนวน License</th>
-          <th>วันที่ขาย</th>
-          <th>ดำเนินการ</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let sale of paginatedSales; let i = index">
-          <td>{{ (currentSalePage - 1) * saleItemsPerPage + i + 1 }}</td>
-          <td>{{ sale.companyName }}</td>
-          <td>{{ sale.program }}</td>
-          <td>{{ sale.package }}</td>
-          <td>{{ sale.licenseCount }}</td>
-          <td>{{ sale.createDate | date: 'dd/MM/yyyy' }}</td>
-          <td>
+    <div class="table-container">
+      <table class="sales-table">
+        <thead>
+          <tr>
+            <th>ลำดับ</th>
+            <th>ดำเนินการ</th>
+            <th>เลขที่ใบออเดอร์</th>
+            <th>เลขที่ใบสั่งซื้อ (PO)</th>
+            <th>เลขที่ใบอนุญาต</th>
+            <th>หน่วยงาน</th>
+            <th>โปรแกรม</th>
+            <th>แพ๊คเกจ</th>
+            <th>จำนวน License</th>
+            <th>วันที่ขาย</th>
+            <!-- <th>ดำเนินการ</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sale of paginatedSales; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <div class="action-buttons">
+                <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-hamburger" matTooltip="จัดการเอกสาร">
+                  <mat-icon>menu</mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu" class="custom-menu light-bg">
+
+                  <div>
+                    <div class="menu-section-title">รายละเอียด</div>
+                    <button mat-menu-item class="menu-item create" (click)="openDrawer(sale)">
+                      <mat-icon>visibility</mat-icon>
+                      <span>ดูรายละเอียด</span>
+                    </button>
+
+                  </div>
+
+                </mat-menu>
+
+              </div>
+            </td>
+            <td>{{ sale.orderCode }}</td>
+            <td>{{ sale.poCode }}</td>
+            <td>{{ sale.licenseCode }}</td>
+            <td>{{ sale.companyName }}</td>
+            <td>{{ sale.program }}</td>
+            <td>{{ sale.package }}</td>
+            <td>{{ sale.licenseCount }}</td>
+            <td>{{ sale.createDate | dateFormat }}</td>
+            <!-- <td>
             <button class=" detail-btn" (click)="openDrawer(sale)">
               ดูรายละเอียด
             </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="pagination">
       <button (click)="prevSalePage()" [disabled]="currentSalePage === 1">‹</button>
       <span>หน้า {{ currentSalePage }} / {{ totalSalePages }}</span>
@@ -81,16 +132,11 @@
           <p>จำนวน License ทั้งหมด: {{ selectedSale.licenseCount }}</p>
           <button class="print-btn" (click)="exportAsXLSX()">
             <i class="fa fa-print"></i>
-            <span>Export Excel</span>
+            <span> พิมพ์เอกสาร</span>
           </button>
         </div>
 
-
-
-
-
-
-        <div class="drawer-table-wrapper">
+        <div class="table-container">
           <table class="license-table">
             <thead>
               <tr>

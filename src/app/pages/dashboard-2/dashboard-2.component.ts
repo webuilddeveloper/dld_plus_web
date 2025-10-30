@@ -8,12 +8,12 @@ import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: 'app-dashboard-2',
+  templateUrl: './dashboard-2.component.html',
+  styleUrls: ['./dashboard-2.component.scss'],
   imports: [CommonModule, FormsModule, HeaderComponent, FooterComponent],
 })
-export class DashboardComponent implements AfterViewInit {
+export class Dashboard2Component implements AfterViewInit {
   // --- ตัวแปรสำหรับ Filter ---
   years = [2025, 2024, 2023];
   programs = [
@@ -212,7 +212,7 @@ export class DashboardComponent implements AfterViewInit {
     // 🧱 Bar Chart – ยอดขายแต่ละโปรแกรม
     const barData = dashboardData.salesByProgram || [];
     const barLabels = barData.map((x: any) => x.program);
-    const barValues = barData.map((x: any) => x.totalLicense); // ใช้ totalValue จาก helper
+    const barValues = barData.map((x: any) => x.totalValue); // ใช้ totalValue จาก helper
     const barCtx = document.getElementById('barChart') as HTMLCanvasElement;
     this.barChart = new Chart(barCtx, {
       type: 'bar',
@@ -367,7 +367,7 @@ export class DashboardComponent implements AfterViewInit {
         ],
       },
       options: {
-        indexAxis: 'x',
+        indexAxis: 'y',
         responsive: true,
         plugins: {
           tooltip: {
@@ -460,7 +460,7 @@ export class DashboardComponent implements AfterViewInit {
         ],
       },
       options: {
-        indexAxis: 'x', // ✅ ทำให้กราฟแนวนอน
+        indexAxis: 'y', // ✅ ทำให้กราฟแนวนอน
         responsive: true,
         plugins: {
           legend: { display: false },
