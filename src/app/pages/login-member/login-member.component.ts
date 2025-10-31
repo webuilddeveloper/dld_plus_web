@@ -8,14 +8,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { ToastrService } from 'ngx-toastr';
-import { FooterComponent } from "../../footer/footer.component";
+import { FooterComponent } from '../../footer/footer.component';
 import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-login-member',
   templateUrl: './login-member.component.html',
   styleUrls: ['./login-member.component.css'],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, LottieComponent, FooterComponent,HeaderComponent,RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    LottieComponent,
+    FooterComponent,
+    HeaderComponent,
+    RouterModule,
+  ],
 })
 export class LoginMemberComponent {
   deviceSize: string = '';
@@ -24,7 +32,6 @@ export class LoginMemberComponent {
   showPassword = false;
   password: string = '';
   model: any = {};
-
 
   planngLottieOptions: AnimationOptions = {
     path: 'assets/animations/Login Leady.json',
@@ -35,8 +42,8 @@ export class LoginMemberComponent {
   constructor(
     private router: Router,
     private serviceProvider: ServiceProviderService,
-    public toastr: ToastrService,
-  ) { }
+    public toastr: ToastrService
+  ) {}
 
   isInfoResiger = false;
 
@@ -55,19 +62,16 @@ export class LoginMemberComponent {
   gotoForm() {
     if (!this.isInfoResiger) {
       this.isInfoResiger = true;
-      window.scroll(0, 0)
+      window.scroll(0, 0);
       return;
     }
-
 
     this.router.navigate(['register-form'], {
       // skipLocationChange: true,
     });
   }
 
-
   goLogin() {
-
     // if (this.model.sellerCode == '' || this.model.sellerCode == undefined) {
     //   this.toastr.warning('กรุณากรอก username', 'แจ้งเตือนระบบ', {
     //     timeOut: 5000,
@@ -81,13 +85,14 @@ export class LoginMemberComponent {
     //   });
     //   return;
     // }
-    this.router.navigate(['license-register'], {
-    });
+    this.router.navigate(['license-register'], {});
   }
 
   login() {
-
     if (this.model.sellerCode == 'admin' && this.model.password) {
+      localStorage.setItem('role', 'admin');
+      localStorage.setItem('user', 'admin');
+
       this.router.navigate(['user-admin'], {
         // skipLocationChange: true,
       });
@@ -109,7 +114,10 @@ export class LoginMemberComponent {
     }
 
     this.serviceProvider
-      .post('vendorRegister/login', { sellerCode: this.model.sellerCode, password: this.model.password })
+      .post('vendorRegister/login', {
+        sellerCode: this.model.sellerCode,
+        password: this.model.password,
+      })
       .subscribe({
         next: (res) => {
           let model: any = [];
@@ -123,31 +131,23 @@ export class LoginMemberComponent {
               // skipLocationChange: true,
             });
           } else {
-
             this.toastr.error(model.message, 'แจ้งเตือนระบบ', {
               timeOut: 10000,
               titleClass: 'toast-msg',
-              messageClass: 'toast-msg'
+              messageClass: 'toast-msg',
             });
-
           }
         },
         error: (err) => {
-
-
           this.toastr.error(err.message, 'แจ้งเตือนระบบ', {
             // positionClass: 'toast-center-center',
             timeOut: 10000,
             titleClass: 'toast-msg',
-            messageClass: 'toast-msg'
+            messageClass: 'toast-msg',
           });
-        }
-      }
-      );
+        },
+      });
   }
-
-
-
 
   readAboutMe() {
     this.serviceProvider.post('m/aboutUs/read', {}).subscribe((data) => {

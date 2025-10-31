@@ -49,7 +49,7 @@ export class SaleDownloadComponent implements OnInit {
       description:
         'รายละเอียด เอกสารแนะนำระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (DLD+)',
       updateDate: '2025-10-30',
-      fileUrl: 'https://dldsoftplus.com/docs/CatalogSmartPlan.pdf',
+      fileUrl: 'https://dldsoftplus.com/docs/CATALOGDLD+.pdf',
     },
   ];
 

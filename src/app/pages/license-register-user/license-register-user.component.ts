@@ -55,16 +55,16 @@ export class LicenseRegisterUserComponent implements OnInit {
     sellerCode: '',
     companyName: '',
     licenseCount: '',
-    program: 'ระบบแผนงานอัตโนมัติ (LAP)',
+    program: 'แผนพัฒนาท้องถิ่นดิจิทัลพลัส (DLD+)',
     package: '',
   };
   @Input() code = 'none';
 
   selectedFile: File | null = null;
   programs = [
-    { name: 'ระบบแผนงานอัตโนมัติ (LAP)', code: 'LAP' },
+    // { name: 'ระบบแผนงานอัตโนมัติ (LAP)', code: 'LAP' },
     // { name: 'ระบบจัดทำแผนพัฒนาท้องถิ่น (Smart Plan)', code: 'SMP' },
-    // { name: 'แผนพัฒนาท้องถิ่นดิจิทัลพลัส (DLD+)', code: 'DLD' },
+    { name: 'แผนพัฒนาท้องถิ่นดิจิทัลพลัส (DLD+)', code: 'DLD' },
   ];
   packages: any =
     [
