@@ -308,6 +308,8 @@ export class VendorRegisterComponent implements OnInit {
       value.subdistrict = selected.title;
     }
 
+    value.programCode = 'DLD';
+
     const payload = {
       ...value,
       attachment: undefined,
