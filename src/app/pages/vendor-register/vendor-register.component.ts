@@ -218,11 +218,11 @@ export class VendorRegisterComponent implements OnInit {
       this.fileName = file.name;
 
       // (Optional) ตรวจสอบขนาดไฟล์
-      if (file.size > 5 * 1024 * 1024) {
-        // 5MB
-        this.form.get(controlName)?.setErrors({ fileSize: true });
-        return;
-      }
+      // if (file.size > 5 * 1024 * 1024) {
+      //   // 5MB
+      //   this.form.get(controlName)?.setErrors({ fileSize: true });
+      //   return;
+      // }
 
       // (Optional) แสดง Loading...
       this.form.get(controlName)?.disable(); // ปิดปุ่มกันกดซ้ำ

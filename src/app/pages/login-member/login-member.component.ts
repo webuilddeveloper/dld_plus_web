@@ -89,15 +89,15 @@ export class LoginMemberComponent {
   }
 
   login() {
-    if (this.model.sellerCode == 'admin' && this.model.password) {
-      localStorage.setItem('role', 'admin');
-      localStorage.setItem('user', 'admin');
+    // if (this.model.sellerCode == 'admin' && this.model.password) {
+    //   localStorage.setItem('role', 'admin');
+    //   localStorage.setItem('user', 'admin');
 
-      this.router.navigate(['user-admin'], {
-        // skipLocationChange: true,
-      });
-      return;
-    }
+    //   this.router.navigate(['user-admin'], {
+    //     // skipLocationChange: true,
+    //   });
+    //   return;
+    // }
 
     if (this.model.sellerCode == '' || this.model.sellerCode == undefined) {
       this.toastr.warning('กรุณากรอก username', 'แจ้งเตือนระบบ', {
