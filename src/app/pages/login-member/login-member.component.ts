@@ -46,9 +46,18 @@ export class LoginMemberComponent {
   ) {}
 
   isInfoResiger = false;
+  programCode = "DLD";
 
   ngOnInit(): void {
-    AOS.init();
+    setTimeout(() => {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: false,
+        mirror: true,
+      });
+      AOS.refresh();
+    }, 100);
     this.model.sellerCode = '';
     this.model.password = '';
     // if (
@@ -117,6 +126,7 @@ export class LoginMemberComponent {
       .post('vendorRegister/login', {
         sellerCode: this.model.sellerCode,
         password: this.model.password,
+        programCode: this.programCode,
       })
       .subscribe({
         next: (res) => {
@@ -124,7 +134,7 @@ export class LoginMemberComponent {
           model = res;
           if (model.status == 'S') {
             localStorage.setItem('code', model?.objectData?.code);
-            localStorage.setItem('user', model?.objectData?.firstName);
+            localStorage.setItem('user', model?.objectData?.contactName);
             localStorage.setItem('sellerCode', model?.objectData?.sellerCode);
             localStorage.setItem('role', 'user');
             this.router.navigate(['user'], {
