@@ -51,6 +51,14 @@ export class SaleDownloadComponent implements OnInit {
       updateDate: '2025-10-30',
       fileUrl: 'https://dldsoftplus.com/docs/CATALOGDLD+.pdf',
     },
+    {
+      title: 'Presentation รูปแบบวิดีโอระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (DLD+)',
+      type: 'video',
+      description:
+        'รายละเอียด Presentation รูปแบบวิดีโอระบบแผนพัฒนาท้องถิ่นดิจิทัลพลัส (DLD+)',
+      updateDate: '2025-11-13',
+      fileUrl: 'https://drive.google.com/file/d/1WRMVkMjICkuwOlZUCiOJOAbD0COVIzEW/view?usp=share_link',
+    },
   ];
 
   ngOnInit(): void {}

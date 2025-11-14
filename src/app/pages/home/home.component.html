@@ -19,22 +19,15 @@
             <h1 data-aos="fade-up">{{ content.hero.title }}</h1>
             <p class="subtitle h5" data-aos="fade-up" data-aos-delay="400">{{ content.hero.subtitle }}</p>
 
-            <div class="d-flex flex-column gap-2">
+            <div class="d-flex justify-content-center gap-2 btn-group">
               <div data-aos="fade-up" data-aos-delay="600">
-                  <button class="cta" (click)="scrollTo('overview')">{{ content.hero.cta }}</button>
-                </div>
-              <div class="d-flex justify-content-center gap-2 btn-group">
+                <button class="cta" (click)="scrollTo('overview')">{{ content.hero.cta }}</button>
+              </div>
 
-
-                <div data-aos="fade-up" data-aos-delay="600">
-                  <button class="goPdf" (click)="gotoPDF()">ดูรายละเอียดแผน (PDF)</button>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="600">
-                  <button class="goVideo" (click)="gotoPresentation()">ดูรายละเอียดแผน (video) </button>
-                </div>
+              <div data-aos="fade-up" data-aos-delay="600">
+                <button class="goPdf" (click)="gotoPDF()">ดูรายละเอียดแผน(PDF)</button>
               </div>
             </div>
-
 
 
           </div>

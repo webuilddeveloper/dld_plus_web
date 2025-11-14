@@ -584,9 +584,5 @@ export class HomeComponent implements AfterViewInit {
   gotoPDF() {
     window.open('https://khubdeedlt.we-builds.com/wb-document/images/welap/CATALOGDLD+.pdf', '_blank');
   }
-
-  gotoPresentation() {
-    window.open('https://drive.google.com/file/d/1WRMVkMjICkuwOlZUCiOJOAbD0COVIzEW/view', '_blank');
-  }
 }
 
