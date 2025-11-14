@@ -15,6 +15,7 @@ import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
 import { FileUploadService } from '../../shares/file-upload.service copy';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-register',
@@ -63,7 +64,8 @@ export class VendorRegisterComponent implements OnInit {
 
   constructor(
     public serviceProviderService: ServiceProviderService,
-    private fileuploadService: FileUploadService
+    private fileuploadService: FileUploadService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -345,6 +347,7 @@ export class VendorRegisterComponent implements OnInit {
 
   closePopup(): void {
     this.showSuccessPopup = false;
+    this.router.navigate(['']);
   }
 
   closeErrorPopup(): void {
