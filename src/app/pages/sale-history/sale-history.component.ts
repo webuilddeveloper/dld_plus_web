@@ -103,7 +103,7 @@ export class SaleHistoryComponent {
   listLicenseKey: any = [];
 
   ngOnInit() {
-    (this.vendorRegisterCode = localStorage.getItem('code') ?? ''),
+    (this.vendorRegisterCode = localStorage.getItem('sellerCode') ?? ''),
       // this.updateSalePagination();
       this.callRead();
   }
@@ -136,7 +136,7 @@ export class SaleHistoryComponent {
 
   callRead() {
     this.serviceProviderService
-      .post('vendorRegister/read', { code: this.vendorRegisterCode })
+      .post('vendorRegister/read', { sellerCode: this.vendorRegisterCode })
       .subscribe(
         (data) => {
           let temp: any = {};

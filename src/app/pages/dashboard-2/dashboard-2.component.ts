@@ -54,14 +54,14 @@ export class Dashboard2Component implements AfterViewInit {
     this.activatedRoute.queryParams.subscribe((params) => {
       const role = params['type'];
       this.vendorRegisterCode =
-        role == 'admin' ? '' : localStorage.getItem('code') ?? '';
+        role == 'admin' ? '' : localStorage.getItem('sellerCode') ?? '';
       this.callRead();
     });
   }
 
   callRead() {
     this.serviceProviderService
-      .post('vendorRegister/read', { code: this.vendorRegisterCode })
+      .post('vendorRegister/read', { sellerCode: this.vendorRegisterCode })
       .subscribe((data) => {
         let temp: any = data;
         this.model = temp.objectData.map((item: any) => item.sellerCode);
