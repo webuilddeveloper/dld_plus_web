@@ -1,0 +1,29 @@
+<app-header></app-header>
+<section class="gov-page">
+  <div class="gov-bg-corner left"></div>
+  <div class="gov-bg-corner right"></div>
+
+  <div class="gov-inner">
+    <header class="gov-header">
+      <h1>หนังสือสั่งการ / ประกาศจากกระทรวง</h1>
+      <p>
+        รวมประกาศและหนังสือสั่งการที่เกี่ยวข้องกับการจัดทำแผนพัฒนาท้องถิ่น
+        สำหรับองค์การปกครองส่วนท้องถิ่นทุกระดับ
+      </p>
+    </header>
+
+    <div class="docs-grid">
+      <a
+        class="doc-card"
+        *ngFor="let doc of documents"
+         [href]="doc" 
+     target="_blank"
+      >
+        <div class="doc-shadow"></div>
+        <img [src]="doc" alt="เอกสารประกาศ" loading="lazy" />
+    </a>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

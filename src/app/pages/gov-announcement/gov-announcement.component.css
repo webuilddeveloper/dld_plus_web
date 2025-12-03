@@ -1,0 +1,146 @@
+:host {
+  display: block;
+}
+
+/* พื้นหลังหลักของหน้า */
+.gov-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 85px 24px 80px;
+  background: radial-gradient(circle at top left, #1d4ed8 0, transparent 40%),
+    radial-gradient(circle at bottom right, #dc2626 0, transparent 40%),
+    #f1f5f9;
+  overflow: hidden;
+  
+}
+
+/* แถบสามเหลี่ยมมุมบนซ้าย / ล่างขวา */
+.gov-bg-corner {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  z-index: 0;
+  opacity: 0.16;
+}
+
+.gov-bg-corner.left {
+  top: -80px;
+  left: -80px;
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.gov-bg-corner.right {
+  bottom: -80px;
+  right: -80px;
+  background: linear-gradient(315deg, #dc2626, #b91c1c);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.gov-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ส่วนหัว */
+.gov-header {
+  text-align: center;
+  margin-bottom: 48px;
+  margin-top: 50px;
+}
+
+.gov-header h1 {
+  font-size: clamp(1.9rem, 2.6vw, 2.4rem);
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.gov-header p {
+  font-size: 1rem;
+  color: #4b5563;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Grid เอกสาร */
+.docs-grid {
+  display: grid;
+  gap: 32px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* Card เอกสาร */
+.doc-card {
+  position: relative;
+  cursor: zoom-in;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.doc-card img {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+}
+
+/* เงาซ้อนด้านหลังให้ดูมีมิติ */
+.doc-shadow {
+  position: absolute;
+  inset: 16px 10px -10px;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.15),
+    rgba(15, 23, 42, 0)
+  );
+  z-index: -1;
+}
+
+.doc-card:hover {
+  transform: translateY(-8px);
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.88);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-wrapper {
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;                /* <<< เลื่อนในนี้ */
+  border-radius: 12px;
+  position: relative;
+}
+
+.lightbox-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: none;              /* <<< ห้ามจำกัดความสูง */
+}
+
+.close-btn {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  cursor: pointer;
+  background: rgba(0,0,0,.7);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+  border-radius: 50%;
+}

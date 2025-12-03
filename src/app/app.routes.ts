@@ -21,6 +21,7 @@ import { PrintPoComponent } from './pages/print-po/print-po.component';
 import { PrintQuotationComponent } from './pages/print-quotation/print-quotation.component';
 import { authGuard } from './guards/auth.guard';
 import { SaleDownloadComponent } from './pages/sale-download/sale-download.component';
+import { GovAnnouncementComponent } from './pages/gov-announcement/gov-announcement.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,8 @@ export const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'document-receipt', component: DocumentReceiptComponent },
   { path: 'news-detail', component: NewsDetailComponent },
+    { path: 'gov-announcement', component: GovAnnouncementComponent },
+
   {
     path: 'vendor-register',
     loadComponent: () =>

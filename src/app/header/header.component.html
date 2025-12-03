@@ -8,16 +8,17 @@
     <!-- เมนูหลัก -->
     <nav class="nav-links">
       <a href="#">แพ็กเกจการใช้งาน</a>
+
+      <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
       <a routerLink="/about-us">เกี่ยวกับเรา</a>
+      <a routerLink="/gov-announcement">หนังสือสั่งการ</a>
+
       <a href="https://webuild.co.th/#/" target="_blank">ติดต่อเรา</a>
 
       <!-- ▼ เมนูจัดการสมาชิก -->
-      <div class="dropdown" (click)="toggleDropdown($event)">
+      <!-- <div class="dropdown" (click)="toggleDropdown($event)">
         <button class="dropbtn"><span>ระบบสมาชิก ▾</span></button>
-        <!-- <div class="dropdown-content" [class.show]="isDropdownOpen">
-          <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
-          <a routerLink="/login-member">เข้าสู่ระบบ</a>
-        </div> -->
+
         <div class="dropdown-content" [class.show]="isDropdownOpen">
           <ng-container *ngIf="!isLoggedIn; else loggedInMenu">
             <a routerLink="/vendor-register">ลงทะเบียนผู้ขาย</a>
@@ -45,7 +46,7 @@
             </div>
           </ng-template>
         </div>
-      </div>
+      </div> -->
     </nav>
 
     <!-- ☰ Hamburger -->
@@ -57,7 +58,10 @@
   <!-- 📱 Mobile Menu -->
   <div class="mobile-menu" [class.open]="isMenuOpen">
     <a href="#" (click)="goPricing($event)">แพ็กเกจการใช้งาน</a>
+    <a routerLink="/vendor-register" (click)="toggleSubMenu()">ลงทะเบียนผู้ขาย</a>
     <a routerLink="/about-us">เกี่ยวกับเรา</a>
+    <a routerLink="/gov-announcement">หนังสือสั่งการ</a>
+
     <a href="https://webuild.co.th/#/" target="_blank">ติดต่อเรา</a>
 
     <!-- 🔽 Dropdown มือถือ -->
@@ -72,7 +76,7 @@
     </div> -->
 
     <!-- 📱 Mobile Dropdown -->
-    <div class="mobile-dropdown">
+    <!-- <div class="mobile-dropdown">
       <button (click)="toggleSubMenu()" class="mobile-dropbtn">
         ระบบสมาชิก ▾
       </button>
@@ -102,6 +106,6 @@
           </div>
         </ng-template>
       </div>
-    </div>
+    </div> -->
   </div>
 </header>
