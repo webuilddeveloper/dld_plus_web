@@ -1,209 +1,156 @@
-<!-- <app-navbar [activeSection]="navbar?.activeSection ?? ''"></app-navbar> -->
-
-<!-- <app-header></app-header> -->
-
-
 <div class="main-content">
-
   <app-header></app-header>
 
-  <div class="main-content">
-
-    <div class="fist-content">
-      <div class="bg-main col-12" data-aos="fade-in">
-        <ng-lottie class="hero-lottie-fg" [options]="waveBackgroundLottieOptions"></ng-lottie>
-      </div>
-      <section id="hero" class="hero animated fade-up hero-section layout-centered">
-        <div class="d-flex align-items-center">
-          <div class="container group-center">
-            <h1 data-aos="fade-up">{{ content.hero.title }}</h1>
-            <p class="subtitle h5" data-aos="fade-up" data-aos-delay="400">{{ content.hero.subtitle }}</p>
-
-            <div class="d-flex justify-content-center gap-2 btn-group">
-              <div data-aos="fade-up" data-aos-delay="600">
-                <button class="cta" (click)="scrollTo('overview')">{{ content.hero.cta }}</button>
-              </div>
-
-              <div data-aos="fade-up" data-aos-delay="600">
-                <button class="goPdf" (click)="gotoPDF()">ดูรายละเอียดแผน(PDF)</button>
-              </div>
-            </div>
-
-
-          </div>
-
-          <!-- <div class="timeline-top-left col-3" data-aos="zoom-in" data-aos-delay="700">
-          <ng-lottie class="hero-lottie-fg" [options]="brainstormingLottieOptions"></ng-lottie>
-        </div> -->
-
-          <!-- <div class="timeline-bottom-right col-md-5 col-sm-12" data-aos="zoom-in" data-aos-delay="750">
-            <ng-lottie class="hero-lottie-fg" [options]="businessTeamLottieOptions"></ng-lottie>
-          </div> -->
-        </div>
-      </section>
+  <!-- Hero Section -->
+  <div class="fist-content">
+    <div class="bg-main col-12" data-aos="fade-in">
+      <ng-lottie class="hero-lottie-fg" [options]="waveBackgroundLottieOptions"></ng-lottie>
     </div>
 
+    <section id="hero" class="hero animated fade-up hero-section layout-centered">
+      <div class="d-flex align-items-center">
+        <div class="container group-center">
+          <h1 data-aos="fade-up">{{ content?.hero?.title }}</h1>
+          <p class="subtitle h5" data-aos="fade-up" data-aos-delay="400">{{ content?.hero?.subtitle }}</p>
 
-
-
-    <main id="overview">
-      <section class="bento-grid">
-
-        <!-- top-left big round image -->
-        <div class="bento-card pos-1 row-4 d-flex align-items-center none-shadow" data-aos="zoom-in"
-          data-aos-delay="410">
-          <h2 class="timeline-title" data-aos="fade-up">เครื่องมือวางแผนพัฒนาท้องถิ่นแบบดิจิทัล
-          </h2>
-          <div style="width: 350px;"><ng-lottie class="hero-lottie-fg" [options]="businessTeamLottieOptions"
-              data-aos-delay="460"></ng-lottie></div>
-        </div>
-
-        <div class="bento-card pos-2 none-shadow" data-aos="zoom-in" data-aos-delay="450">
-          <ng-lottie class="hero-lottie-fg" [options]="officeAccountantLottieOptions"></ng-lottie>
-        </div>
-
-        <div class="bento-card pos-3 card-bg-1" data-aos="zoom-in" data-aos-delay="550">
-          <div class="card-title">รวบรวมข้อมูลอย่างเป็นระบบ</div>
-          <li>เก็บข้อมูลจากหลายแหล่ง เช่น ข้อมูลงบประมาณ โครงการ และความต้องการของชุมชน</li>
-          <li>จัดเก็บในรูปแบบดิจิทัลเพื่อความสะดวกในการเข้าถึงและอัปเดต</li>
-        </div>
-
-        <div class="bento-card pos-4 none-shadow" data-aos="zoom-in" data-aos-delay="500">
-          <ng-lottie class="sm-lottie strategy-lottie" [options]="strategyLottieOptions" data-aos="slide-right"
-            data-aos-duration="650" data-aos-delay="240">
-          </ng-lottie>
-        </div>
-
-        <div class="bento-card pos-5" data-aos="zoom-in" data-aos-delay="550">
-          <div class="card-title">วิเคราะห์ข้อมูลเพื่อการตัดสินใจ</div>
-          <li>ใช้เทคโนโลยีช่วยวิเคราะห์แนวโน้มและความสัมพันธ์ของข้อมูล</li>
-          <li>ช่วยให้การวางแผนพัฒนาเป็นไปอย่างมีหลักฐานรองรับ (Data-driven)</li>
-        </div>
-
-        <div class="bento-card pos-6 none-shadow" data-aos="fade-up" data-aos-delay="450">
-          <ng-lottie class="sm-lottie planng-lottie" [options]="planngLottieOptions" data-aos="zoom-in">
-          </ng-lottie>
-        </div>
-
-        <div class="bento-card pos-7" data-aos="zoom-in" data-aos-delay="550">
-          <div class="card-title">สนับสนุนการวางแผนอย่างรวดเร็วและแม่นยำ</div>
-          <li>ลดเวลาการรวบรวมข้อมูลและจัดทำแผน</li>
-          <li>เพิ่มความถูกต้องของการจัดลำดับความสำคัญและงบประมาณ</li>
-        </div>
-
-        <div class="bento-card pos-8 none-shadow" data-aos="zoom-in" data-aos-delay="450">
-          <ng-lottie class="hero-lottie-fg" [options]="officeAccountantLottieOptions"></ng-lottie>
-        </div>
-
-        <div class="bento-card pos-9" data-aos="zoom-in" data-aos-delay="550">
-          <div class="card-title">เชื่อมโยงงบประมาณกับแผนงานโดยตรง</div>
-          <li>แสดงความสัมพันธ์ระหว่าง “โครงการ–งบประมาณ–ผลลัพธ์”</li>
-          <li>ช่วยติดตามการใช้จ่ายและประเมินผลการดำเนินงานได้ชัดเจน</li>
-        </div>
-
-        <div class="bento-card pos-10 none-shadow" data-aos="zoom-in" data-aos-delay="450">
-          <ng-lottie class="hero-lottie-fg" [options]="brainstormingLottieOptions"></ng-lottie>
-        </div>
-
-        <div class="bento-card pos-11" data-aos="zoom-in" data-aos-delay="550">
-          <div class="card-title">เพิ่มความโปร่งใสและตรวจสอบได้</div>
-          <li>มีระบบรายงานและติดตามแผนแบบเรียลไทม์</li>
-          <li>ประชาชนและหน่วยงานที่เกี่ยวข้องสามารถเข้ามาตรวจสอบได้ง่าย</li>
-        </div>
-
-        <div class="bento-card pos-12 none-shadow" data-aos="zoom-in" data-aos-delay="450">
-          <ng-lottie class="sm-lottie planning-lottie" [options]="planningLottieOptions" data-aos="slide-right"
-            data-aos-duration="650" data-aos-delay="120">
-          </ng-lottie>
-        </div>
-
-        <div class="bento-card pos-13" data-aos="zoom-in" data-aos-delay="550">
-          <div class="card-title">เปิดโอกาสให้ประชาชนมีส่วนร่วม</div>
-          <li>ให้ประชาชนเสนอความคิดเห็น โครงการ หรือปัญหาในพื้นที่</li>
-          <li>ส่งเสริมการมีส่วนร่วมในกระบวนการวางแผนท้องถิ่นอย่างแท้จริง</li>
-        </div>
-      </section>
-    </main>
-
-
-    <!-- <div class="sentence two-col" #sentence>
-      <div class="timeline-left">
-        <ng-lottie class="sm-lottie planng-lottie" [options]="planngLottieOptions" data-aos="slide-right"
-          data-aos-duration="650">
-        </ng-lottie>
-
-        <ng-lottie class="sm-lottie planning-lottie" [options]="planningLottieOptions" data-aos="slide-right"
-          data-aos-duration="650" data-aos-delay="120">
-        </ng-lottie>
-
-        <ng-lottie class="sm-lottie strategy-lottie" [options]="strategyLottieOptions" data-aos="slide-right"
-          data-aos-duration="650" data-aos-delay="240">
-        </ng-lottie>
-      </div>
-
-
-    </div> -->
-
-    <section id="pricing" class="pricing" data-aos="fade-up">
-      <h2 class="pricing-title">แพ็กเกจการใช้งาน</h2>
-      <p class="pricing-subtitle">เลือกแพ็กเกจตามขนาดองค์กรของคุณ</p>
-
-      <div class="price-grid">
-        <!-- 1 License: Stand-alone -->
-        <div class="price-card" data-aos="fade-up" data-aos-delay="0">
-          <h3 class="plan-name">Basic</h3>
-          <div class="license">1 License</div>
-          <div class="deploy">Stand-alone</div>
-          <!-- <div class="price">฿18,000</div> -->
-          <ul class="features">
-            <li>ติดตั้งใช้งานภายในหน่วยงาน (On-prem/Standalone)</li>
-            <li>ฟีเจอร์หลักครบสำหรับเริ่มต้นใช้งาน</li>
-            <li>อีเมลซัพพอร์ตมาตรฐาน</li>
-          </ul>
-          <a class="btn-select" href="mailto:saraban@dla.go.th?subject=ขอใบเสนอราคา Starter 1 License">ขอใบเสนอราคา</a>
-        </div>
-
-        <!-- 5 Licenses: On Cloud (แนะนำ) -->
-        <div class="price-card recommend" data-aos="fade-up" data-aos-delay="100">
-          <div class="badge">แนะนำ</div>
-          <h3 class="plan-name">Enterprise</h3>
-          <div class="license">5 Licenses</div>
-          <div class="deploy">On Cloud</div>
-          <!-- <div class="price">฿80,000</div> -->
-          <ul class="features">
-            <li>โฮสต์บนคลาวด์ อัปเดตอัตโนมัติ</li>
-            <li>แดชบอร์ดทีม & สิทธิ์การเข้าถึง</li>
-            <li>สำรองข้อมูลรายวัน & Uptime SLA</li>
-          </ul>
-          <a class="btn-select primary" href="https://lap.spl-system.com">เลือกแพ็กเกจ</a>
-        </div>
-
-        <!-- 10 Licenses: On Cloud -->
-        <div class="price-card" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="plan-name">Organization</h3>
-          <div class="license">10 Licenses</div>
-          <div class="deploy">On Cloud</div>
-          <!-- <div class="price">฿150,000</div> -->
-          <ul class="features">
-            <li>ทุกฟีเจอร์ของ Team</li>
-            <li>รายงานปรับแต่งได้ & API</li>
-            <li>Priority Support / ช่องทางเฉพาะ</li>
-          </ul>
-          <a class="btn-select"
-            href="mailto:saraban@dla.go.th?subject=ขอใบเสนอราคา Organization 10 Licenses">ติดต่อฝ่ายขาย</a>
+          <div class="d-flex justify-content-center gap-2 btn-group">
+            <div data-aos="fade-up" data-aos-delay="600">
+              <button class="cta" (click)="scrollTo('overview')">{{ content?.hero?.cta }}</button>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="600">
+              <button class="goPdf" (click)="gotoPDF()">ดูรายละเอียดแผน (PDF)</button>
+            </div>
+          </div>
         </div>
       </div>
-
-      <p class="note">
-        * ราคาเป็นแพ็กเกจมาตรฐาน (สามารถปรับแต่งตามความต้องการได้)
-      </p>
     </section>
-
-
   </div>
 
+  <!-- Bento Grid Overview -->
+  <main id="overview">
+    <section class="bento-grid">
 
+      <div class="bento-card pos-1 d-flex align-items-center none-shadow" data-aos="zoom-in" data-aos-delay="410">
+        <h2 class="timeline-title" data-aos="fade-up">เครื่องมือวางแผนพัฒนาท้องถิ่นแบบดิจิทัล</h2>
+        <div style="width: 350px;">
+          <ng-lottie class="hero-lottie-fg" [options]="businessTeamLottieOptions" data-aos-delay="460"></ng-lottie>
+        </div>
+      </div>
 
+      <div class="bento-card pos-2 none-shadow" data-aos="zoom-in" data-aos-delay="450">
+        <ng-lottie class="hero-lottie-fg" [options]="officeAccountantLottieOptions"></ng-lottie>
+      </div>
+
+      <div class="bento-card pos-3 card-bg-1" data-aos="zoom-in" data-aos-delay="550">
+        <div class="card-title">รวบรวมข้อมูลอย่างเป็นระบบ</div>
+        <li>เก็บข้อมูลจากหลายแหล่ง เช่น ข้อมูลงบประมาณ โครงการ และความต้องการของชุมชน</li>
+        <li>จัดเก็บในรูปแบบดิจิทัลเพื่อความสะดวกในการเข้าถึงและอัปเดต</li>
+      </div>
+
+      <div class="bento-card pos-4 none-shadow" data-aos="zoom-in" data-aos-delay="500">
+        <ng-lottie class="sm-lottie strategy-lottie" [options]="strategyLottieOptions"
+          data-aos="slide-right" data-aos-duration="650" data-aos-delay="240">
+        </ng-lottie>
+      </div>
+
+      <div class="bento-card pos-5" data-aos="zoom-in" data-aos-delay="550">
+        <div class="card-title">วิเคราะห์ข้อมูลเพื่อการตัดสินใจ</div>
+        <li>ใช้เทคโนโลยีช่วยวิเคราะห์แนวโน้มและความสัมพันธ์ของข้อมูล</li>
+        <li>ช่วยให้การวางแผนพัฒนาเป็นไปอย่างมีหลักฐานรองรับ (Data-driven)</li>
+      </div>
+
+      <div class="bento-card pos-6 none-shadow" data-aos="fade-up" data-aos-delay="450">
+        <ng-lottie class="sm-lottie planng-lottie" [options]="planngLottieOptions" data-aos="zoom-in">
+        </ng-lottie>
+      </div>
+
+      <div class="bento-card pos-7" data-aos="zoom-in" data-aos-delay="550">
+        <div class="card-title">สนับสนุนการวางแผนอย่างรวดเร็วและแม่นยำ</div>
+        <li>ลดเวลาการรวบรวมข้อมูลและจัดทำแผน</li>
+        <li>เพิ่มความถูกต้องของการจัดลำดับความสำคัญและงบประมาณ</li>
+      </div>
+
+      <div class="bento-card pos-8 none-shadow" data-aos="zoom-in" data-aos-delay="450">
+        <ng-lottie class="hero-lottie-fg" [options]="officeAccountantLottieOptions"></ng-lottie>
+      </div>
+
+      <div class="bento-card pos-9" data-aos="zoom-in" data-aos-delay="550">
+        <div class="card-title">เชื่อมโยงงบประมาณกับแผนงานโดยตรง</div>
+        <li>แสดงความสัมพันธ์ระหว่าง "โครงการ–งบประมาณ–ผลลัพธ์"</li>
+        <li>ช่วยติดตามการใช้จ่ายและประเมินผลการดำเนินงานได้ชัดเจน</li>
+      </div>
+
+      <div class="bento-card pos-10 none-shadow" data-aos="zoom-in" data-aos-delay="450">
+        <ng-lottie class="hero-lottie-fg" [options]="brainstormingLottieOptions"></ng-lottie>
+      </div>
+
+      <div class="bento-card pos-11" data-aos="zoom-in" data-aos-delay="550">
+        <div class="card-title">เพิ่มความโปร่งใสและตรวจสอบได้</div>
+        <li>มีระบบรายงานและติดตามแผนแบบเรียลไทม์</li>
+        <li>ประชาชนและหน่วยงานที่เกี่ยวข้องสามารถเข้ามาตรวจสอบได้ง่าย</li>
+      </div>
+
+      <div class="bento-card pos-12 none-shadow" data-aos="zoom-in" data-aos-delay="450">
+        <ng-lottie class="sm-lottie planning-lottie" [options]="planningLottieOptions"
+          data-aos="slide-right" data-aos-duration="650" data-aos-delay="120">
+        </ng-lottie>
+      </div>
+
+      <div class="bento-card pos-13" data-aos="zoom-in" data-aos-delay="550">
+        <div class="card-title">เปิดโอกาสให้ประชาชนมีส่วนร่วม</div>
+        <li>ให้ประชาชนเสนอความคิดเห็น โครงการ หรือปัญหาในพื้นที่</li>
+        <li>ส่งเสริมการมีส่วนร่วมในกระบวนการวางแผนท้องถิ่นอย่างแท้จริง</li>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing" data-aos="fade-up">
+    <h2 class="pricing-title">แพ็กเกจการใช้งาน</h2>
+    <p class="pricing-subtitle">เลือกแพ็กเกจตามขนาดองค์กรของคุณ</p>
+
+    <div class="price-grid">
+      <div class="price-card" data-aos="fade-up" data-aos-delay="0">
+        <h3 class="plan-name">Basic</h3>
+        <div class="license">1 License</div>
+        <div class="deploy">Stand-alone</div>
+        <ul class="features">
+          <li>ติดตั้งใช้งานภายในหน่วยงาน (On-prem/Standalone)</li>
+          <li>ฟีเจอร์หลักครบสำหรับเริ่มต้นใช้งาน</li>
+          <li>อีเมลซัพพอร์ตมาตรฐาน</li>
+        </ul>
+        <a class="btn-select" href="mailto:saraban@dla.go.th?subject=ขอใบเสนอราคา Starter 1 License">ขอใบเสนอราคา</a>
+      </div>
+
+      <div class="price-card recommend" data-aos="fade-up" data-aos-delay="100">
+        <div class="badge">แนะนำ</div>
+        <h3 class="plan-name">Enterprise</h3>
+        <div class="license">5 Licenses</div>
+        <div class="deploy">On Cloud</div>
+        <ul class="features">
+          <li>โฮสต์บนคลาวด์ อัปเดตอัตโนมัติ</li>
+          <li>แดชบอร์ดทีม & สิทธิ์การเข้าถึง</li>
+          <li>สำรองข้อมูลรายวัน & Uptime SLA</li>
+        </ul>
+        <a class="btn-select primary" href="https://lap.spl-system.com">เลือกแพ็กเกจ</a>
+      </div>
+
+      <div class="price-card" data-aos="fade-up" data-aos-delay="200">
+        <h3 class="plan-name">Organization</h3>
+        <div class="license">10 Licenses</div>
+        <div class="deploy">On Cloud</div>
+        <ul class="features">
+          <li>ทุกฟีเจอร์ของ Team</li>
+          <li>รายงานปรับแต่งได้ & API</li>
+          <li>Priority Support / ช่องทางเฉพาะ</li>
+        </ul>
+        <a class="btn-select" href="mailto:saraban@dla.go.th?subject=ขอใบเสนอราคา Organization 10 Licenses">ติดต่อฝ่ายขาย</a>
+      </div>
+    </div>
+
+    <p class="note">* ราคาเป็นแพ็กเกจมาตรฐาน (สามารถปรับแต่งตามความต้องการได้)</p>
+  </section>
 
 </div>
 

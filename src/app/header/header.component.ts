@@ -11,50 +11,18 @@ import { filter, first } from 'rxjs/operators';
 })
 export class HeaderComponent {
   isSticky = false;
-  constructor(
-    private router: Router,
-  ) {
-    // โหลดข้อมูลจาก localStorage
-    const storedUser = localStorage.getItem('user');
-    const storedRole = localStorage.getItem('role');
-
-    if (storedUser) {
-      this.userName = storedUser;
-      this.userRole = storedRole;
-      this.isLoggedIn = true;
-    }
-
-    // ปิด dropdown เมื่อ route เปลี่ยน
-    this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-      .subscribe(() => {
-        this.isDropdownOpen = false;
-        this.isMenuOpen = false;
-      });
-
-    // ปิด dropdown เมื่อคลิกข้างนอก
-    document.addEventListener('click', () => (this.isDropdownOpen = false));
-  }
-
-
   isMenuOpen = false;
-  isDropdownOpen = false;
   isSubMenuOpen = false;
 
-  // ✅ ข้อมูลผู้ใช้
-  isLoggedIn = false;
-  userName: string | null = null;
-  userRole: string | null = null;
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe(() => (this.isMenuOpen = false));
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    this.isDropdownOpen = false;
     this.isSubMenuOpen = false;
-  }
-
-  toggleDropdown(event: Event) {
-    event.stopPropagation();
-    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   toggleSubMenu() {
@@ -66,29 +34,6 @@ export class HeaderComponent {
     this.isSticky = window.scrollY > 50;
   }
 
-  // ✅ ไปหน้าตาม role
-  goToProfile() {
-    if (!this.userRole) return;
-
-    if (this.userRole === 'admin') {
-      this.router.navigate(['/user-admin']);
-    } else {
-      this.router.navigate(['/user']);
-    }
-
-    this.isDropdownOpen = false;
-  }
-
-  // ✅ ออกจากระบบ
-  logout() {
-    localStorage.clear();
-    this.userName = null;
-    this.userRole = null;
-    this.isLoggedIn = false;
-    this.router.navigate(['/login-member']);
-    this.isDropdownOpen = false;
-  }
-
   goPricing(event: Event) {
     event.preventDefault();
 
@@ -97,7 +42,6 @@ export class HeaderComponent {
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       } else {
-        // ถ้ายังไม่เจอ element ให้ลองอีกครั้งทุก 100ms (สูงสุด 10 ครั้ง)
         let tries = 0;
         const interval = setInterval(() => {
           const target = document.querySelector('#pricing');
@@ -112,20 +56,15 @@ export class HeaderComponent {
     };
 
     if (this.router.url === '/') {
-      // ถ้าอยู่หน้า Home แล้ว → scroll ได้เลย
       scrollToPricing();
     } else {
-      // ถ้าอยู่หน้าอื่น → รอกลับไปหน้า Home ก่อน
       this.router.navigate(['/']).then(() => {
         this.router.events
           .pipe(
             filter((e): e is NavigationEnd => e instanceof NavigationEnd),
             first()
           )
-          .subscribe(() => {
-            // รอ DOM render เสร็จ
-            setTimeout(() => scrollToPricing(), 300);
-          });
+          .subscribe(() => setTimeout(() => scrollToPricing(), 300));
       });
     }
   }

@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 })
 export class FileUploadService {
 
-  endpoint: string = 'https://vet.we-builds.com/vet-document/upload';
+  endpoint: string = 'https://gateway.we-builds.com/wb-document/upload';
   // endpoint: string = 'http://209.15.96.238/vet-document/upload';
 
   constructor(private http: HttpClient) { }

@@ -1,4 +1,3 @@
-<!-- <app-sidebar></app-sidebar> -->
 <app-header></app-header>
 
 <section class="vendor-register" data-aos="fade-up">
@@ -17,32 +16,34 @@
     </div>
 
     <div class="grid">
-      <div class="field" *ngIf="form.get('sellerType')?.value === 'company'">
-        <label>ชื่อบริษัท/หน่วยงาน <span class="req">*</span></label>
-        <input type="text" formControlName="companyName" placeholder="เช่น บริษัท โมด โซลูชันส์ จำกัด">
-        <small class="err" *ngIf="form.get('companyName')?.touched && form.get('companyName')?.invalid">
-          กรุณากรอกชื่อบริษัท/หน่วยงาน
-        </small>
-      </div>
+      @if (form.get('sellerType')?.value === 'company') {
+        <div class="field">
+          <label>ชื่อบริษัท/หน่วยงาน <span class="req">*</span></label>
+          <input type="text" formControlName="companyName" placeholder="เช่น บริษัท โมด โซลูชันส์ จำกัด">
+          @if (form.get('companyName')?.touched && form.get('companyName')?.invalid) {
+            <small class="err">กรุณากรอกชื่อบริษัท/หน่วยงาน</small>
+          }
+        </div>
+      }
 
       <div class="field">
         <label>เลขประจำตัวผู้เสียภาษี (13 หลัก) <span class="req">*</span></label>
         <input type="text" formControlName="taxId" maxlength="13" placeholder="xxxxxxxxxxxxx"
           (input)="onNumericInput($event, 'taxId')">
-        <div *ngIf="form.get('taxId')?.invalid && (form.get('taxId')?.touched || form.get('taxId')?.dirty)">
-          <small class="err" *ngIf="form.get('taxId')?.hasError('required')">
-            กรุณากรอกเลขประจำตัวผู้เสียภาษี
-          </small>
-          <small class="err" *ngIf="form.get('taxId')?.hasError('pattern')">
-            กรุณากรอกเป็นตัวเลขเท่านั้น
-          </small>
-          <small class="err" *ngIf="form.get('taxId')?.hasError('minlength')">
-            ต้องเป็นตัวเลข 13 หลัก
-          </small>
-          <small class="err" *ngIf="form.get('taxId')?.hasError('invalidThaiId')">
-            เลขประจำตัวผู้เสียภาษีไม่ถูกต้อง
-          </small>
-        </div>
+        @if (form.get('taxId')?.invalid && (form.get('taxId')?.touched || form.get('taxId')?.dirty)) {
+          @if (form.get('taxId')?.hasError('required')) {
+            <small class="err">กรุณากรอกเลขประจำตัวผู้เสียภาษี</small>
+          }
+          @if (form.get('taxId')?.hasError('pattern')) {
+            <small class="err">กรุณากรอกเป็นตัวเลขเท่านั้น</small>
+          }
+          @if (form.get('taxId')?.hasError('minlength')) {
+            <small class="err">ต้องเป็นตัวเลข 13 หลัก</small>
+          }
+          @if (form.get('taxId')?.hasError('invalidThaiId')) {
+            <small class="err">เลขประจำตัวผู้เสียภาษีไม่ถูกต้อง</small>
+          }
+        }
       </div>
     </div>
 
@@ -50,42 +51,60 @@
       <div class="field">
         <label>ผู้ติดต่อ <span class="req">*</span></label>
         <input type="text" formControlName="contactName" placeholder="ชื่อ-สกุล ผู้ติดต่อ">
-        <small class="err" *ngIf="form.get('contactName')?.touched && form.get('contactName')?.invalid">
-          กรุณากรอกชื่อผู้ติดต่อ
-        </small>
+        @if (form.get('contactName')?.touched && form.get('contactName')?.invalid) {
+          <small class="err">กรุณากรอกชื่อผู้ติดต่อ</small>
+        }
       </div>
 
       <div class="field">
         <label>อีเมล <span class="req">*</span></label>
         <input type="email" formControlName="email" placeholder="name@example.com">
-        <small class="err" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
-          อีเมลไม่ถูกต้อง
-        </small>
+        @if (form.get('email')?.touched && form.get('email')?.invalid) {
+          <small class="err">อีเมลไม่ถูกต้อง</small>
+        }
       </div>
 
       <div class="field">
         <label>เบอร์โทรศัพท์ <span class="req">*</span></label>
-        <input type="text" formControlName="phone" placeholder="0812345678" (input)="onNumericInput($event, 'phone')">
-        <small class="err" *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
-          เบอร์โทรไม่ถูกต้อง
-        </small>
+        <input type="text" formControlName="phone" placeholder="0812345678"
+          (input)="onNumericInput($event, 'phone')">
+        @if (form.get('phone')?.touched && form.get('phone')?.invalid) {
+          <small class="err">เบอร์โทรไม่ถูกต้อง</small>
+        }
       </div>
     </div>
 
+    <!-- ที่อยู่ -->
     <div class="field">
       <label>ที่อยู่ (สำหรับติดต่อ/ออกเอกสาร) <span class="req">*</span></label>
       <input type="text" formControlName="addressLine" placeholder="เลขที่ ถนน ตรอก/ซอย อาคาร">
-      <small class="err" *ngIf="form.get('addressLine')?.touched && form.get('addressLine')?.invalid">
-        กรุณากรอกที่อยู่
-      </small>
+      @if (form.get('addressLine')?.touched && form.get('addressLine')?.invalid) {
+        <small class="err">กรุณากรอกที่อยู่</small>
+      }
     </div>
 
+    <div class="field">
+      <label>ที่อยู่จัดส่งเอกสาร <span class="req">*</span></label>
+      <div class="checkbox-copy">
+        <input type="checkbox" id="copyAddress" [(ngModel)]="isSameAddress"
+          [ngModelOptions]="{standalone: true}" (change)="onCopyAddress($event)">
+        <label for="copyAddress">ใช้ที่อยู่เดียวกับบริษัท</label>
+      </div>
+      <input type="text" formControlName="shippingAddress" placeholder="เลขที่ ถนน ตรอก/ซอย อาคาร">
+      @if (form.get('shippingAddress')?.touched && form.get('shippingAddress')?.invalid) {
+        <small class="err">กรุณากรอกที่อยู่จัดส่งเอกสาร</small>
+      }
+    </div>
+
+    <!-- จังหวัด / อำเภอ / ตำบล / รหัสไปรษณีย์ -->
     <div class="grid">
       <div class="field">
         <label>จังหวัด</label>
         <select formControlName="province" (change)="onProvinceChange($event)">
           <option value="">-- เลือกจังหวัด --</option>
-          <option *ngFor="let p of provinces" [value]="p.code">{{ p.title }}</option>
+          @for (p of provinces; track p.code) {
+            <option [value]="p.code">{{ p.title }}</option>
+          }
         </select>
       </div>
 
@@ -93,7 +112,9 @@
         <label>อำเภอ/เขต</label>
         <select formControlName="district" (change)="onDistrictChange($event)">
           <option value="">-- เลือกอำเภอ --</option>
-          <option *ngFor="let d of districts" [value]="d.code">{{ d.title }}</option>
+          @for (d of districts; track d.code) {
+            <option [value]="d.code">{{ d.title }}</option>
+          }
         </select>
       </div>
 
@@ -101,38 +122,43 @@
         <label>ตำบล/แขวง</label>
         <select formControlName="subdistrict" (change)="onSubdistrictChange($event)">
           <option value="">-- เลือกตำบล --</option>
-          <option *ngFor="let s of subdistricts" [value]="s.code">{{ s.title }}</option>
+          @for (s of subdistricts; track s.code) {
+            <option [value]="s.code">{{ s.title }}</option>
+          }
         </select>
       </div>
 
       <div class="field">
         <label>รหัสไปรษณีย์</label>
-        <input type="text" formControlName="postalCode" maxlength="5" readonly />
+        <input type="text" formControlName="postalCode" maxlength="5" readonly>
       </div>
     </div>
 
-
+    <!-- เว็บไซต์ + บัญชีธนาคาร -->
     <div class="grid">
       <div class="field">
         <label>เว็บไซต์</label>
         <input type="text" formControlName="website" placeholder="https://example.com">
       </div>
+
       <div class="field">
         <label for="bankName">ชื่อธนาคาร <span class="req">*</span></label>
         <select id="bankName" formControlName="bankName" required>
           <option value="" disabled>-- กรุณาเลือกธนาคาร --</option>
-          <option *ngFor="let bank of banks" [value]="bank.name">
-            {{ bank.name }}
-          </option>
+          @for (bank of banks; track bank.code) {
+            <option [value]="bank.name">{{ bank.name }}</option>
+          }
         </select>
-        <small class="err" *ngIf="form.get('bankName')?.invalid && form.get('bankName')?.touched">
-          กรุณาเลือกธนาคาร
-        </small>
+        @if (form.get('bankName')?.invalid && form.get('bankName')?.touched) {
+          <small class="err">กรุณาเลือกธนาคาร</small>
+        }
       </div>
+
       <div class="field">
         <label>ชื่อบัญชี</label>
         <input type="text" formControlName="bankAccountName" placeholder="ชื่อบัญชี">
       </div>
+
       <div class="field">
         <label>เลขที่บัญชี</label>
         <input type="text" formControlName="bankAccountNumber" placeholder="xxxxxxxxxx"
@@ -140,61 +166,60 @@
       </div>
     </div>
 
+    <!-- เอกสารแนบ -->
     <hr>
     <h3>เอกสารแนบ</h3>
-    <p class="form-description">
-      อัปโหลดเอกสารเพื่อยืนยันตัวตน (รองรับเฉพาะไฟล์ .pdf, .jpg, .png)
-    </p>
+    <p class="form-description">อัปโหลดเอกสารเพื่อยืนยันตัวตน (รองรับเฉพาะไฟล์ .pdf, .jpg, .png)</p>
 
     <div class="field">
       <label for="companyAffidavitFile">
         @if (form.get('sellerType')?.value === 'company') {
-        <span>
-          1. หนังสือรับรองบริษัท (ไม่เกิน 6 เดือน) <span class="req">*</span>
-        </span>
+          <span>1. หนังสือรับรองบริษัท (ไม่เกิน 6 เดือน) <span class="req">*</span></span>
         }
         @if (form.get('sellerType')?.value === 'person') {
-        <span>
-          1. สำเนาบัตรประชาชน <span class="req">*</span>
-        </span>
+          <span>1. สำเนาบัตรประชาชน <span class="req">*</span></span>
         }
       </label>
 
       <label class="file-upload">
         <input type="file" id="companyAffidavitFile" class="file-input" accept=".pdf,.jpg,.jpeg,.png"
           (change)="onFileSelect($event, 'companyAffidavitFile')">
-        <span>{{fileName || '📁 เลือกไฟล์'}}</span>
+        <span>{{ fileName || '📁 เลือกไฟล์' }}</span>
       </label>
 
-      <span class="file-name" *ngIf="form.get('companyAffidavitFile')?.value">
-        {{ form.get('companyAffidavitFile')?.value.name }}
-      </span>
-      <small class="err"
-        *ngIf="form.get('companyAffidavitFile')?.hasError('required') && form.get('companyAffidavitFile')?.touched">
-        <span *ngIf="form.get('sellerType')?.value === 'company'">กรุณาแนบหนังสือรับรองบริษัท</span>
-        <span *ngIf="form.get('sellerType')?.value === 'person'">กรุณาแนบสำเนาบัตรประชาชน</span>
-      </small>
+      @if (form.get('companyAffidavitFile')?.value) {
+        <span class="file-name">{{ form.get('companyAffidavitFile')?.value.name }}</span>
+      }
+      @if (form.get('companyAffidavitFile')?.hasError('required') && form.get('companyAffidavitFile')?.touched) {
+        @if (form.get('sellerType')?.value === 'company') {
+          <small class="err">กรุณาแนบหนังสือรับรองบริษัท</small>
+        }
+        @if (form.get('sellerType')?.value === 'person') {
+          <small class="err">กรุณาแนบสำเนาบัตรประชาชน</small>
+        }
+      }
     </div>
 
+    <!-- Consent -->
     <div class="consent">
       <label>
         <input type="checkbox" id="consent-checkbox" formControlName="consent">
         ข้าพเจ้ายินยอมให้บริษัท We-Lap จัดเก็บและใช้ข้อมูลส่วนบุคคล
-        ตาม <a href="#" target="_blank">นโยบายความเป็นส่วนตัว (Privacy
-          Policy)</a>
+        ตาม <a href="#" target="_blank">นโยบายความเป็นส่วนตัว (Privacy Policy)</a>
       </label>
     </div>
-    <div *ngIf="form.get('consent')?.invalid && form.get('consent')?.touched">
+    @if (form.get('consent')?.invalid && form.get('consent')?.touched) {
       <small class="err">กรุณายอมรับข้อตกลงและเงื่อนไข</small>
-    </div>
+    }
+
     <div class="btn-c">
-      <button type="submit" class="submit-btn">
-        ส่งใบสมัคร
-      </button>
+      <button type="submit" class="submit-btn">ส่งใบสมัคร</button>
     </div>
+
   </form>
 </section>
 
+<!-- Success Popup -->
 @if (showSuccessPopup) {
 <div class="popup-overlay">
   <div class="popup-card">
@@ -212,8 +237,9 @@
 </div>
 }
 
+<!-- Error Popup -->
 @if (showErrorPopup) {
-<div class="popup-overlay" >
+<div class="popup-overlay">
   <div class="popup-card error-card">
     <div class="popup-icon error-icon">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">

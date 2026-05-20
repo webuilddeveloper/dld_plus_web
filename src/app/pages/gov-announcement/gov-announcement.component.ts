@@ -12,10 +12,10 @@ import { HeaderComponent } from "../../header/header.component";
 })
 export class GovAnnouncementComponent {
   documents: string[] = [
-    'https://we-lap.co.th/docs/S_22487076_1.jpg',
-    'https://we-lap.co.th/docs/S_22487078_2.jpg',
-    'https://we-lap.co.th/docs/S_22487079_3.jpg',
-    'https://we-lap.co.th/docs/S_22487080_4.jpg',
+    'https://gateway.we-builds.com/wb-document/images/gov/S_22487076_1.jpg',
+    'https://gateway.we-builds.com/wb-document/images/gov/S_22487078_2.jpg',
+    'https://gateway.we-builds.com/wb-document/images/gov/S_22487079_3.jpg',
+    'https://gateway.we-builds.com/wb-document/images/gov/S_22487080_4.jpg',
   ];
 
   selectedImage: string | null = null;
